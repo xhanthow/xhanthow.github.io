@@ -20,7 +20,8 @@
 传输层:对上层应用层，提供处于网络连接中的两台计算机之间的数据传输。TCP、UDP都属于传输层。
 网络层:网络层用来处理在网络上流动的数据包。数据包是网络传输的最小数据单位。多台计算机连接传输时，网络层也负责在多条线路中">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
-<meta property="og:updated_time" content="2016-08-21T16:00:24.117Z">
+<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
+<meta property="og:updated_time" content="2016-08-21T16:05:10.485Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解HTTP——了解web及网络基础">
 <meta name="twitter:description" content="TCP/IP分层:
@@ -119,8 +120,12 @@
 <h3 id="一般的请求流程图"><a href="#一般的请求流程图" class="headerlink" title="一般的请求流程图:"></a>一般的请求流程图:</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="客户端和服务端的通信图"></p>
 <h3 id="常见的协议"><a href="#常见的协议" class="headerlink" title="常见的协议:"></a>常见的协议:</h3><ul>
 <li>ARP协议:一种用以解析地址的协议，根据通信方的IP地址就可以反查出对应的MAC地址。</li>
-<li>TCP协议:位于传输层，提供可靠的字节流服务。<ul>
-<li>三次握手:使用TCP的标志(flag)——<code>SYN(synchronize)</code>和<code>ACK(acknowledgement)</code><br>具体过程:发送端首先发送一个带SYN标志的数据包给对方。接收端收到后，回传一个带有SYN/ACK标志的数据包以示传达确认信息。最后，发送端再回传一个带ACK标志的数据包，代表“握手”结束。若在握手过程中某个阶段莫名中断，TCP协议会再次以相同你给的顺序发送相同的数据包。</li>
+<li><p>TCP协议:位于传输层，提供可靠的字节流服务。</p>
+<ul>
+<li><p>三次握手:使用TCP的标志(flag)——<code>SYN(synchronize)</code>和<code>ACK(acknowledgement)</code><br>具体过程:发送端首先发送一个带SYN标志的数据包给对方。接收端收到后，回传一个带有SYN/ACK标志的数据包以示传达确认信息。最后，发送端再回传一个带ACK标志的数据包，代表“握手”结束。若在握手过程中某个阶段莫名中断，TCP协议会再次以相同你给的顺序发送相同的数据包。</p>
+</li>
+<li><p><strong>三次握手流程图:</strong><br><img src="http://oc8wh8qu5.bkt.clouddn.com/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="三次握手"></p>
+</li>
 </ul>
 </li>
 </ul>
@@ -128,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/21/图解HTTP/" data-id="cis4sz4yw0002xcu53vgod62g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/08/21/图解HTTP/" data-id="cis4t1rar0002vwu5iabttz8t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP基本知识/">HTTP基本知识</a></li></ul>
