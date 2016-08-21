@@ -3,17 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>The Blog for U</title>
+  <title>图解HTTP——了解web及网络基础 | The Blog for U</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Some Notes">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Blog for U">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="TCP/IP&amp;#x5206;&amp;#x5C42;:
+&amp;#x5206;&amp;#x4E3A;4&amp;#x5C42;:&amp;#x5E94;&amp;#x7528;&amp;#x5C42;&amp;#x3001;&amp;#x4F20;&amp;#x8F93;&amp;#x5C42;&amp;#x3001;&amp;#x7F51;&amp;#x7EDC;&amp;#x5C42;&amp;#x548C;&amp;#x6570;&amp;#x636E;&amp;#x94FE;&amp;#x8DEF;&amp;#x5C42;(&amp;#x8FD9;&amp;#x91">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图解HTTP——了解web及网络基础">
+<meta property="og:url" content="http://yoursite.com/2016/08/21/HTTP/index.html">
 <meta property="og:site_name" content="The Blog for U">
-<meta property="og:description" content="Some Notes">
+<meta property="og:description" content="TCP/IP&amp;#x5206;&amp;#x5C42;:
+&amp;#x5206;&amp;#x4E3A;4&amp;#x5C42;:&amp;#x5E94;&amp;#x7528;&amp;#x5C42;&amp;#x3001;&amp;#x4F20;&amp;#x8F93;&amp;#x5C42;&amp;#x3001;&amp;#x7F51;&amp;#x7EDC;&amp;#x5C42;&amp;#x548C;&amp;#x6570;&amp;#x636E;&amp;#x94FE;&amp;#x8DEF;&amp;#x5C42;(&amp;#x8FD9;&amp;#x91">
+<meta property="og:image" content="http://yoursite.com/2016/08/21/HTTP/img/1.png">
+<meta property="og:updated_time" content="2016-08-21T05:11:53.950Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Blog for U">
-<meta name="twitter:description" content="Some Notes">
+<meta name="twitter:title" content="图解HTTP——了解web及网络基础">
+<meta name="twitter:description" content="TCP/IP&amp;#x5206;&amp;#x5C42;:
+&amp;#x5206;&amp;#x4E3A;4&amp;#x5C42;:&amp;#x5E94;&amp;#x7528;&amp;#x5C42;&amp;#x3001;&amp;#x4F20;&amp;#x8F93;&amp;#x5C42;&amp;#x3001;&amp;#x7F51;&amp;#x7EDC;&amp;#x5C42;&amp;#x548C;&amp;#x6570;&amp;#x636E;&amp;#x94FE;&amp;#x8DEF;&amp;#x5C42;(&amp;#x8FD9;&amp;#x91">
+<meta name="twitter:image" content="http://yoursite.com/2016/08/21/HTTP/img/1.png">
   
     <link rel="alternate" href="/atom.xml" title="The Blog for U" type="application/atom+xml">
   
@@ -66,9 +72,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-HTTP" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-HTTP" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/21/HTTP/" class="article-date">
   <time datetime="2016-08-21T04:12:24.000Z" itemprop="datePublished">2016-08-21</time>
@@ -85,8 +89,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/21/HTTP/">图解HTTP——了解web及网络基础</a>
+    <h1 class="article-title" itemprop="name">
+      图解HTTP——了解web及网络基础
     </h1>
   
 
@@ -116,55 +120,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="[post]-ssh-add" class="article article-type-[post]" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/15/ssh-add/" class="article-date">
-  <time datetime="2016-08-14T16:03:45.000Z" itemprop="datePublished">2016-08-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Git/">Git</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/15/ssh-add/">ssh-add</a>
-    </h1>
+    <a href="/2016/08/15/ssh-add/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ssh-add</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&#x4ECA;&#x5929;&#x5728;&#x914D;&#x7F6E;git&#x7684;ssh&#x6743;&#x9650;&#x7684;&#x65F6;&#x5019;&#xFF08;win10&#x4E0B;&#x8FDB;&#x884C;&#x7684;&#xFF0C;git&#x4E3A;1.9&#xFF09;&#xFF0C;&#x5728;&#x6267;&#x884C;<code>$ add-ssh ~/.ssh/id_rsa</code>    &#x7684;&#x65F6;&#x5019;&#x51FA;&#x73B0;&#x4E86;<strong><em>Could not open a connection to your authentication agent</em></strong>&#x8FD9;&#x4E2A;&#x9519;&#x8BEF;&#x7684;&#x63D0;&#x793A;&#x3002;</p>
-<h3 id="&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;"><a href="#&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;" class="headerlink" title="&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;"></a>&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;</h3><p>&#x5728;&#x6267;&#x884C;&#x4E0A;&#x9762;&#x7684;&#x64CD;&#x4F5C;&#x4E4B;&#x524D;&#xFF0C;&#x6267;&#x884C;<code>eval `ssh-agent</code>&#xFF08;&#x662F;&#xFF5E;&#x952E;&#x4E0A;&#x7684;&#x90A3;&#x4E2A;`&#xFF09;&#x8FD9;&#x4E2A;&#x547D;&#x540D;&#x5C31;&#x4E0D;&#x53EF;&#x4EE5;&#x907F;&#x514D;&#x8FD9;&#x4E2A;&#x9519;&#x8BEF;&#x4E86;&#x3002;</p>
-<h3 id="PS&#xFF1A;"><a href="#PS&#xFF1A;" class="headerlink" title="PS&#xFF1A;"></a>PS&#xFF1A;</h3><p>&#x4E0D;&#x77E5;&#x9053;&#x4E0D;&#x540C;&#x7248;&#x672C;&#x7684;<code>git</code>&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x662F;&#x4E0D;&#x662F;&#x76F8;&#x540C;&#x7684;</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/08/15/ssh-add/" data-id="cis45vksi000114u5uhtk26mb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/常见问题/">常见问题</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
 
 </section>
         
