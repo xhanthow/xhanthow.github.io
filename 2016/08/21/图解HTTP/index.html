@@ -101,7 +101,10 @@
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E5%90%84%E5%8D%8F%E8%AE%AE%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.png">
-<meta property="og:updated_time" content="2016-08-23T13:27:40.596Z">
+<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E4%BB%A3%E7%90%861.png">
+<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E5%85%B3.png">
+<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E9%9A%A7%E9%81%93.png">
+<meta property="og:updated_time" content="2016-08-28T08:12:10.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解HTTP——了解web及网络基础">
 <meta name="twitter:description" content="TCP/IP分层:
@@ -382,6 +385,15 @@
 </li>
 </ul>
 <h3 id="各协议和HTTP协议的关系"><a href="#各协议和HTTP协议的关系" class="headerlink" title="各协议和HTTP协议的关系:"></a>各协议和HTTP协议的关系:</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E5%90%84%E5%8D%8F%E8%AE%AE%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt="各协议和HTTP协议的关系"></p>
+<h3 id="代理："><a href="#代理：" class="headerlink" title="代理："></a>代理：</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E4%BB%A3%E7%90%861.png" alt="代理示意图"><br>代理服务器的基本行为就是接收客户端发送的请求后转发给其他服务器。代理不改变请求的URI，会直接发送给前方持有资源的目标服务器。持有资源实体的服务器被称为源服务器，从源服务器返回的响应经过代理服务器后再传给客户端。<br>HTTP通信的过程中，可级联多台代理服务器。请求和响应的转发会经过数台类似锁链一样连接起来的代理服务器。转发时，需要附加Via首部字段以标记出经过的主机信息。</p>
+<ul>
+<li><p><strong>缓存代理</strong><br>代理转发响应时，缓存代理（Caching Proxy）会预先将资源的副本（缓存）保存在代理服务器上。当代理再次接收到相同资源的请求时，就可以不从源服务器那里获取资源，而是将之前缓存的资源作为响应返回。</p>
+</li>
+<li><p><strong>透明代理</strong><br>转发请求或响应时，不对报文做任何加工的代理类型被称为透明代理（Transparent Proxy）。反之，对报文内容进行加工的代理被称为非透明代理。</p>
+</li>
+</ul>
+<h3 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E5%85%B3.png" alt="网关"><br>网关的工作机制和代理十分相似。而网关能使通信线路上的服务器提供非HTTP协议服务。<br>利用网关可以提高通信的安全性，因为可以在客户端与网关之间的通信线路上加密以确保连接的安全。比如，网关可以连接数据库，使用<code>SQL</code>语句查询数据。</p>
+<h3 id="隧道"><a href="#隧道" class="headerlink" title="隧道"></a>隧道</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E9%9A%A7%E9%81%93.png" alt="隧道"><br>隧道可按要求建立起一条与其他服务器的通信线路。届时使用<code>SSL</code>等加密手段进行加密。隧道的目的是确保客户端能与服务器进行安全的通信。隧道本身不会去解析HTTP请求。也就是说，请求保持原样中转给之后的服务器。隧道会在通信双方断开连接时结束。</p>
 
       
     </div>
@@ -537,7 +549,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP分层"><span class="nav-number">1.</span> <span class="nav-text">TCP/IP分层:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般的请求流程图"><span class="nav-number">2.</span> <span class="nav-text">一般的请求流程图:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的协议"><span class="nav-number">3.</span> <span class="nav-text">常见的协议:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各协议和HTTP协议的关系"><span class="nav-number">4.</span> <span class="nav-text">各协议和HTTP协议的关系:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP分层"><span class="nav-number">1.</span> <span class="nav-text">TCP/IP分层:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般的请求流程图"><span class="nav-number">2.</span> <span class="nav-text">一般的请求流程图:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的协议"><span class="nav-number">3.</span> <span class="nav-text">常见的协议:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各协议和HTTP协议的关系"><span class="nav-number">4.</span> <span class="nav-text">各协议和HTTP协议的关系:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理："><span class="nav-number">5.</span> <span class="nav-text">代理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网关"><span class="nav-number">6.</span> <span class="nav-text">网关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隧道"><span class="nav-number">7.</span> <span class="nav-text">隧道</span></a></li></ol></div>
             
           </div>
         </section>
