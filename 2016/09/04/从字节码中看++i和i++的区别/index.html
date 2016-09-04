@@ -84,19 +84,22 @@
 
 
 
-<meta name="description" content="不用多说，12345678910```javapublic class Test &amp;#123;	public static void main(String[] args) &amp;#123;		int m = 0;		int n = 0;		System.out.println(m++);		System.out.println(++n);	&amp;#125;&amp;#125;
-然后再控制台打印出来0，1(自己脑">
+<meta name="description" content="不用多说，12345678910111213我是正文：```javapublic class Test &amp;#123;	public static void main(String[] args) &amp;#123;		int m = 0;		int n = 0;		System.out.println(m++);		System.out.println(++n);	&amp;#125;&amp;#125;
+
+然后再控">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从字节码中看++i和i++的区别">
 <meta property="og:url" content="http://yoursite.com/2016/09/04/从字节码中看++i和i++的区别/index.html">
 <meta property="og:site_name" content="The Blog for U">
-<meta property="og:description" content="不用多说，12345678910```javapublic class Test &amp;#123;	public static void main(String[] args) &amp;#123;		int m = 0;		int n = 0;		System.out.println(m++);		System.out.println(++n);	&amp;#125;&amp;#125;
-然后再控制台打印出来0，1(自己脑">
-<meta property="og:updated_time" content="2016-09-04T07:51:12.013Z">
+<meta property="og:description" content="不用多说，12345678910111213我是正文：```javapublic class Test &amp;#123;	public static void main(String[] args) &amp;#123;		int m = 0;		int n = 0;		System.out.println(m++);		System.out.println(++n);	&amp;#125;&amp;#125;
+
+然后再控">
+<meta property="og:updated_time" content="2016-09-04T08:02:12.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从字节码中看++i和i++的区别">
-<meta name="twitter:description" content="不用多说，12345678910```javapublic class Test &amp;#123;	public static void main(String[] args) &amp;#123;		int m = 0;		int n = 0;		System.out.println(m++);		System.out.println(++n);	&amp;#125;&amp;#125;
-然后再控制台打印出来0，1(自己脑">
+<meta name="twitter:description" content="不用多说，12345678910111213我是正文：```javapublic class Test &amp;#123;	public static void main(String[] args) &amp;#123;		int m = 0;		int n = 0;		System.out.println(m++);		System.out.println(++n);	&amp;#125;&amp;#125;
+
+然后再控">
 
 
 
@@ -297,6 +300,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/字节码/" itemprop="url" rel="index">
+                    <span itemprop="name">字节码</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -326,7 +348,9 @@
       
 
       
-        <p>不用多说，<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">```java</div><div class="line">public class Test &#123;</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		int m = 0;</div><div class="line">		int n = 0;</div><div class="line">		System.out.println(m++);</div><div class="line">		System.out.println(++n);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <blockquote>
+<p>不用多说，<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">我是正文：</div><div class="line"></div><div class="line">```java</div><div class="line">public class Test &#123;</div><div class="line">	public static void main(String[] args) &#123;</div><div class="line">		int m = 0;</div><div class="line">		int n = 0;</div><div class="line">		System.out.println(m++);</div><div class="line">		System.out.println(++n);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
 <p>然后再控制台打印出来0，1(自己脑补分行)。对，结果就是这样的。所以再看看下文~<br><strong>javac</strong>这个命令都懂吧，然后咧，我一般都会加一个<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">说干就干，```javac -g Test.java``` 然后生成```Test.class```这个文件。</div><div class="line">然后```javap -verbose Test```  你会看见一下信息:</div></pre></td></tr></table></figure></p>
 <pre><code>Code:
   stack=2, locals=3, args_size=1
@@ -477,7 +501,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
