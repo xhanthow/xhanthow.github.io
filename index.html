@@ -115,7 +115,7 @@
 
   <link rel="canonical" href="http://yoursite.com/"/>
 
-  <title> The Blog for U </title>
+  <title> 归档 | The Blog for U </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -146,9 +146,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -255,419 +253,141 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
+
+    <span class="archive-page-counter">
+      
+      
+      
+        
+      
+      嗯..! 目前共计 3 篇日志。 继续努力。
+    </span>
+
     
+
+      
+      
       
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
+      
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/04/从字节码中看清++i和i++的本质/" itemprop="url">
-                  从字节码中看清++i和i++的本质
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-04T15:08:50+08:00" content="2016-09-04">
-              2016-09-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/字节码/" itemprop="url" rel="index">
-                    <span itemprop="name">字节码</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/04/从字节码中看清++i和i++的本质/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/从字节码中看清++i和i++的本质/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
       
       
 
       
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-          
-            <blockquote>
-<p>不用多说，<strong>i++</strong> 和 <strong>++i</strong>这两个玩意从你开始学习编程开始就被拿出来各种哔哔。偶然还是会忘记它们的，刚开始接触，卧槽，这什么玩意，反人类啊！懒得扯了，直接看正文吧~</p>
-</blockquote>
-<p>我是正文：</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> m = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> n = <span class="number">0</span>;</div><div class="line">		System.out.println(m++);</div><div class="line">		System.out.println(++n);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>然后再控制台打印出来0，1(自己脑补分行)。对，结果就是这样的。所以再看看下文~<br><strong>javac</strong>这个命令都懂吧，然后咧，我一般都会加一个 <strong>-g</strong> 这个参数。这个东西的作用就是       <strong>生成所有调试信息(也会把变量信息打印出来)</strong><br>说干就干，<strong>javac -g Test.java</strong> 然后生成 <strong>Test.class</strong> 这个文件。然后 <strong>javap -verbose Test</strong><br>你会看见一下信息:</p>
- <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Code:</div><div class="line">  stack=2, locals=3, args_size=1</div><div class="line">     0: iconst_0</div><div class="line">     1: istore_1</div><div class="line">     2: iconst_0</div><div class="line">     3: istore_2</div><div class="line">     4: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;</div><div class="line">     7: iload_1</div><div class="line">     8: iinc          1, 1</div><div class="line">    11: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V</div><div class="line">    14: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;</div><div class="line">    17: iinc          2, 1</div><div class="line">    20: iload_2</div><div class="line">    21: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V</div><div class="line">    24: return</div><div class="line">  LineNumberTable:</div><div class="line">    line 3: 0</div><div class="line">    line 4: 2</div><div class="line">    line 5: 4</div><div class="line">    line 6: 14</div><div class="line">    line 7: 24</div></pre></td></tr></table></figure>
-<p>这个是 <strong>m++</strong> 对应的字节码部分:<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">7</span>: iload_1</div><div class="line"><span class="number">8</span>: iinc          <span class="number">1</span>, <span class="number">1</span></div></pre></td></tr></table></figure></p>
-<p>这个是 <strong>++n</strong> 对应的字节码部分:<br> <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="number">17</span>: iinc         <span class="number">2</span>, <span class="number">1</span></div><div class="line"><span class="number">20</span>: iload_2</div></pre></td></tr></table></figure></p>
-<p><strong>剖析一下:</strong> <strong>iinc 1,1</strong> 的意思就是将第一个 <strong>local variable</strong> 加1。第一个1表示的是第几个 <strong>local variable</strong> 第二个1就不用解释了。<br>那么这个 <strong>local variable</strong> 又是什么鬼了。上文提到过用 <strong>javac -g Test</strong> 这个命令,然后再用 <strong>javap -verbose Test</strong> 。这样的话，在字节码中你会看到<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">LocalVariableTable:</div><div class="line">  Start  Length  Slot  Name   Signature</div><div class="line">      0      25     0  args   [Ljava/lang/String;</div><div class="line">      2      23     1     m   I</div><div class="line">      4      21     2     n   I</div></pre></td></tr></table></figure></p>
-<p>所以m就是第一个 <strong>local variable</strong> ，n是第二个 <strong>local variable</strong> 。<br>对哦，还没说 <strong>iload_1 iload_2</strong> 。这两兄弟的意思差不多，后面的数字1，2表示的也是 <strong>local variable</strong> 里的变量的位置。 <strong>iload_1</strong> 就是第1个int型变量进栈，也就是这个m。这个时候还没执行 <strong>iinc 1,1</strong> ，所以这个处于栈顶的m还是0，这个就是 <strong>m++</strong> 后还是0的原因。那么 <strong>++n</strong> 是1的原因，就很明显了。就是先加然后进栈。<br>哎呀，我也是半瓢水，其他指令解释起来好麻烦。直接甩个链接吧，里面有基本的字节码讲解，还不错哟。</p>
-<h3 id="字节码指令"><a href="#字节码指令" class="headerlink" title="字节码指令"></a><a href="http://gityuan.com/2015/10/24/jvm-bytecode-grammar/" target="_blank" rel="external">字节码指令</a></h3><p>PS：看看字节码，装装逼还是可以的~嘻嘻</p>
-
-          
+            <a class="post-title-link" href="/2016/09/04/从字节码中看清++i和i++的本质/" itemprop="url">
+              
+                <span itemprop="name">从字节码中看清++i和i++的本质</span>
+              
+            </a>
         
-      
-    </div>
+      </h1>
 
-    <div>
-      
-    </div>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-09-04T15:08:50+08:00"
+              content="2016-09-04" >
+          09-04
+        </time>
+      </div>
 
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+    </header>
   </article>
 
 
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
-      <header class="post-header">
 
+      
+      
+      
+
+      
+      
+
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
+            <a class="post-title-link" href="/2016/08/21/图解HTTP/" itemprop="url">
               
-                
-                <a class="post-title-link" href="/2016/08/21/图解HTTP/" itemprop="url">
-                  图解HTTP——了解web及网络基础
-                </a>
+                <span itemprop="name">图解HTTP——了解web及网络基础</span>
               
-            
-          </h1>
+            </a>
         
+      </h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-21T12:12:24+08:00" content="2016-08-21">
-              2016-08-21
-            </time>
-          </span>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-08-21T12:12:24+08:00"
+              content="2016-08-21" >
+          08-21
+        </time>
+      </div>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/网络/" itemprop="url" rel="index">
-                    <span itemprop="name">网络</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/21/图解HTTP/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/21/图解HTTP/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="TCP-IP分层"><a href="#TCP-IP分层" class="headerlink" title="TCP/IP分层:"></a>TCP/IP分层:</h3><ul>
-<li>分为4层:应用层、传输层、网络层和数据链路层(<strong><a href="https://zh.wikipedia.org/wiki/OSI%E6%A8%A1%E5%9E%8B" target="_blank" rel="external">这里要区分OSI分层模式<7层或5层></7层或5层></a></strong>)<ul>
-<li>应用层:决定了向用户提供应用服务时通信的活动，FTP、DNS、HTTP都属于应用层。</li>
-<li>传输层:对上层应用层，提供处于网络连接中的两台计算机之间的数据传输。TCP、UDP都属于传输层。</li>
-<li>网络层:网络层用来处理在网络上流动的数据包。数据包是网络传输的最小数据单位。多台计算机连接传输时，网络层也负责在多条线路中选择一条传输线路。</li>
-<li>数据链路层（网络接口层）:用来处理连接网络的硬件部分。</li>
-</ul>
-</li>
-</ul>
-<h3 id="一般的请求流程图"><a href="#一般的请求流程图" class="headerlink" title="一般的请求流程图:"></a>一般的请求流程图:</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="客户端和服务端的通信图"></p>
-<h3 id="常见的协议"><a href="#常见的协议" class="headerlink" title="常见的协议:"></a>常见的协议:</h3><ul>
-<li>ARP协议:一种用以解析地址的协议，根据通信方的IP地址就可以反查出对应的MAC地址。</li>
-<li><p>TCP协议:位于传输层，提供可靠的字节流服务。</p>
-<ul>
-<li><p>三次握手:使用TCP的标志(flag)——<code>SYN(synchronize)</code>和<code>ACK(acknowledgement)</code><br>具体过程:发送端首先发送一个带SYN标志的数据包给对方。接收端收到后，回传一个带有SYN/ACK标志的数据包以示传达确认信息。最后，发送端再回传一个带ACK标志的数据包，代表“握手”结束。若在握手过程中某个阶段莫名中断，TCP协议会再次以相同你给的顺序发送相同的数据包。</p>
-</li>
-<li><p><strong>三次握手流程图:</strong><br><img src="http://oc8wh8qu5.bkt.clouddn.com/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="三次握手"></p>
-</li>
-</ul>
-</li>
-<li><p>DNS服务:提供域名到IP之间的解析。</p>
-</li>
-</ul>
-<h3 id="各协议和HTTP协议的关系"><a href="#各协议和HTTP协议的关系" class="headerlink" title="各协议和HTTP协议的关系:"></a>各协议和HTTP协议的关系:</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E5%90%84%E5%8D%8F%E8%AE%AE%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt="各协议和HTTP协议的关系"></p>
-<h3 id="代理："><a href="#代理：" class="headerlink" title="代理："></a>代理：</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E4%BB%A3%E7%90%861.png" alt="代理示意图"><br>代理服务器的基本行为就是接收客户端发送的请求后转发给其他服务器。代理不改变请求的URI，会直接发送给前方持有资源的目标服务器。持有资源实体的服务器被称为源服务器，从源服务器返回的响应经过代理服务器后再传给客户端。<br>HTTP通信的过程中，可级联多台代理服务器。请求和响应的转发会经过数台类似锁链一样连接起来的代理服务器。转发时，需要附加Via首部字段以标记出经过的主机信息。</p>
-<ul>
-<li><p><strong>缓存代理</strong><br>代理转发响应时，缓存代理（Caching Proxy）会预先将资源的副本（缓存）保存在代理服务器上。当代理再次接收到相同资源的请求时，就可以不从源服务器那里获取资源，而是将之前缓存的资源作为响应返回。</p>
-</li>
-<li><p><strong>透明代理</strong><br>转发请求或响应时，不对报文做任何加工的代理类型被称为透明代理（Transparent Proxy）。反之，对报文内容进行加工的代理被称为非透明代理。</p>
-</li>
-</ul>
-<h3 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E5%85%B3.png" alt="网关"><br>网关的工作机制和代理十分相似。而网关能使通信线路上的服务器提供非HTTP协议服务。<br>利用网关可以提高通信的安全性，因为可以在客户端与网关之间的通信线路上加密以确保连接的安全。比如，网关可以连接数据库，使用<code>SQL</code>语句查询数据。</p>
-<h3 id="隧道"><a href="#隧道" class="headerlink" title="隧道"></a>隧道</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E9%9A%A7%E9%81%931.png" alt="隧道"><br>隧道可按要求建立起一条与其他服务器的通信线路。届时使用<code>SSL</code>等加密手段进行加密。隧道的目的是确保客户端能与服务器进行安全的通信。隧道本身不会去解析HTTP请求。也就是说，请求保持原样中转给之后的服务器。隧道会在通信双方断开连接时结束。</p>
-<blockquote>
-<p>乱入：<a href="http://vc2tea.com/whats-shadowsocks/" target="_blank" rel="external">ss翻墙原理</a></p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+    </header>
   </article>
 
 
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
-      <header class="post-header">
 
+      
+      
+      
+
+      
+      
+
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
+            <a class="post-title-link" href="/2016/08/15/ssh-add/" itemprop="url">
               
-                
-                <a class="post-title-link" href="/2016/08/15/ssh-add/" itemprop="url">
-                  ssh-add
-                </a>
+                <span itemprop="name">ssh-add</span>
               
-            
-          </h1>
+            </a>
         
+      </h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-15T00:03:45+08:00" content="2016-08-15">
-              2016-08-15
-            </time>
-          </span>
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-08-15T00:03:45+08:00"
+              content="2016-08-15" >
+          08-15
+        </time>
+      </div>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/15/ssh-add/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/15/ssh-add/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天在配置git的ssh权限的时候（win10下进行的，git为1.9），在执行<code>$ add-ssh ~/.ssh/id_rsa</code>    的时候出现了<strong><em>Could not open a connection to your authentication agent</em></strong>这个错误的提示。</p>
-<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>在执行上面的操作之前，执行<code>eval `ssh-agent</code>（是～键上的那个`）这个命名就不可以避免这个错误了。</p>
-<h3 id="PS："><a href="#PS：" class="headerlink" title="PS："></a>PS：</h3><p>不知道不同版本的<code>git</code>解决办法是不是相同的</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+    </header>
   </article>
 
 
+
     
+
   </section>
 
   
+
 
 
           </div>
@@ -777,17 +497,6 @@
     NexT.Mist
   </a>
 </div>
-
-       
-  <!-- 在下面的位置加上如下代码 -->
-  
-       <span id="busuanzi_container_page_pv">
-       &nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
-       </span>
-       
-   <!-- 在上面的位置加上如上代码 -->    
-   
-       
         
 
         
@@ -851,6 +560,12 @@
   
 
   
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
+
 
   
 
