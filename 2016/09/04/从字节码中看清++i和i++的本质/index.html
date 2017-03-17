@@ -125,13 +125,7 @@
 
   <link rel="canonical" href="http://yoursite.com/2016/09/04/从字节码中看清++i和i++的本质/"/>
 
-  <title>
-  
-
-  
-    从字节码中看清++i和i++的本质 | The Blog for U
-  
-</title>
+  <title> 从字节码中看清++i和i++的本质 | The Blog for U </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -162,7 +156,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -272,8 +266,100 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <blockquote>
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                从字节码中看清++i和i++的本质
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-04T15:08:50+08:00" content="2016-09-04">
+              2016-09-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/字节码/" itemprop="url" rel="index">
+                    <span itemprop="name">字节码</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+		
+			<!-- 在下面的位置加上如下代码 -->
+  
+       <span id="busuanzi_container_page_pv">
+       &nbsp; | &nbsp; 热度&nbsp; <span id="busuanzi_value_page_pv"></span>°C
+       </span>
+       
+			<!-- 在上面的位置加上如上代码 -->   
+		
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/04/从字节码中看清++i和i++的本质/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/04/从字节码中看清++i和i++的本质/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
 <p>不用多说，<strong>i++</strong> 和 <strong>++i</strong>这两个玩意从你开始学习编程开始就被拿出来各种哔哔。偶然还是会忘记它们的，刚开始接触，卧槽，这什么玩意，反人类啊！懒得扯了，直接看正文吧~</p>
 </blockquote>
 <p>我是正文：</p>
@@ -286,7 +372,58 @@
 <p>所以m就是第一个 <strong>local variable</strong> ，n是第二个 <strong>local variable</strong> 。<br>对哦，还没说 <strong>iload_1 iload_2</strong> 。这两兄弟的意思差不多，后面的数字1，2表示的也是 <strong>local variable</strong> 里的变量的位置。 <strong>iload_1</strong> 就是第1个int型变量进栈，也就是这个m。这个时候还没执行 <strong>iinc 1,1</strong> ，所以这个处于栈顶的m还是0，这个就是 <strong>m++</strong> 后还是0的原因。那么 <strong>++n</strong> 是1的原因，就很明显了。就是先加然后进栈。<br>哎呀，我也是半瓢水，其他指令解释起来好麻烦。直接甩个链接吧，里面有基本的字节码讲解，还不错哟。</p>
 <h3 id="字节码指令"><a href="#字节码指令" class="headerlink" title="字节码指令"></a><a href="http://gityuan.com/2015/10/24/jvm-bytecode-grammar/" target="_blank" rel="external">字节码指令</a></h3><p>PS：看看字节码，装装逼还是可以的~嘻嘻</p>
 
-    
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/字节码/" rel="tag">#字节码</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/21/图解HTTP/" rel="next" title="图解HTTP——了解web及网络基础">
+                <i class="fa fa-chevron-left"></i> 图解HTTP——了解web及网络基础
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -325,8 +462,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/headPic.jpg"
@@ -377,6 +523,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#字节码指令"><span class="nav-number">1.</span> <span class="nav-text">字节码指令</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -408,6 +565,7 @@
     NexT.Mist
   </a>
 </div>
+
         
 
         
@@ -471,6 +629,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
