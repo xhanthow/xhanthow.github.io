@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/salve.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/xshell.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E5%93%A8%E5%85%B5%E5%90%AF%E5%8A%A8.png">
-<meta property="og:updated_time" content="2017-04-04T09:06:30.075Z">
+<meta property="og:updated_time" content="2017-04-04T09:07:23.559Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置redis主从复制以及哨兵模式">
 <meta name="twitter:description" content="前戏说明：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~">
@@ -301,7 +301,7 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>1,502 字</span>
+				<span>1,505 字</span>
 				&nbsp; | &nbsp;
 				<span>6 min</span>
 			  </span>
@@ -396,13 +396,15 @@
 <p> mymaster: master的名称（随便取啦）</p>
 <p>192.168.1.112 6379: master的ip和port</p>
 <p>1: 指明当有多少个sentinel认为一个master失效时，master才算真正失效</p>
-<figure class="highlight plain"><figcaption><span>down-after-milliseconds mymaster 5000```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">这个配置项指定了需要多少失效时间，一个master才会被这个sentinel主观地认为是不可用的。 单位是毫秒，默认为30秒。</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">```sentinel failover-timeout mymaster 900000</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sentinel down-after-milliseconds mymaster 5000</div></pre></td></tr></table></figure>
+<p>这个配置项指定了需要多少失效时间，一个master才会被这个sentinel主观地认为是不可用的。 单位是毫秒，默认为30秒。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sentinel failover-timeout mymaster 900000</div></pre></td></tr></table></figure>
 <p>failover-timeout 可以用在以下这些方面： </p>
 <p>​      1. 同一个sentinel对同一个master两次failover之间的间隔时间。</p>
 <p>​      2. 当一个slave从一个错误的master那里同步数据开始计算时间。直到slave被纠正为向正确的master那里同步数据时。</p>
 <p>​      3.当想要取消一个正在进行的failover所需要的时间。  </p>
 <p>​      4.当进行failover时，配置所有slaves指向新的master所需的最大时间。不过，即使过了这个超时，slaves依然会被正确配置为指向master，但是就不按parallel-syncs所配置的规则来了。</p>
-<p><code>sentinel parallel-syncs mymaster 2</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sentinel parallel-syncs mymaster 2</div></pre></td></tr></table></figure>
 <p>这个配置项指定了在发生failover主备切换时最多可以有多少个slave同时对新的master进行 同步，这个数字越小，完成failover所需的时间就越长，但是如果这个数字越大，就意味着越 多的slave因为replication而不可用。可以通过将这个值设为 1 来保证每次只有一个slave 处于不能处理命令请求的状态。</p>
 <p>配置结束，就这么简单。然后看下效果~</p>
 <p>开启哨兵监控：<strong>sudo /usr/bin/redis-sentinel   /etc/redis/sentinel.conf – sentinel &amp;</strong></p>
