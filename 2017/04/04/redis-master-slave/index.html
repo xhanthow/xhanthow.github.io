@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/salve.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/xshell.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E5%93%A8%E5%85%B5%E5%90%AF%E5%8A%A8.png">
-<meta property="og:updated_time" content="2017-04-04T09:07:23.559Z">
+<meta property="og:updated_time" content="2017-04-04T09:08:40.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置redis主从复制以及哨兵模式">
 <meta name="twitter:description" content="前戏说明：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~">
@@ -301,7 +301,7 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>1,505 字</span>
+				<span>1,495 字</span>
 				&nbsp; | &nbsp;
 				<span>6 min</span>
 			  </span>
@@ -370,41 +370,41 @@
 <li>编辑-&gt;虚拟网络编辑器-&gt;更改设置（酱紫，我只留下了VMnet8这个模式，框框中是需要注意的地方，子网ip根据自己的实际情况配置）<br> <img src="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E8%B7%AF%E7%BC%96%E8%BE%91%E5%99%A8.png" alt="虚拟网络编辑器"></li>
 <li>点击NAT设置(酱紫，这个xx.xx.xx.2中的2很关键，我也不知道为啥)<br> <img src="http://oc8wh8qu5.bkt.clouddn.com/NAT%E8%AE%BE%E7%BD%AE.png" alt="NAT设置"></li>
 <li><p>接下来就是设置固定ip咯。<br> <strong>sudo vim /etc/network/interfaces</strong><br>  然后配置如下:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">auto lo iface lo inet loopbac </div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line"># 这个就是自己设置的固定ip</div><div class="line">address 192.168.1.110</div><div class="line">netmask 255.255.255.0</div><div class="line"># 这个就是上面配置的网关</div><div class="line">gateway 192.168.1.2</div><div class="line"># 这个根据自己情况配置的</div><div class="line">dns-nameservers 218.2.2.2</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">auto lo iface lo inet loopbac </div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line"># 这个就是自己设置的固定ip</div><div class="line">address 192.168.1.110</div><div class="line">netmask 255.255.255.0</div><div class="line"># 这个就是上面配置的网关</div><div class="line">gateway 192.168.1.2</div><div class="line"># 这个根据自己情况配置的</div><div class="line">dns-nameservers 218.2.2.2</div></pre></td></tr></table></figure>
 <p>然后<br><strong>sudo /etc/init.d/networking restart</strong>(ps:如果ip不是上述的ip就重启一下~)<br>ok，环境准备就折腾完了。</p>
 <h3 id="1-redis主从复制"><a href="#1-redis主从复制" class="headerlink" title="1:redis主从复制"></a>1:redis主从复制</h3><p><a href="http://ifeve.com/redis-replication/" target="_blank" rel="external">redis主从复制介绍</a> 不好意思今天是讲怎么配置这玩意的,而且我理解得也不算透彻呀，zz~<br>编辑redis.conf文件 <strong>sudo vim /etc/redis/redis.conf</strong><br><img src="http://oc8wh8qu5.bkt.clouddn.com/salve.png" alt="slave配置"><br>对，就这么简单，就一句话。ip+port，ip就是你的master的ip(下面那个masterauth就是密码相关的配置，自己玩可以忽略)  我这边是设置了2台从(192.168.1.111和192.168.1.112)。<br>配置好了之后<strong>sudo /etc/init.d/redis-server restart</strong>重启一下，然后<strong>redis-cli</strong>启动redis。</p>
 <p><strong>题外话</strong><br>我是用xshell连接的，如果有10台从咋办，一个个<strong>redis-cli</strong>的敲？当然不是，xshell下面有个输入框，旁边选择项如下:<br><img src="http://oc8wh8qu5.bkt.clouddn.com/xshell.png" alt="xshell"><br>这样的话在输入框中敲一个命令即对所有标签组都有效~</p>
 </li>
 </ul>
-<p> ok，回到正题，启动之后敲<strong>info replication</strong><br> master信息如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">role:master</div><div class="line">connected_slaves:2</div><div class="line">slave0:ip=192.168.1.111,port=6379,state=online,offset=3207,lag=0</div><div class="line">slave1:ip=192.168.1.112,port=6379,state=online,offset=3207,lag=1</div><div class="line">master_repl_offset:3207</div><div class="line">repl_backlog_active:1</div><div class="line">repl_backlog_size:1048576</div><div class="line">repl_backlog_first_byte_offset:2</div><div class="line">repl_backlog_histlen:3206</div></pre></td></tr></table></figure></p>
+<p> ok，回到正题，启动之后敲<strong>info replication</strong><br> master信息如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">role:master</div><div class="line">connected_slaves:2</div><div class="line">slave0:ip=192.168.1.111,port=6379,state=online,offset=3207,lag=0</div><div class="line">slave1:ip=192.168.1.112,port=6379,state=online,offset=3207,lag=1</div><div class="line">master_repl_offset:3207</div><div class="line">repl_backlog_active:1</div><div class="line">repl_backlog_size:1048576</div><div class="line">repl_backlog_first_byte_offset:2</div><div class="line">repl_backlog_histlen:3206</div></pre></td></tr></table></figure></p>
 <p>slave(192.168.1.111)信息如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">role:slave</div><div class="line">master_host:192.168.1.110</div><div class="line">master_port:6379</div><div class="line">master_link_status:up</div><div class="line">master_last_io_seconds_ago:7</div><div class="line">master_sync_in_progress:0</div><div class="line">slave_repl_offset:3781</div><div class="line">slave_priority:100</div><div class="line">slave_read_only:1</div><div class="line">connected_slaves:0</div><div class="line">master_repl_offset:0</div><div class="line">repl_backlog_active:0</div><div class="line">repl_backlog_size:1048576</div><div class="line">repl_backlog_first_byte_offset:0</div><div class="line">repl_backlog_histlen:0</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">role:slave</div><div class="line">master_host:192.168.1.110</div><div class="line">master_port:6379</div><div class="line">master_link_status:up</div><div class="line">master_last_io_seconds_ago:7</div><div class="line">master_sync_in_progress:0</div><div class="line">slave_repl_offset:3781</div><div class="line">slave_priority:100</div><div class="line">slave_read_only:1</div><div class="line">connected_slaves:0</div><div class="line">master_repl_offset:0</div><div class="line">repl_backlog_active:0</div><div class="line">repl_backlog_size:1048576</div><div class="line">repl_backlog_first_byte_offset:0</div><div class="line">repl_backlog_histlen:0</div></pre></td></tr></table></figure>
 <p>这是正常的情况，可以现实总是辣么的残酷。<strong>master_link_status:down</strong>这就是一个活生生的例子呀，当看到这个时，表示出错啦！赶紧喵一眼log日志，<strong>/var/log/redis/redis-server.log</strong>这个是日志的默认路径，在redis.conf文件可以看到它的身影。</p>
 <p>日志中一直说<strong>Error condition on socket for SYNC: Connection refused</strong>，但是相互之间都是ping得通的呀，</p>
 <p>于是在网上找了好一会找到了<a href="http://www.voidcn.com/blog/chwshuang/article/p-6392681.html" target="_blank" rel="external">解决方案</a>：把redis.conf中的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bind 127.0.0.1</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">bind 127.0.0.1</div></pre></td></tr></table></figure>
 <p>改为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bind 0.0.0.0</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">bind 0.0.0.0</div></pre></td></tr></table></figure>
 <p>或者注释掉bind字段。</p>
 <p>但是你可能又会遇到这样的错误:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[7224] 26 Apr 23:21:16.552 # Server started, Redis version 2.8.4  </div><div class="line">[7224] 26 Apr 23:21:16.553 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add &apos;vm.overcommit_memory = 1&apos; to /etc/sysctl.conf and then reboot or run the command &apos;sysctl vm.overcommit_memory=1&apos; for this to take effect.  </div><div class="line">[7224] 26 Apr 23:21:16.553 * The server is now ready to accept connections on port 6379</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[7224] 26 Apr 23:21:16.552 # Server started, Redis version 2.8.4  </div><div class="line">[7224] 26 Apr 23:21:16.553 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add &apos;vm.overcommit_memory = 1&apos; to /etc/sysctl.conf and then reboot or run the command &apos;sysctl vm.overcommit_memory=1&apos; for this to take effect.  </div><div class="line">[7224] 26 Apr 23:21:16.553 * The server is now ready to accept connections on port 6379</div></pre></td></tr></table></figure>
 <p>但是这就比较好解决，人家都把方案告诉你了。这是目前遇到的两种错误~</p>
 <p>好了，这样主从复制基本大功告成了！这样你在mater中写入的信息在slave中也就可以看到了~</p>
 <h3 id="2-redis哨兵"><a href="#2-redis哨兵" class="headerlink" title="2:redis哨兵"></a>2:redis哨兵</h3><p><a href="http://redis.majunwei.com/topics/sentinel.html" target="_blank" rel="external">redis哨兵介绍</a></p>
 <p>哨兵的配置文件在sentinel.conf中，其实只用修改几处配置即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sentinel monitor mymaster 192.168.1.112 6379 1</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sentinel monitor mymaster 192.168.1.112 6379 1</div></pre></td></tr></table></figure>
 <p> mymaster: master的名称（随便取啦）</p>
 <p>192.168.1.112 6379: master的ip和port</p>
 <p>1: 指明当有多少个sentinel认为一个master失效时，master才算真正失效</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sentinel down-after-milliseconds mymaster 5000</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sentinel down-after-milliseconds mymaster 5000</div></pre></td></tr></table></figure>
 <p>这个配置项指定了需要多少失效时间，一个master才会被这个sentinel主观地认为是不可用的。 单位是毫秒，默认为30秒。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sentinel failover-timeout mymaster 900000</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sentinel failover-timeout mymaster 900000</div></pre></td></tr></table></figure>
 <p>failover-timeout 可以用在以下这些方面： </p>
 <p>​      1. 同一个sentinel对同一个master两次failover之间的间隔时间。</p>
 <p>​      2. 当一个slave从一个错误的master那里同步数据开始计算时间。直到slave被纠正为向正确的master那里同步数据时。</p>
 <p>​      3.当想要取消一个正在进行的failover所需要的时间。  </p>
 <p>​      4.当进行failover时，配置所有slaves指向新的master所需的最大时间。不过，即使过了这个超时，slaves依然会被正确配置为指向master，但是就不按parallel-syncs所配置的规则来了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sentinel parallel-syncs mymaster 2</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sentinel parallel-syncs mymaster 2</div></pre></td></tr></table></figure>
 <p>这个配置项指定了在发生failover主备切换时最多可以有多少个slave同时对新的master进行 同步，这个数字越小，完成failover所需的时间就越长，但是如果这个数字越大，就意味着越 多的slave因为replication而不可用。可以通过将这个值设为 1 来保证每次只有一个slave 处于不能处理命令请求的状态。</p>
 <p>配置结束，就这么简单。然后看下效果~</p>
 <p>开启哨兵监控：<strong>sudo /usr/bin/redis-sentinel   /etc/redis/sentinel.conf – sentinel &amp;</strong></p>
