@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="大数据 Hadoop," />
 
 
 
@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="Some Notes">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据学习之路01————配置hadoop集群">
+<meta property="og:url" content="http://yoursite.com/2017/06/02/hadoop-cluster/index.html">
 <meta property="og:site_name" content="敲音乐听代码~">
-<meta property="og:description" content="Some Notes">
-<meta property="og:updated_time" content="2016-08-26T16:55:27.427Z">
+<meta property="og:description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。">
+<meta property="og:updated_time" content="2017-06-02T15:01:00.866Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="Some Notes">
+<meta name="twitter:title" content="大数据学习之路01————配置hadoop集群">
+<meta name="twitter:description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。">
 
 
 
@@ -114,15 +114,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/02/hadoop-cluster/"/>
 
-  <title>
-  
-
-  
-    标签 | 敲音乐听代码~
-  
-</title>
+  <title> 大数据学习之路01————配置hadoop集群 | 敲音乐听代码~ </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -153,7 +147,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -263,16 +257,160 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            目前共计 5 个标签
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                大数据学习之路01————配置hadoop集群
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-02T22:52:37+08:00" content="2017-06-02">
+              2017-06-02
+            </time>
+          </span>
+		  
+			  <span class="post-letters-count">
+				&nbsp; | &nbsp;
+				<span>64 字</span>
+				&nbsp; | &nbsp;
+				<span>1 min</span>
+			  </span>
+			
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+		
+
+          
+            
+              <span class="post-comments-count">
+                
+                <a href="/2017/06/02/hadoop-cluster/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/02/hadoop-cluster/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+				
+              <span class="page-pv">本文被瞅了
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+              </span>
+          
         </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/HTTP基本知识/" style="font-size: 12px; color: #ccc">HTTP基本知识</a> <a href="/tags/redis/" style="font-size: 12px; color: #ccc">redis</a> <a href="/tags/大数据-Hadoop/" style="font-size: 12px; color: #ccc">大数据 Hadoop</a> <a href="/tags/字节码/" style="font-size: 12px; color: #ccc">字节码</a> <a href="/tags/常见问题/" style="font-size: 12px; color: #ccc">常见问题</a>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>前戏说明</strong>：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。</p>
+<a id="more"></a>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/大数据-Hadoop/" rel="tag">#大数据 Hadoop</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/04/redis-master-slave/" rel="next" title="配置redis主从复制以及哨兵模式">
+                <i class="fa fa-chevron-left"></i> 配置redis主从复制以及哨兵模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -286,8 +424,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="tags/index.html"
-           data-title="tags" data-url="http://yoursite.com/tags/index.html">
+      <div class="ds-thread" data-thread-key="2017/06/02/hadoop-cluster/"
+           data-title="大数据学习之路01————配置hadoop集群" data-url="http://yoursite.com/2017/06/02/hadoop-cluster/">
       </div>
     
   </div>
@@ -311,8 +449,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/headPic.jpg"
@@ -382,6 +529,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -494,6 +652,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
