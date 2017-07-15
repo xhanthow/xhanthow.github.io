@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="大数据 Hadoop," />
+  <meta name="keywords" content="Hadoop," />
 
 
 
@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。">
+<meta name="description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。（我用的hadoop版本为2.7.3，不同版本配置可能有些许差别，具体还是看官方文档！）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="大数据学习之路01————配置hadoop集群">
+<meta property="og:title" content="大数据学习之路01--配置hadoop集群">
 <meta property="og:url" content="http://yoursite.com/2017/06/02/hadoop-cluster/index.html">
 <meta property="og:site_name" content="敲音乐听代码~">
-<meta property="og:description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。">
-<meta property="og:updated_time" content="2017-06-02T15:01:00.866Z">
+<meta property="og:description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。（我用的hadoop版本为2.7.3，不同版本配置可能有些许差别，具体还是看官方文档！）">
+<meta property="og:updated_time" content="2017-06-02T18:40:42.532Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="大数据学习之路01————配置hadoop集群">
-<meta name="twitter:description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。">
+<meta name="twitter:title" content="大数据学习之路01--配置hadoop集群">
+<meta name="twitter:description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。（我用的hadoop版本为2.7.3，不同版本配置可能有些许差别，具体还是看官方文档！）">
 
 
 
@@ -116,7 +116,7 @@
 
   <link rel="canonical" href="http://yoursite.com/2017/06/02/hadoop-cluster/"/>
 
-  <title> 大数据学习之路01————配置hadoop集群 | 敲音乐听代码~ </title>
+  <title> 大数据学习之路01--配置hadoop集群 | 敲音乐听代码~ </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -276,7 +276,7 @@
             
             
               
-                大数据学习之路01————配置hadoop集群
+                大数据学习之路01--配置hadoop集群
               
             
           </h1>
@@ -295,9 +295,9 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>64 字</span>
+				<span>449 字</span>
 				&nbsp; | &nbsp;
-				<span>1 min</span>
+				<span>2 min</span>
 			  </span>
 			
 
@@ -356,8 +356,19 @@
       
 
       
-        <p><strong>前戏说明</strong>：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。</p>
+        <p><strong>前戏说明</strong>：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。（我用的hadoop版本为2.7.3，不同版本配置可能有些许差别，具体还是看官方文档！）</p>
 <a id="more"></a>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><h4 id="java环境"><a href="#java环境" class="headerlink" title="java环境"></a>java环境</h4><p>由于hadoop是建立在java上面的项目，因而jdk的安装是必须的，由于我的ubuntu版本有点低，自带的open-jdk版本也比较低，所以需要升级，执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo add-apt-repository ppa:openjdk-r/ppa</div><div class="line">sudo apt-get update </div><div class="line">sudo apt-get install openjdk-8-jdk</div></pre></td></tr></table></figure>
+<p>安装完毕之后将<code>JAVA_HOME</code>添加到环境变量中</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">vim /etc/environment</div><div class="line"></div><div class="line">JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</div></pre></td></tr></table></figure>
+<h4 id="网络环境"><a href="#网络环境" class="headerlink" title="网络环境"></a>网络环境</h4><p>由于是集群模式，所以会有多台机器，但是如果每台机器都用其ip的话就过于麻烦，因为修改一下它们的host文件如下:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># for hadoop</div><div class="line">192.168.1.110 node1</div><div class="line">192.168.1.111 node2</div><div class="line">192.168.1.112 node3</div></pre></td></tr></table></figure>
+<p>这样的话就可以直接用其“别名”来代替其ip了。</p>
+<p>另外为了方便还需要进行ssh免密码登陆，看操作~</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ssh-keygen -t rsa -P &apos;&apos; -f ~/.ssh/id_rsa</div></pre></td></tr></table></figure>
+<p>这句话是生成公钥和私钥的，即在根目录下的<code>.ssh</code>目录下可以看到id_rsa(私钥)、id_rsa.pub(公钥)。如果想要在node1上免密码登陆到node2上，则在node2根目录下的<code>.ssh</code>目录建立一个<code>authorized_keys</code>文件(如果没有的话)，然后将node1上的id_rsa.pub中的内容添加到<code>authorized_keys</code>文件中。<strong>注意文件最后不要有换行符</strong></p>
+<p>这样简单操作后就可以实现在node1上面密码登陆到node2上，即<code>ssh node2</code>可直接登陆到node2上了，node3同理。</p>
 
       
     </div>
@@ -380,7 +391,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/大数据-Hadoop/" rel="tag">#大数据 Hadoop</a>
+            <a href="/tags/Hadoop/" rel="tag">#Hadoop</a>
           
         </div>
       
@@ -425,7 +436,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/06/02/hadoop-cluster/"
-           data-title="大数据学习之路01————配置hadoop集群" data-url="http://yoursite.com/2017/06/02/hadoop-cluster/">
+           data-title="大数据学习之路01--配置hadoop集群" data-url="http://yoursite.com/2017/06/02/hadoop-cluster/">
       </div>
     
   </div>
@@ -536,7 +547,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java环境"><span class="nav-number">1.1.</span> <span class="nav-text">java环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络环境"><span class="nav-number">1.2.</span> <span class="nav-text">网络环境</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

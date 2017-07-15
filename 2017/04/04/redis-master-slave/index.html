@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/salve.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/xshell.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E5%93%A8%E5%85%B5%E5%90%AF%E5%8A%A8.png">
-<meta property="og:updated_time" content="2017-04-04T09:17:24.125Z">
+<meta property="og:updated_time" content="2017-06-02T15:06:06.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置redis主从复制以及哨兵模式">
 <meta name="twitter:description" content="前戏说明：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~">
@@ -301,7 +301,7 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>1,495 字</span>
+				<span>1,492 字</span>
 				&nbsp; | &nbsp;
 				<span>6 min</span>
 			  </span>
@@ -364,7 +364,7 @@
       
         <p><strong>前戏说明</strong>：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~</p>
 <a id="more"></a>
-<h3 id="0-环境准备"><a href="#0-环境准备" class="headerlink" title="0:环境准备"></a>0:环境准备</h3><h4 id="安装多台虚拟机"><a href="#安装多台虚拟机" class="headerlink" title="安装多台虚拟机"></a>安装多台虚拟机</h4><p>先在vm上安装一台虚拟机，然后安装redis，直接这样干简单粗暴<br><strong>redis apt-get install redis-server</strong><br>但是主从模式嘛，所以需要n台虚拟机。然后咧，直接在vm中<strong>克隆</strong>已经安装过的虚拟机即可~<br><strong>注意:</strong> 克隆好之后，右击它，然后选择设置-&gt;网络适配器-&gt;高级-&gt;生成(随机生成MAC地址)</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><h4 id="安装多台虚拟机"><a href="#安装多台虚拟机" class="headerlink" title="安装多台虚拟机"></a>安装多台虚拟机</h4><p>先在vm上安装一台虚拟机，然后安装redis，直接这样干简单粗暴<br><strong>redis apt-get install redis-server</strong><br>但是主从模式嘛，所以需要n台虚拟机。然后咧，直接在vm中<strong>克隆</strong>已经安装过的虚拟机即可~<br><strong>注意:</strong> 克隆好之后，右击它，然后选择设置-&gt;网络适配器-&gt;高级-&gt;生成(随机生成MAC地址)</p>
 <h4 id="配置固定IP"><a href="#配置固定IP" class="headerlink" title="配置固定IP"></a>配置固定IP</h4><p>上面操作over之后，还有一个问题，就是每次启动的时候每台虚拟机的ip都是不固定的(不固定玩毛啊)。话不多说，看操作！</p>
 <ul>
 <li>编辑-&gt;虚拟网络编辑器-&gt;更改设置（酱紫，我只留下了VMnet8这个模式，框框中是需要注意的地方，子网ip根据自己的实际情况配置）<br> <img src="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E8%B7%AF%E7%BC%96%E8%BE%91%E5%99%A8.png" alt="虚拟网络编辑器"></li>
@@ -372,7 +372,7 @@
 <li><p>接下来就是设置固定ip咯。<br> <strong>sudo vim /etc/network/interfaces</strong><br>  然后配置如下:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">auto lo iface lo inet loopbac </div><div class="line">auto eth0</div><div class="line">iface eth0 inet static</div><div class="line"># 这个就是自己设置的固定ip</div><div class="line">address 192.168.1.110</div><div class="line">netmask 255.255.255.0</div><div class="line"># 这个就是上面配置的网关</div><div class="line">gateway 192.168.1.2</div><div class="line"># 这个根据自己情况配置的</div><div class="line">dns-nameservers 218.2.2.2</div></pre></td></tr></table></figure>
 <p>然后<br><strong>sudo /etc/init.d/networking restart</strong>(ps:如果ip不是上述的ip就重启一下~)<br>ok，环境准备就折腾完了。</p>
-<h3 id="1-redis主从复制"><a href="#1-redis主从复制" class="headerlink" title="1:redis主从复制"></a>1:redis主从复制</h3><p><a href="http://ifeve.com/redis-replication/" target="_blank" rel="external">redis主从复制介绍</a> 不好意思今天是讲怎么配置这玩意的,而且我理解得也不算透彻呀，zz~<br>编辑redis.conf文件 <strong>sudo vim /etc/redis/redis.conf</strong><br><img src="http://oc8wh8qu5.bkt.clouddn.com/salve.png" alt="slave配置"><br>对，就这么简单，就一句话。ip+port，ip就是你的master的ip(下面那个masterauth就是密码相关的配置，自己玩可以忽略)  我这边是设置了2台从(192.168.1.111和192.168.1.112)。<br>配置好了之后<strong>sudo /etc/init.d/redis-server restart</strong>重启一下，然后<strong>redis-cli</strong>启动redis。</p>
+<h3 id="redis主从复制"><a href="#redis主从复制" class="headerlink" title="redis主从复制"></a>redis主从复制</h3><p><a href="http://ifeve.com/redis-replication/" target="_blank" rel="external">redis主从复制介绍</a> 不好意思今天是讲怎么配置这玩意的,而且我理解得也不算透彻呀，zz~<br>编辑redis.conf文件 <strong>sudo vim /etc/redis/redis.conf</strong><br><img src="http://oc8wh8qu5.bkt.clouddn.com/salve.png" alt="slave配置"><br>对，就这么简单，就一句话。ip+port，ip就是你的master的ip(下面那个masterauth就是密码相关的配置，自己玩可以忽略)  我这边是设置了2台从(192.168.1.111和192.168.1.112)。<br>配置好了之后<strong>sudo /etc/init.d/redis-server restart</strong>重启一下，然后<strong>redis-cli</strong>启动redis。</p>
 <p><strong>题外话</strong><br>我是用xshell连接的，如果有10台从咋办，一个个<strong>redis-cli</strong>的敲？当然不是，xshell下面有个输入框，旁边选择项如下:<br><img src="http://oc8wh8qu5.bkt.clouddn.com/xshell.png" alt="xshell"><br>这样的话在输入框中敲一个命令即对所有标签组都有效~</p>
 </li>
 </ul>
@@ -390,7 +390,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[7224] 26 Apr 23:21:16.552 # Server started, Redis version 2.8.4  </div><div class="line">[7224] 26 Apr 23:21:16.553 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add &apos;vm.overcommit_memory = 1&apos; to /etc/sysctl.conf and then reboot or run the command &apos;sysctl vm.overcommit_memory=1&apos; for this to take effect.  </div><div class="line">[7224] 26 Apr 23:21:16.553 * The server is now ready to accept connections on port 6379</div></pre></td></tr></table></figure>
 <p>但是这就比较好解决，人家都把方案告诉你了。这是目前遇到的两种错误~</p>
 <p>好了，这样主从复制基本大功告成了！这样你在mater中写入的信息在slave中也就可以看到了~</p>
-<h3 id="2-redis哨兵"><a href="#2-redis哨兵" class="headerlink" title="2:redis哨兵"></a>2:redis哨兵</h3><p><a href="http://redis.majunwei.com/topics/sentinel.html" target="_blank" rel="external">redis哨兵介绍</a></p>
+<h3 id="redis哨兵"><a href="#redis哨兵" class="headerlink" title="redis哨兵"></a>redis哨兵</h3><p><a href="http://redis.majunwei.com/topics/sentinel.html" target="_blank" rel="external">redis哨兵介绍</a></p>
 <p>哨兵的配置文件在sentinel.conf中，其实只用修改几处配置即可。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sentinel monitor mymaster 192.168.1.112 6379 1</div></pre></td></tr></table></figure>
 <p> mymaster: master的名称（随便取啦）</p>
@@ -449,8 +449,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/02/hadoop-cluster/" rel="prev" title="大数据学习之路01————配置hadoop集群">
-                大数据学习之路01————配置hadoop集群 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/02/hadoop-cluster/" rel="prev" title="大数据学习之路01--配置hadoop集群">
+                大数据学习之路01--配置hadoop集群 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -592,7 +592,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-环境准备"><span class="nav-number">1.</span> <span class="nav-text">0:环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装多台虚拟机"><span class="nav-number">1.1.</span> <span class="nav-text">安装多台虚拟机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置固定IP"><span class="nav-number">1.2.</span> <span class="nav-text">配置固定IP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-redis主从复制"><span class="nav-number">2.</span> <span class="nav-text">1:redis主从复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-redis哨兵"><span class="nav-number">3.</span> <span class="nav-text">2:redis哨兵</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装多台虚拟机"><span class="nav-number">1.1.</span> <span class="nav-text">安装多台虚拟机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置固定IP"><span class="nav-number">1.2.</span> <span class="nav-text">配置固定IP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis主从复制"><span class="nav-number">2.</span> <span class="nav-text">redis主从复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis哨兵"><span class="nav-number">3.</span> <span class="nav-text">redis哨兵</span></a></li></ol></div>
             
           </div>
         </section>
