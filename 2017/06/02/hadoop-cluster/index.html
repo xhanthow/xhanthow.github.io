@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/02/hadoop-cluster/index.html">
 <meta property="og:site_name" content="敲音乐听代码~">
 <meta property="og:description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。（我用的hadoop版本为2.7.3，不同版本配置可能有些许差别，具体还是看官方文档！）">
-<meta property="og:updated_time" content="2017-07-15T04:29:54.335Z">
+<meta property="og:updated_time" content="2017-07-15T11:11:29.608Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="大数据学习之路01--配置hadoop集群">
 <meta name="twitter:description" content="前戏说明：由于工作需要，开始接触大数据方面的东西，由于之前从来没有搞过这玩意，所以嘛，先不管啥啥啥，先把环境撸好在说嘛~于是乎在此记录一些东东。（我用的hadoop版本为2.7.3，不同版本配置可能有些许差别，具体还是看官方文档！）">
@@ -295,9 +295,9 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>449 字</span>
+				<span>831 字</span>
 				&nbsp; | &nbsp;
-				<span>2 min</span>
+				<span>3 min</span>
 			  </span>
 			
 
@@ -369,6 +369,22 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ssh-keygen -t rsa -P &apos;&apos; -f ~/.ssh/id_rsa</div></pre></td></tr></table></figure>
 <p>这句话是生成公钥和私钥的，即在根目录下的<code>.ssh</code>目录下可以看到id_rsa(私钥)、id_rsa.pub(公钥)。如果想要在node1上免密码登陆到node2上，则在node2根目录下的<code>.ssh</code>目录建立一个<code>authorized_keys</code>文件(如果没有的话)，然后将node1上的id_rsa.pub中的内容添加到<code>authorized_keys</code>文件中。<strong>注意文件最后不要有换行符</strong></p>
 <p>这样简单操作后就可以实现在node1上面密码登陆到node2上，即<code>ssh node2</code>可直接登陆到node2上了，node3同理。</p>
+<h3 id="正式开搞"><a href="#正式开搞" class="headerlink" title="正式开搞"></a>正式开搞</h3><p>下好压缩包并解压之后，让我们来瞅瞅<code>etc/hadoop/</code>这个目录下的东西。对，全是配置文件，也是我们需要搞的地方！</p>
+<ul>
+<li><p><code>hadoop-env.sh</code>: 增加这句话<code>export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</code>(即自己机器上java安装的目录)</p>
+</li>
+<li><p><code>core-site.xml</code>:</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://node1:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 工作目录，默认在temp目录，每次启动会清空，所以需要自己指定工作目录  --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- 不需要自己创建，在format的时候会自动创建 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>/opt/hadoop/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- Size of read/write buffer used in SequenceFiles --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">name</span>&gt;</span>io.file.buffer.size<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">value</span>&gt;</span>131072<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><code>hdfs-size.xml</code>:</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--配置SecondaryNameNode  --&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.secondary.http-address<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>node1:50090<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!--副本数，默认为3，由于只有2台datanode，即该数&lt;=2 --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>2<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.permissions.enabled<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/opt/hadoop/hdfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">     <span class="comment">&lt;!--  &lt;value&gt;file:/usr/local/hadoop-2.7.3/datanode&lt;/value&gt; --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/opt/hadoop/hdfs/datanode<span class="tag">&lt;/<span class="name">value</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>然后新建一个slaves文件内容就是你的从机器的ip，我这里的就是node2，node3</p>
+</li>
+</ul>
+<p><strong>然后把这些配置拷贝到从机器上即可</strong></p>
+<p>ps：<strong>权限很重要，就是上面配置的文件路径的权限，有坑</strong></p>
+<p>这样不出意外的话就搞定了，然后启动一下，jps一下，浏览器打开一下，瞅一下。有问题就从log里面找，然后问谷歌爸爸就可以了。</p>
 
       
     </div>
@@ -547,7 +563,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java环境"><span class="nav-number">1.1.</span> <span class="nav-text">java环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络环境"><span class="nav-number">1.2.</span> <span class="nav-text">网络环境</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境准备"><span class="nav-number">1.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java环境"><span class="nav-number">1.1.</span> <span class="nav-text">java环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网络环境"><span class="nav-number">1.2.</span> <span class="nav-text">网络环境</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正式开搞"><span class="nav-number">2.</span> <span class="nav-text">正式开搞</span></a></li></ol></div>
             
           </div>
         </section>
