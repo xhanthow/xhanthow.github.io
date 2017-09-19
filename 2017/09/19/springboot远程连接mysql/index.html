@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/19/springboot远程连接mysql/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
 <meta property="og:description" content="前戏说明：由于开发的时候，可能由于本地数据库木得所需要的表或者一些关键的数据，这个时候想如果可以在本地连接到远程的数据库进行开发，岂不是美滋滋～ 所以本文就是来实现这点需求滴（日常踩坑）">
-<meta property="og:updated_time" content="2017-09-19T10:54:36.000Z">
+<meta property="og:updated_time" content="2017-09-19T11:16:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot远程连接mysql">
 <meta name="twitter:description" content="前戏说明：由于开发的时候，可能由于本地数据库木得所需要的表或者一些关键的数据，这个时候想如果可以在本地连接到远程的数据库进行开发，岂不是美滋滋～ 所以本文就是来实现这点需求滴（日常踩坑）">
@@ -295,9 +295,9 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>85 字</span>
+				<span>455 字</span>
 				&nbsp; | &nbsp;
-				<span>1 min</span>
+				<span>2 min</span>
 			  </span>
 			
 
@@ -358,6 +358,22 @@
       
         <p><strong>前戏说明</strong>：由于开发的时候，可能由于本地数据库木得所需要的表或者一些关键的数据，这个时候想如果可以在本地连接到远程的数据库进行开发，岂不是美滋滋～ 所以本文就是来实现这点需求滴（日常踩坑）</p>
 <a id="more"></a>
+<p>首先在pom中添加如下依赖:</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.jcraft<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsch<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.1.53<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="http://www.jcraft.com/jsch/" target="_blank" rel="external">jsch官网文档</a></p>
+</blockquote>
+<h4 id="建立连接"><a href="#建立连接" class="headerlink" title="建立连接"></a>建立连接</h4><figure class="highlight java"><table><tr><td class="code"><pre><div class="line">String user = <span class="string">"跳板机的userName"</span>;</div><div class="line">String password = <span class="string">"跳板机的password"</span>;</div><div class="line">String host = <span class="string">"跳板机的host"</span>;</div><div class="line"><span class="comment">// 跳板机ssh开放的接口</span></div><div class="line"><span class="keyword">int</span> port = <span class="number">22</span>; </div><div class="line"><span class="comment">// 这个是本地的端口，很重要！！！选取一个没有占用的port即可</span></div><div class="line"><span class="keyword">int</span> local_port = <span class="number">3307</span>; </div><div class="line"><span class="comment">// 要访问的mysql所在的host</span></div><div class="line">String remote_host = <span class="string">"10.4.26.133"</span>;</div><div class="line"><span class="keyword">int</span> remote_port = <span class="number">3306</span>;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    JSch jsch = <span class="keyword">new</span> JSch();</div><div class="line">    Session session = jsch.getSession(user, host, port);</div><div class="line">    session.setPassword(password);</div><div class="line">    session.setConfig(<span class="string">"StrictHostKeyChecking"</span>, <span class="string">"no"</span>);</div><div class="line">    <span class="comment">// 日志打印自己脑补</span></div><div class="line">    session.connect();</div><div class="line">    session.setPortForwardingL(local_port, remote_host, remote_port);</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">  	<span class="comment">// do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样没有意外的话就ok了，就可以在远程服务器上搞事了～</p>
+<p>如果有意外的话，找谷哥爸爸！</p>
+<h4 id="配置mysql信息"><a href="#配置mysql信息" class="headerlink" title="配置mysql信息"></a>配置mysql信息</h4><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 这个url一定要注意注意再注意</div><div class="line"># host是localhost,然后port是上面提到的那个local_port。</div><div class="line"># 这样才可以完美避开意外，我也不知道为啥要这样配，反正这个地方踩坑了。知道了告诉我一声呗！</div><div class="line">spring.datasource.url=jdbc:mysql://localhost:3307/xxxx</div><div class="line">spring.datasource.username=root</div><div class="line">spring.datasource.password=zhimatech</div><div class="line">spring.datasource.driver-class-name=com.mysql.jdbc.Driver</div></pre></td></tr></table></figure>
+<h4 id="启动springboot时进行连接"><a href="#启动springboot时进行连接" class="headerlink" title="启动springboot时进行连接"></a>启动springboot时进行连接</h4><figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Slf</span>4j</div><div class="line"><span class="meta">@WebListener</span></div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyContextListener</span> <span class="keyword">implements</span> <span class="title">ServletContextListener</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> SSHConnection conexionssh;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyContextListener</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@see</span> ServletContextListener#contextInitialized(ServletContextEvent)</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextInitialized</span><span class="params">(ServletContextEvent arg0)</span> </span>&#123;</div><div class="line">        <span class="comment">// 建立连接</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * <span class="doctag">@see</span> ServletContextListener#contextDestroyed(ServletContextEvent)</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">contextDestroyed</span><span class="params">(ServletContextEvent arg0)</span> </span>&#123;</div><div class="line">        <span class="comment">// 断开连接</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="http://www.baeldung.com/spring-servletcomponentscan" target="_blank" rel="external">WebListener用法</a></p>
+</blockquote>
+<p>或者或者:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SpringApplication.run(Application.class, args);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... strings)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    	<span class="comment">// 建立连接</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>欧科，这样真的可以开始搞事了!</p>
 
       
     </div>
@@ -540,7 +556,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#建立连接"><span class="nav-number">1.</span> <span class="nav-text">建立连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置mysql信息"><span class="nav-number">2.</span> <span class="nav-text">配置mysql信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动springboot时进行连接"><span class="nav-number">3.</span> <span class="nav-text">启动springboot时进行连接</span></a></li></ol></div>
             
           </div>
         </section>
