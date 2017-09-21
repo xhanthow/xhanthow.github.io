@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/19/springboot远程连接mysql/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
 <meta property="og:description" content="前戏说明：由于开发的时候，可能由于本地数据库木得所需要的表或者一些关键的数据，这个时候想如果可以在本地连接到远程的数据库进行开发，岂不是美滋滋～ 所以本文就是来实现这点需求滴（日常踩坑）">
-<meta property="og:updated_time" content="2017-09-19T11:17:16.000Z">
+<meta property="og:updated_time" content="2017-09-21T02:58:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springboot远程连接mysql">
 <meta name="twitter:description" content="前戏说明：由于开发的时候，可能由于本地数据库木得所需要的表或者一些关键的数据，这个时候想如果可以在本地连接到远程的数据库进行开发，岂不是美滋滋～ 所以本文就是来实现这点需求滴（日常踩坑）">
@@ -295,7 +295,7 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>455 字</span>
+				<span>475 字</span>
 				&nbsp; | &nbsp;
 				<span>2 min</span>
 			  </span>
@@ -374,6 +374,9 @@
 <p>或者或者:</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> <span class="keyword">implements</span> <span class="title">CommandLineRunner</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SpringApplication.run(Application.class, args);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">(String... strings)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    	<span class="comment">// 建立连接</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>欧科，这样真的可以开始搞事了!</p>
+<blockquote>
+<p>利用jsch在远程服务器上传下载文件  <a href="http://www.cnblogs.com/longyg/archive/2012/06/25/2556576.html" target="_blank" rel="external">我是传送门</a></p>
+</blockquote>
 
       
     </div>
