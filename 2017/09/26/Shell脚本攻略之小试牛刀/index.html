@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/26/Shell脚本攻略之小试牛刀/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
 <meta property="og:description" content="前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
-<meta property="og:updated_time" content="2017-09-27T01:28:46.000Z">
+<meta property="og:updated_time" content="2017-09-27T08:38:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之小试牛刀">
 <meta name="twitter:description" content="前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
@@ -295,9 +295,9 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>971 字</span>
+				<span>1,233 字</span>
 				&nbsp; | &nbsp;
-				<span>4 min</span>
+				<span>5 min</span>
 			  </span>
 			
 
@@ -428,10 +428,35 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;sqrt(100)&quot; | bc #Square root</div><div class="line">echo &quot;10^10&quot; | bc #Square</div></pre></td></tr></table></figure>
 <p>​</p>
-<p>​                    </p>
+<h4 id="玩转文件描述符及重定向"><a href="#玩转文件描述符及重定向" class="headerlink" title="玩转文件描述符及重定向"></a>玩转文件描述符及重定向</h4><p>文件描述符0、1和2是系统预留的。</p>
+</li>
+<li><p>0-&gt;stdin(标准输入)</p>
+</li>
+<li><p>1-&gt;stdout(标准输出)</p>
+</li>
+<li><p>2-&gt;stderr(标准错误)</p>
 </li>
 </ul>
-<p>​<br>​<br>​    </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;This is a sample text 1&quot; &gt; temp.txt  # 会清空原始文件内容</div><div class="line">echo &quot;This is sample text 2&quot; &gt;&gt; temp.txt   # 追加内容</div><div class="line">ls + 2&gt; out.txt  # 将stderr重定向到out.txt</div><div class="line">cmd 2&gt;&amp;1 output.txt # stderr和stdout都重定向到output.txt</div><div class="line">cmd 2&gt;/dev/null # stderr的输出重定向到/dev/null中</div></pre></td></tr></table></figure>
+<p>有一个方法既可以将数据重定向到文件，还可以提供一份重定向的副本作为后续命令的stdin—&gt;<code>tee</code>命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">cat a* | tee out.txt | cat -n</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>tee</code>只能从stdin中读取，默认情况是覆盖文件，<code>tee -a</code>追加内容。</p>
+</blockquote>
+<h4 id="数组和关联数组"><a href="#数组和关联数组" class="headerlink" title="数组和关联数组"></a>数组和关联数组</h4><p>定义方式:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">array_var=(1 2 3 4 5 6)</div><div class="line"></div><div class="line">array_var[0]=&quot;test1&quot;</div><div class="line">array_var[1]=&quot;test2&quot;</div><div class="line">array_var[2]=&quot;test3&quot;</div><div class="line">array_var[3]=&quot;test4&quot;</div><div class="line">array_var[4]=&quot;test5&quot;</div><div class="line">array_var[5]=&quot;test6&quot;</div></pre></td></tr></table></figure>
+<p>打印所有元素:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo $&#123;array_var[*]&#125;</div><div class="line">echo $&#123;array_var[@]&#125;</div></pre></td></tr></table></figure>
+<p>长度：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo $&#123;#array_var[*]&#125;</div></pre></td></tr></table></figure>
+<p><strong><em>关联数组</em></strong>:</p>
+<p>声明:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">declare -A ass_array	</div><div class="line"></div><div class="line">declare -A fruits_value</div><div class="line">fruits_value=([apple]=&apos;100dollars&apos; [orange]=&apos;150 dollars&apos;)</div><div class="line">echo &quot;Apple costs $&#123;fruits_value[apple]&#125;&quot;</div></pre></td></tr></table></figure>
+<p>列出数组索引：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo $&#123;!array_var[*]&#125;</div><div class="line">echo $&#123;!array_var[@]&#125;</div></pre></td></tr></table></figure>
+<p>  ​    </p>
+<p>  ​</p>
+<p>​<br>​    </p>
 <p>​<br>​<br>​<br>​<br>​<br>​<br>​                    </p>
 <p>​<br>​<br>​    </p>
 
@@ -612,7 +637,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终端打印"><span class="nav-number">2.</span> <span class="nav-text">终端打印</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转变量和环境变量"><span class="nav-number">3.</span> <span class="nav-text">玩转变量和环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用shell进行数学运算"><span class="nav-number">4.</span> <span class="nav-text">使用shell进行数学运算</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终端打印"><span class="nav-number">2.</span> <span class="nav-text">终端打印</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转变量和环境变量"><span class="nav-number">3.</span> <span class="nav-text">玩转变量和环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用shell进行数学运算"><span class="nav-number">4.</span> <span class="nav-text">使用shell进行数学运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转文件描述符及重定向"><span class="nav-number">5.</span> <span class="nav-text">玩转文件描述符及重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组和关联数组"><span class="nav-number">6.</span> <span class="nav-text">数组和关联数组</span></a></li></ol></div>
             
           </div>
         </section>
