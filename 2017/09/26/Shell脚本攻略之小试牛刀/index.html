@@ -84,16 +84,16 @@
 
 
 
-<meta name="description" content="前戏说明:最近在看&amp;lt;&amp;gt;这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
+<meta name="description" content="前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shell脚本攻略之小试牛刀">
 <meta property="og:url" content="http://yoursite.com/2017/09/26/Shell脚本攻略之小试牛刀/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
-<meta property="og:description" content="前戏说明:最近在看&amp;lt;&amp;gt;这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
-<meta property="og:updated_time" content="2017-09-26T07:44:51.000Z">
+<meta property="og:description" content="前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
+<meta property="og:updated_time" content="2017-09-27T01:28:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之小试牛刀">
-<meta name="twitter:description" content="前戏说明:最近在看&amp;lt;&amp;gt;这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
+<meta name="twitter:description" content="前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
 
 
 
@@ -295,9 +295,9 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>88 字</span>
+				<span>971 字</span>
 				&nbsp; | &nbsp;
-				<span>1 min</span>
+				<span>4 min</span>
 			  </span>
 			
 
@@ -356,7 +356,84 @@
       
 
       
-        <p><strong>前戏说明</strong>:最近在看&lt;<linux shell脚本攻略="">&gt;这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）</linux></p>
+        <p><strong>前戏说明</strong>:最近在看<code>Linux Shell脚本攻略</code>这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）</p>
+<a id="more"></a>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>shell脚本通常是一个以<code>shebang</code>起始的文本文件: <code>#!/bin/sh</code></p>
+<p><a href="https://zh.wikipedia.org/wiki/Shebang" target="_blank" rel="external">我是传送门</a></p>
+<blockquote>
+<p>如果将脚本作为bash的命令行参数来运行，那么就用不着脚本中的shebang了。而且没有<code>x</code>权限亦可执行（不同于./xx.sh）</p>
+</blockquote>
+<h4 id="终端打印"><a href="#终端打印" class="headerlink" title="终端打印"></a>终端打印</h4><p>echo：后面接要打印的东东，可以用<code>&quot;&quot;</code> <code>&#39;&#39;</code> 或者裸奔</p>
+<ul>
+<li>裸奔时候，没法在所要显示的文本中使用分号(;)，因为分号在Bash shell中被用作命令定界符。</li>
+<li>以echo hello;hello为例，echo hello被视为一个命令，第二个hello则被视为另一个命令。</li>
+<li>变量替换在单引号中无效，双引号注意转义。</li>
+</ul>
+<p>printf：格式化的输出字符串，可以指定字符串宽度，对齐方式和输出类型等，不会自动添加换行符。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">printf  &quot;%-5s %-10s %-4s\n&quot; No Name  Mark</div><div class="line">printf  &quot;%-5s %-10s %-4.2f\n&quot; 1 Sarath 80.3456</div><div class="line">printf  &quot;%-5s %-10s %-4.2f\n&quot; 2 James 90.9989</div><div class="line">printf  &quot;%-5s %-10s %-4.2f\n&quot; 3 Jeff 77.564</div></pre></td></tr></table></figure>
+<p>我们会得到如下格式化的输出:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">No    Name       Mark</div><div class="line">1     Sarath     80.35</div><div class="line">2     James      91.00</div><div class="line">3     Jeff       77.56</div></pre></td></tr></table></figure>
+<p>解释:</p>
+<p><code>%s</code>、<code>%c</code>、<code>%d</code>和<code>%f</code>都是格式替换符。<code>%-5s</code>指明了一个格式为左对齐且宽度为5的字符串替换(-表示左对齐)。如果不用-指定对齐方式，字符串就采用右对齐形式。宽度指定了保留给某个变量的字符数。对Name而言，保留宽度是10。因此，任何Name字段的内容都会被显示在10字符宽的保留区域内，如果内容不足10个字符，余下的则以空格符填充。对于浮点数，可以使用其他参数对小数部分进行舍入。对于Mark字段，将其格式化为%-4.2f，其中.2指定保留2个小数位。注意，在每行格式字符串后都有一个换行符(\n)。</p>
+<h4 id="玩转变量和环境变量"><a href="#玩转变量和环境变量" class="headerlink" title="玩转变量和环境变量"></a>玩转变量和环境变量</h4><p><strong>在Bash中，每一个变量的值都是字符串。无论你给变量赋值时有没有使用引号，值都会以字符串的形式存储</strong></p>
+<blockquote>
+<p>注意，var = value不同于var=value。把var=value写成var = value是一个常见的错误，<br>但前者是赋值操作，后者则是相等操作。（代码洁癖者真滴很难受啊）    </p>
+</blockquote>
+<p>export命令用来设置环境变量。至此之后，从当前shell脚本执行的任何应用程序都会继承<br>这个变量。</p>
+<p><code>export1.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">var1=hello</div><div class="line">var2=world</div><div class="line">export var2</div><div class="line">./export2.sh</div></pre></td></tr></table></figure>
+<p><code>export2.sh</code>:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">echo $var1</div><div class="line">echo $var2</div></pre></td></tr></table></figure>
+<p>执行<code>./export1.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"></div><div class="line">world</div></pre></td></tr></table></figure>
+<p>对，hello消失了～</p>
+<p><strong>番外篇:</strong></p>
+<ul>
+<li>获取字符串的长度：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">length=$&#123;#var&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>识别当前所使用的shell:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo $0</div><div class="line">echo $SHELL</div></pre></td></tr></table></figure>
+<h4 id="使用shell进行数学运算"><a href="#使用shell进行数学运算" class="headerlink" title="使用shell进行数学运算"></a>使用shell进行数学运算</h4><blockquote>
+<p>在Bash shell环境中，可以利用<code>let</code>、<code>(())</code>和<code>[]</code>执行基本的算术操作。而在进行高级操作时，<br>expr和bc这两个工具也会非常有用。</p>
+</blockquote>
+<ul>
+<li><code>let</code>：可以直接执行基本的算术操作，变量前不需要加$</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">no1=1;</div><div class="line">no2=2;</div><div class="line">let result=no1+no2</div><div class="line"># ++</div><div class="line">let no1++</div><div class="line"># --</div><div class="line">let no2--</div></pre></td></tr></table></figure>
+<ul>
+<li><p><code>[]</code>：使用方法和let命令类似</p>
+<p><code>result=$[ no1 + no2 ]</code></p>
+<p><code>result=$[ $no1 + 5 ]</code></p>
+</li>
+<li><p><code>(())</code>：变量名之前必须加上$</p>
+<p><code>result=$(( no1 + 50 ))</code></p>
+</li>
+<li><p><code>expire</code>：<code>result=expr 3 + 4</code>  <code>result=$(expr $no1 + 5)</code></p>
+</li>
+<li><p><code>bc</code>：是一个用于数学运算的高级工具，这个精密计算器包含了大量的选项</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;4 * 0.56&quot; | bc</div><div class="line">2.24</div><div class="line">no=54;</div><div class="line">result=`echo &quot;$no * 1.5&quot; | bc`</div><div class="line">echo $result</div><div class="line">81.0</div></pre></td></tr></table></figure>
+<ul>
+<li>设置小数精度:</li>
+</ul>
+<p><code>echo &quot;scale=2;3/8&quot; | bc   0.37</code></p>
+<ul>
+<li>进制转换:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">no=100</div><div class="line">echo &quot;obase=2;$no&quot; | bc</div><div class="line">1100100</div><div class="line">no=1100100</div><div class="line">echo &quot;obase=10;ibase=2;$no&quot; | bc</div><div class="line">100</div></pre></td></tr></table></figure>
+<ul>
+<li>计算平方以及平方根</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;sqrt(100)&quot; | bc #Square root</div><div class="line">echo &quot;10^10&quot; | bc #Square</div></pre></td></tr></table></figure>
+<p>​</p>
+<p>​                    </p>
+</li>
+</ul>
+<p>​<br>​<br>​    </p>
+<p>​<br>​<br>​<br>​<br>​<br>​<br>​                    </p>
+<p>​<br>​<br>​    </p>
 
       
     </div>
@@ -535,7 +612,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终端打印"><span class="nav-number">2.</span> <span class="nav-text">终端打印</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转变量和环境变量"><span class="nav-number">3.</span> <span class="nav-text">玩转变量和环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用shell进行数学运算"><span class="nav-number">4.</span> <span class="nav-text">使用shell进行数学运算</span></a></li></ol></div>
             
           </div>
         </section>
