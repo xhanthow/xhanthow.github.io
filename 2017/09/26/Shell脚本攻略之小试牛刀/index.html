@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/26/Shell脚本攻略之小试牛刀/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
 <meta property="og:description" content="前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
-<meta property="og:updated_time" content="2017-09-27T08:38:11.000Z">
+<meta property="og:updated_time" content="2017-09-27T13:48:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之小试牛刀">
 <meta name="twitter:description" content="前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
@@ -295,9 +295,9 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>1,233 字</span>
+				<span>1,866 字</span>
 				&nbsp; | &nbsp;
-				<span>5 min</span>
+				<span>8 min</span>
 			  </span>
 			
 
@@ -454,11 +454,76 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">declare -A ass_array	</div><div class="line"></div><div class="line">declare -A fruits_value</div><div class="line">fruits_value=([apple]=&apos;100dollars&apos; [orange]=&apos;150 dollars&apos;)</div><div class="line">echo &quot;Apple costs $&#123;fruits_value[apple]&#125;&quot;</div></pre></td></tr></table></figure>
 <p>列出数组索引：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo $&#123;!array_var[*]&#125;</div><div class="line">echo $&#123;!array_var[@]&#125;</div></pre></td></tr></table></figure>
-<p>  ​    </p>
-<p>  ​</p>
-<p>​<br>​    </p>
-<p>​<br>​<br>​<br>​<br>​<br>​<br>​                    </p>
-<p>​<br>​<br>​    </p>
+<h4 id="调试脚本"><a href="#调试脚本" class="headerlink" title="调试脚本"></a>调试脚本</h4><ul>
+<li><p>可以使用-x，启用shell脚本的跟踪调试功能:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">bash -x script.sh</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用set -x和set +x对脚本进行部分调试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/bash </div><div class="line">#文件名: debug.sh </div><div class="line">for i in &#123;1..6&#125;; </div><div class="line">do</div><div class="line">	set -x</div><div class="line">    echo $i</div><div class="line">    set +x</div></pre></td></tr></table></figure>
+</li>
+<li><p>自定义调试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">function DEBUG()</div><div class="line">&#123;</div><div class="line"> 	[ &quot;$_DEBUG&quot; == &quot;on&quot; ] &amp;&amp; $@ || :</div><div class="line">&#125;</div><div class="line">for i in &#123;1..10&#125;</div><div class="line">do</div><div class="line">    DEBUG echo $i</div><div class="line">done</div></pre></td></tr></table></figure>
+<p>可以将调试功能设置为”on”来运行上面的脚本:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ _DEBUG=on ./script.sh</div></pre></td></tr></table></figure>
+<p>在每一个需要打印调试信息的语句前加上<code>DEBUG</code>。在bash中命令<code>:</code>告诉shell不要进行任何操作。</p>
+<blockquote>
+<p>把shebang从<code>#!/bin/bash</code>改成<code>#!/bin/bash -xv</code>，这样一来不用任何其他选项就可以启动调试功能了。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="不使用回车键来读取n个字符"><a href="#不使用回车键来读取n个字符" class="headerlink" title="不使用回车键来读取n个字符"></a>不使用回车键来读取n个字符</h4><ul>
+<li><p>从输入中读取n个字符并存入变量variable_name：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -n number_of_chars variable_name</div></pre></td></tr></table></figure>
+</li>
+<li><p>用无回显的方式读取密码:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -s var</div></pre></td></tr></table></figure>
+</li>
+<li><p>显示提示信息:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -p &quot;Enter input:&quot; var</div></pre></td></tr></table></figure>
+</li>
+<li><p>在特定时间内读取输入:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -t timeout var</div></pre></td></tr></table></figure>
+</li>
+<li><p>用特定的定界符作为输入行的结束:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -d delim_char var</div></pre></td></tr></table></figure>
+<p>​            </p>
+</li>
+</ul>
+<p>​                        </p>
+<h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><ul>
+<li><p>for循环:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">for var in list;</div><div class="line">do</div><div class="line">	command; #使用变量$var</div><div class="line">done</div></pre></td></tr></table></figure>
+<p>​</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">data=&quot;name,sex,localtion&quot;</div><div class="line"># 分隔符</div><div class="line">oldIFS=$IFS</div><div class="line">IFS=,</div><div class="line">for item in $data;</div><div class="line">do</div><div class="line">    echo Item: $item</div><div class="line">done</div><div class="line">IFS=$oldIFS</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>while循环:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">while condition;</div><div class="line">do</div><div class="line">	command;</div><div class="line">done</div></pre></td></tr></table></figure>
+</li>
+<li><p>until循环:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">x=0;</div><div class="line">until [ $x -eq 9 ];  #条件</div><div class="line">do</div><div class="line">	let x++;</div><div class="line">	echo $x;</div><div class="line">done</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+<h4 id="比较和测试"><a href="#比较和测试" class="headerlink" title="比较和测试"></a>比较和测试</h4><ul>
+<li><p>if条件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">if condition;</div><div class="line">then</div><div class="line">	command;</div><div class="line">fi</div></pre></td></tr></table></figure>
+</li>
+<li><p>else if和else:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">if condition;</div><div class="line">then</div><div class="line">	command;</div><div class="line">else if condition; then</div><div class="line">	command;</div><div class="line">else</div><div class="line">	command;</div><div class="line">fi</div></pre></td></tr></table></figure>
+</li>
+<li><p>算术比较:</p>
+<p>  条件通常被放置在封闭的中括号中。一定要注意<strong>在<code>[</code>或<code>]</code>与操作数之间有一个空格</strong></p>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[ $var -eq 0 ] #等于0 true</div><div class="line">[ $var -nq 0 ] #不等于0 true</div><div class="line">-gt:大于		-ge:大于等于</div><div class="line">-lt:小于		-le:小于等于</div><div class="line">-a:逻辑与	   -o:逻辑或</div></pre></td></tr></table></figure>
+</li>
+<li><p>文件系统:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[ -f $file_var ] #如果给定的变量包含正常的文件路径或文件名,true</div><div class="line">[ -x $var ] #如果给定的变量包含的文件可执行,true</div><div class="line">[ -d $var ] #如果给定的变量包含的是目录,true</div><div class="line">[ -e $var ] #如果给定的变量包含的文件存在,true</div><div class="line">[ -w $var ] #如果给定的变量包含的文件可写,true</div><div class="line">[ -r $var ] #如果给定的变量包含的文件可读,true</div></pre></td></tr></table></figure>
+</li>
+<li><p>字符串比较:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[[ $str1 = $str1 ]] #注意=两边有空格,相等,true</div><div class="line">[[ $str1 != $str1 ]] #不相等,true</div><div class="line">[[ $str1 &gt; $str1 ]] #str1字母顺序比str2大,true</div><div class="line">[[ $str1 &lt; $str1 ]] #str1字母顺序比str2小,true</div><div class="line">[[ -z $str1 ]] #str1是空字符串,true</div><div class="line">[[ -n $str1 ]] #str1是非空字符串,true</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>好啦，第一章就到此结束咯～ 对shell也有了一个初步的认识，下面的篇章将会继续和shell干下去</strong></p>
 
       
     </div>
@@ -637,7 +702,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终端打印"><span class="nav-number">2.</span> <span class="nav-text">终端打印</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转变量和环境变量"><span class="nav-number">3.</span> <span class="nav-text">玩转变量和环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用shell进行数学运算"><span class="nav-number">4.</span> <span class="nav-text">使用shell进行数学运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转文件描述符及重定向"><span class="nav-number">5.</span> <span class="nav-text">玩转文件描述符及重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组和关联数组"><span class="nav-number">6.</span> <span class="nav-text">数组和关联数组</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终端打印"><span class="nav-number">2.</span> <span class="nav-text">终端打印</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转变量和环境变量"><span class="nav-number">3.</span> <span class="nav-text">玩转变量和环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用shell进行数学运算"><span class="nav-number">4.</span> <span class="nav-text">使用shell进行数学运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转文件描述符及重定向"><span class="nav-number">5.</span> <span class="nav-text">玩转文件描述符及重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组和关联数组"><span class="nav-number">6.</span> <span class="nav-text">数组和关联数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试脚本"><span class="nav-number">7.</span> <span class="nav-text">调试脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不使用回车键来读取n个字符"><span class="nav-number">8.</span> <span class="nav-text">不使用回车键来读取n个字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环"><span class="nav-number">9.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较和测试"><span class="nav-number">10.</span> <span class="nav-text">比较和测试</span></a></li></ol></div>
             
           </div>
         </section>
