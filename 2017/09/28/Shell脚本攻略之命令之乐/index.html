@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="常见问题," />
+  <meta name="keywords" content="shell," />
 
 
 
@@ -84,22 +84,16 @@
 
 
 
-<meta name="description" content="今天在配置git的ssh权限的时候（win10下进行的，git为1.9），在执行$ add-ssh ~/.ssh/id_rsa    的时候出现了Could not open a connection to your authentication agent这个错误的提示。
-解决办法：在执行上面的操作之前，执行eval `ssh-agent（是～键上的那个`）这个命名就不可以避免这个错误了。
-PS">
+<meta name="description" content="前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ssh-add">
-<meta property="og:url" content="http://yoursite.com/2016/08/15/ssh-add/index.html">
+<meta property="og:title" content="Shell脚本攻略之命令之乐">
+<meta property="og:url" content="http://yoursite.com/2017/09/28/Shell脚本攻略之命令之乐/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
-<meta property="og:description" content="今天在配置git的ssh权限的时候（win10下进行的，git为1.9），在执行$ add-ssh ~/.ssh/id_rsa    的时候出现了Could not open a connection to your authentication agent这个错误的提示。
-解决办法：在执行上面的操作之前，执行eval `ssh-agent（是～键上的那个`）这个命名就不可以避免这个错误了。
-PS">
-<meta property="og:updated_time" content="2016-08-16T14:15:36.000Z">
+<meta property="og:description" content="前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
+<meta property="og:updated_time" content="2017-09-28T02:29:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ssh-add">
-<meta name="twitter:description" content="今天在配置git的ssh权限的时候（win10下进行的，git为1.9），在执行$ add-ssh ~/.ssh/id_rsa    的时候出现了Could not open a connection to your authentication agent这个错误的提示。
-解决办法：在执行上面的操作之前，执行eval `ssh-agent（是～键上的那个`）这个命名就不可以避免这个错误了。
-PS">
+<meta name="twitter:title" content="Shell脚本攻略之命令之乐">
+<meta name="twitter:description" content="前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
 
 
 
@@ -120,9 +114,9 @@ PS">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/15/ssh-add/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/28/Shell脚本攻略之命令之乐/"/>
 
-  <title> ssh-add | 敲音乐听代码 </title>
+  <title> Shell脚本攻略之命令之乐 | 敲音乐听代码 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -282,7 +276,7 @@ PS">
             
             
               
-                ssh-add
+                Shell脚本攻略之命令之乐
               
             
           </h1>
@@ -294,16 +288,16 @@ PS">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-15T00:03:45+08:00" content="2016-08-15">
-              2016-08-15
+            <time itemprop="dateCreated" datetime="2017-09-28T09:15:52+08:00" content="2017-09-28">
+              2017-09-28
             </time>
           </span>
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>109 字</span>
+				<span>767 字</span>
 				&nbsp; | &nbsp;
-				<span>1 min</span>
+				<span>3 min</span>
 			  </span>
 			
 
@@ -316,8 +310,8 @@ PS">
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -333,8 +327,8 @@ PS">
             
               <span class="post-comments-count">
                 
-                <a href="/2016/08/15/ssh-add/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/15/ssh-add/" itemprop="commentsCount"></span>
+                <a href="/2017/09/28/Shell脚本攻略之命令之乐/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/28/Shell脚本攻略之命令之乐/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -362,9 +356,42 @@ PS">
       
 
       
-        <p>今天在配置git的ssh权限的时候（win10下进行的，git为1.9），在执行<code>$ add-ssh ~/.ssh/id_rsa</code>    的时候出现了<strong><em>Could not open a connection to your authentication agent</em></strong>这个错误的提示。</p>
-<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>在执行上面的操作之前，执行<code>eval `ssh-agent</code>（是～键上的那个`）这个命名就不可以避免这个错误了。</p>
-<h3 id="PS："><a href="#PS：" class="headerlink" title="PS："></a>PS：</h3><p>不知道不同版本的<code>git</code>解决办法是不是相同的</p>
+        <p><strong>前戏说明:</strong>进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～</p>
+<a id="more"></a>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>掌握Unix/Linux命令行可谓是一门艺术，而且得多实践，下面将介绍一些常见而且实用的命令。</p>
+<p>Let’s 🐶</p>
+<h4 id="用cat进行拼接"><a href="#用cat进行拼接" class="headerlink" title="用cat进行拼接"></a>用cat进行拼接</h4><p><code>cat(concatenate)</code>：用于读取、显示或者拼接文件内容。</p>
+<ul>
+<li>用<code>cat</code>读取文件：<code>cat file1 file2 file3</code></li>
+<li>从标准输入中读取：<code>echo xxx | cat - file.txt</code>(<code>-</code> 将作为stdin文本的文件名)</li>
+</ul>
+<p><strong>番外篇</strong>:</p>
+<p><code>cat -s file</code>：去除多余的空白格(<code>tr</code>也有此功能，后续将会介绍)</p>
+<p><code>cat -n file</code>：显示行号</p>
+<h4 id="录制并回放终端回话"><a href="#录制并回放终端回话" class="headerlink" title="录制并回放终端回话"></a>录制并回放终端回话</h4><p><code>script</code>：录制</p>
+<p><code>scriptreplay</code>：回放</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># timing.log用于存储时序信息;output.session存储命令;2&gt;用于将sterr重定向到timing.log</div><div class="line">script -t 2&gt; timing.log -a output.session</div><div class="line">type commands;</div><div class="line">    ...</div><div class="line">    ..</div><div class="line">exit</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">scriptreplay timing.log output.session</div></pre></td></tr></table></figure>
+<p>对，这样你就会看到诡异的事情发生了～</p>
+<h4 id="文件查找和文件列表"><a href="#文件查找和文件列表" class="headerlink" title="文件查找和文件列表"></a>文件查找和文件列表</h4><p><code>find</code>：沿着文件层下向下遍历，匹配符合条件的然后执行相应的操作。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">find base_path # .表示当前目录，..表示父目录</div><div class="line">find . -iname &quot;time*&quot; # -iname 忽略大小写</div><div class="line">find . \( -name &quot;*.txt&quot; -o -name &quot;*.log&quot; \) # \(和\)将-name &quot;*.txt&quot; -o -name &quot;*.log&quot;视为整体</div><div class="line">find ~ -path &quot;*&quot; # 匹配路径</div><div class="line">find . -regex &quot;.*\(\.log\|\.sh\)$&quot; # 正则匹配 -iregex 忽略大小写</div><div class="line">find . ! -name &quot;*.txt&quot; # ! 表示否定</div><div class="line">find . -maxdepth 1 -name &quot;f*&quot; # -maxdepth：查找时候遍历的最大深度</div><div class="line">find . -mindepth 2 -name &quot;f*&quot; # -mindepth：从哪一层次开始查找;-mindepth 2表示从子目录开始查找</div><div class="line">find . -type d # 查询所有的目录 d：目录；f：普通文件 l：链接符号</div></pre></td></tr></table></figure>
+<p><strong>番外篇</strong>:</p>
+<p><code>Unix/Linux</code>：文件系统中的每一个文件都有三种时间戳</p>
+<ul>
+<li>访问时间(-atime)：用户最近一次访问文件的时间</li>
+<li>修改时间(-mtime)：文件最后一次被修改的时间</li>
+<li>变化时间(-ctime)：文件元数据（例如权限或者所有权）最后一次改变的时间</li>
+</ul>
+<blockquote>
+<p>并没有创建时间的概念</p>
+</blockquote>
+<p>它们都可以作为find的参数,<code>-</code>：表示小于 <code>+</code>：表示大于</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 单位都是天</div><div class="line">find . -type f -atime -7  # 最近7天内被访问过的所有文件</div><div class="line">find . -type f -atime 7  # 恰好在7天前被访问过的所有文件</div><div class="line">find . -type f -atime +7 # 访问时间超过7天的所有文件</div><div class="line"># -amin -mmin -cmin 单位是min</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># -newer用于比较时间戳的参考文件</div><div class="line">find . -type f -newer file.txt</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 基于文件大小 b:512字  c:字节 w:字(2字节) M G</div><div class="line">find . -type f -size +2k # &gt;</div><div class="line">find . -type f -size -2k # &lt;</div><div class="line">find . -type f -size 2k  # =</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">find . -type f -name &quot;*.swp&quot; -delete</div><div class="line"># 权限过滤</div><div class="line">find . -type f -perm 644</div><div class="line"># 用户过滤</div><div class="line">find . -type f -user slynux</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># -exec  &#123;&#125;是与-exec一起使用的特殊字符串，每个匹配到的结果都会替代这个&#123;&#125; \;结束符，需要转义</div><div class="line">find . -type f -user root -exec chown slynux &#123;&#125; \;</div><div class="line">find . -type f -name &quot;*.c&quot; -exec cat &#123;&#125; \;&gt;all_c_files.txt</div><div class="line"># tips:</div><div class="line">-exec ./commands.sh &#123;&#125; \; # commands.sh为自己编写的脚本</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># \( -name &quot;.git&quot; -prune \)用于排除  \( -type f -print \)指明了需要的操作</div><div class="line">find devel/source_path  \( -name &quot;.git&quot; -prune \) -o \( -type f -print \)</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -387,7 +414,7 @@ PS">
       
         <div class="post-tags">
           
-            <a href="/tags/常见问题/" rel="tag">#常见问题</a>
+            <a href="/tags/shell/" rel="tag">#shell</a>
           
         </div>
       
@@ -396,13 +423,13 @@ PS">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/09/26/Shell脚本攻略之小试牛刀/" rel="next" title="Shell脚本攻略之小试牛刀">
+                <i class="fa fa-chevron-left"></i> Shell脚本攻略之小试牛刀
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/21/HTTP/" rel="prev" title="图解HTTP——了解web及网络基础">
-                图解HTTP——了解web及网络基础 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -431,8 +458,8 @@ PS">
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/08/15/ssh-add/"
-           data-title="ssh-add" data-url="http://yoursite.com/2016/08/15/ssh-add/">
+      <div class="ds-thread" data-thread-key="2017/09/28/Shell脚本攻略之命令之乐/"
+           data-title="Shell脚本攻略之命令之乐" data-url="http://yoursite.com/2017/09/28/Shell脚本攻略之命令之乐/">
       </div>
     
   </div>
@@ -543,7 +570,7 @@ PS">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法："><span class="nav-number">1.</span> <span class="nav-text">解决办法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PS："><span class="nav-number">2.</span> <span class="nav-text">PS：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用cat进行拼接"><span class="nav-number">2.</span> <span class="nav-text">用cat进行拼接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#录制并回放终端回话"><span class="nav-number">3.</span> <span class="nav-text">录制并回放终端回话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件查找和文件列表"><span class="nav-number">4.</span> <span class="nav-text">文件查找和文件列表</span></a></li></ol></div>
             
           </div>
         </section>
