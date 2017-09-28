@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/26/Shell脚本攻略之小试牛刀/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
 <meta property="og:description" content="前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
-<meta property="og:updated_time" content="2017-09-27T13:51:38.000Z">
+<meta property="og:updated_time" content="2017-09-28T01:14:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之小试牛刀">
 <meta name="twitter:description" content="前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
@@ -486,10 +486,8 @@
 </li>
 <li><p>用特定的定界符作为输入行的结束:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -d delim_char var</div></pre></td></tr></table></figure>
-<p>​            </p>
 </li>
 </ul>
-<p>​                        </p>
 <h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><ul>
 <li><p>for循环:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">for var in list;</div><div class="line">do</div><div class="line">	command; #使用变量$var</div><div class="line">done</div></pre></td></tr></table></figure>
@@ -511,7 +509,7 @@
 </li>
 <li><p>算术比较:</p>
 <p>  条件通常被放置在封闭的中括号中。一定要注意<strong>在<code>[</code>或<code>]</code>与操作数之间有一个空格</strong></p>
- <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[ $var -eq 0 ] #等于0 true</div><div class="line">[ $var -nq 0 ] #不等于0 true</div><div class="line">-gt:大于		-ge:大于等于</div><div class="line">-lt:小于		-le:小于等于</div><div class="line">-a:逻辑与	   -o:逻辑或</div></pre></td></tr></table></figure>
+<p> ​<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[ $var -eq 0 ] #等于0 true</div><div class="line">[ $var -nq 0 ] #不等于0 true</div><div class="line">-gt:大于		-ge:大于等于</div><div class="line">-lt:小于		-le:小于等于</div><div class="line">-a:逻辑与	   -o:逻辑或</div><div class="line"> ​</div></pre></td></tr></table></figure></p>
 </li>
 <li><p>文件系统:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[ -f $file_var ] #如果给定的变量包含正常的文件路径或文件名,true</div><div class="line">[ -x $var ] #如果给定的变量包含的文件可执行,true</div><div class="line">[ -d $var ] #如果给定的变量包含的是目录,true</div><div class="line">[ -e $var ] #如果给定的变量包含的文件存在,true</div><div class="line">[ -w $var ] #如果给定的变量包含的文件可写,true</div><div class="line">[ -r $var ] #如果给定的变量包含的文件可读,true</div></pre></td></tr></table></figure>
