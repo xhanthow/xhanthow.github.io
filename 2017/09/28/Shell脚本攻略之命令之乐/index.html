@@ -84,16 +84,25 @@
 
 
 
-<meta name="description" content="前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
+<meta name="description" content="被真相伤害总比被谎言欺骗的好，得到了再失去，总是比从来就没有得到更伤人 
+——《追风筝的人》
+
+前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shell脚本攻略之命令之乐">
 <meta property="og:url" content="http://yoursite.com/2017/09/28/Shell脚本攻略之命令之乐/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
-<meta property="og:description" content="前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
-<meta property="og:updated_time" content="2017-09-28T11:14:09.000Z">
+<meta property="og:description" content="被真相伤害总比被谎言欺骗的好，得到了再失去，总是比从来就没有得到更伤人 
+——《追风筝的人》
+
+前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
+<meta property="og:updated_time" content="2017-09-28T13:08:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之命令之乐">
-<meta name="twitter:description" content="前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
+<meta name="twitter:description" content="被真相伤害总比被谎言欺骗的好，得到了再失去，总是比从来就没有得到更伤人 
+——《追风筝的人》
+
+前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
 
 
 
@@ -295,7 +304,7 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>2,294 字</span>
+				<span>2,332 字</span>
 				&nbsp; | &nbsp;
 				<span>10 min</span>
 			  </span>
@@ -356,7 +365,11 @@
       
 
       
-        <p><strong>前戏说明:</strong>进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～</p>
+        <blockquote>
+<p>被真相伤害总比被谎言欺骗的好，得到了再失去，总是比从来就没有得到更伤人 </p>
+<p>——《追风筝的人》</p>
+</blockquote>
+<p><strong>前戏说明:</strong>进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～</p>
 <a id="more"></a>
 <h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>掌握Unix/Linux命令行可谓是一门艺术，而且得多实践，下面将介绍一些常见而且实用的命令。</p>
 <p>Let’s 🐶</p>
@@ -469,7 +482,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">find path -type f -name &quot;*.mp3&quot; -exec mv &#123;&#125; target_dir \; # 将所有mp3文件移动到指定目录</div></pre></td></tr></table></figure>
 <h4 id="交互输入自动化"><a href="#交互输入自动化" class="headerlink" title="交互输入自动化"></a>交互输入自动化</h4><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#文件名: interactive.sh</div><div class="line">read -p &quot;Enter number:&quot; no ;</div><div class="line">read -p &quot;Enter name:&quot; name</div><div class="line">echo You have entered $no, $name;</div><div class="line"></div><div class="line"></div><div class="line">$ echo -e &quot;1\nhello\n&quot; | ./interactive.sh</div><div class="line">You have entered 1, hello</div></pre></td></tr></table></figure>
 <p><code>echo -e</code>来生成输入序列，<code>-e</code>表明echo会解释转义序列，如果序列输入内容比较多，可以用单独的输入文件结合重定向操作符来提供输入</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># expect的用法</div><div class="line"></div><div class="line">#!/bin/sh</div><div class="line"># interactive.sh</div><div class="line">read -p &quot;Enter number:&quot; no ;</div><div class="line">read -p &quot;Enter name:&quot; name</div><div class="line">echo You have entered $no, $name;</div><div class="line"></div><div class="line"></div><div class="line">#!/usr/bin/expect</div><div class="line">spawn ./interactive.sh   # 指定需要自动化哪一个命令</div><div class="line">expect &quot;Enter number:&quot;   # 提供需要等待的信息</div><div class="line">send &quot;1\n&quot;				 # 要发送的消息</div><div class="line">expect &quot;Enter name:&quot;</div><div class="line">send &quot;hello\n&quot;</div><div class="line">expect eof				 # 指明命令交互结束</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># expect的用法</div><div class="line"></div><div class="line">#!/bin/sh</div><div class="line"># interactive.sh</div><div class="line">read -p &quot;Enter number:&quot; no ;</div><div class="line">read -p &quot;Enter name:&quot; name</div><div class="line">echo You have entered $no, $name;</div><div class="line"></div><div class="line"></div><div class="line">#!/usr/bin/expect</div><div class="line">spawn ./interactive.sh	# 指定需要自动化哪一个命令</div><div class="line">expect &quot;Enter number:&quot;	# 提供需要等待的信息</div><div class="line">send &quot;1\n&quot;	# 要发送的消息</div><div class="line">expect &quot;Enter name:&quot;</div><div class="line">send &quot;hello\n&quot;</div><div class="line">expect eof	# 指明命令交互结束</div></pre></td></tr></table></figure>
 <p>mac登陆远程机器:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/usr/bin/expect -f</div><div class="line"># 不需要跳板机</div><div class="line">set user xxxx</div><div class="line">set host xxxx</div><div class="line">set password xxxx</div><div class="line">set port xxxx</div><div class="line">set timeout -1</div><div class="line"></div><div class="line">spawn ssh -p $port $user@$host</div><div class="line">expect &quot;*assword:*&quot;</div><div class="line">send &quot;$password\r&quot;</div><div class="line">interact</div><div class="line">expect eof</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/usr/bin/expect</div><div class="line"># 需要跳板机</div><div class="line">set host [lindex $argv 0]</div><div class="line"></div><div class="line">set TERMSERV xxxx</div><div class="line">set USER xxxx</div><div class="line">set PASSWORD xxxx</div><div class="line">set PORT xxxx</div><div class="line">set HOST xxxx</div><div class="line">set UATUN xxxx</div><div class="line">set UATPWD xxxx</div><div class="line"></div><div class="line"># 登录跳板机</div><div class="line">spawn ssh -p $PORT $USER@$TERMSERV</div><div class="line">expect &#123;</div><div class="line">        &quot;yes/no&quot; &#123;send &quot;yes\r&quot;;exp_continue;&#125;</div><div class="line">         &quot;*password:*&quot; &#123; send &quot;$PASSWORD\r&quot; &#125;</div><div class="line">        &#125;</div><div class="line"># 登录内网</div><div class="line">expect &quot;*xxxx@*&quot; &#123;send &quot;ssh $UATUN@$host\r&quot;&#125;</div><div class="line">expect &#123;</div><div class="line">        &quot;yes/no&quot; &#123;send &quot;yes\r&quot;;exp_continue;&#125;</div><div class="line">        &quot;*password:*&quot; &#123; send &quot;$UATPWD\r&quot; &#125;</div><div class="line">        &#125;</div><div class="line">interact</div></pre></td></tr></table></figure>
