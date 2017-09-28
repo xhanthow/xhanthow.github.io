@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/28/Shell脚本攻略之命令之乐/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
 <meta property="og:description" content="前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
-<meta property="og:updated_time" content="2017-09-28T02:29:19.000Z">
+<meta property="og:updated_time" content="2017-09-28T08:12:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之命令之乐">
 <meta name="twitter:description" content="前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
@@ -295,9 +295,9 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>767 字</span>
+				<span>1,767 字</span>
 				&nbsp; | &nbsp;
-				<span>3 min</span>
+				<span>7 min</span>
 			  </span>
 			
 
@@ -392,6 +392,74 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">find . -type f -name &quot;*.swp&quot; -delete</div><div class="line"># 权限过滤</div><div class="line">find . -type f -perm 644</div><div class="line"># 用户过滤</div><div class="line">find . -type f -user slynux</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># -exec  &#123;&#125;是与-exec一起使用的特殊字符串，每个匹配到的结果都会替代这个&#123;&#125; \;结束符，需要转义</div><div class="line">find . -type f -user root -exec chown slynux &#123;&#125; \;</div><div class="line">find . -type f -name &quot;*.c&quot; -exec cat &#123;&#125; \;&gt;all_c_files.txt</div><div class="line"># tips:</div><div class="line">-exec ./commands.sh &#123;&#125; \; # commands.sh为自己编写的脚本</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># \( -name &quot;.git&quot; -prune \)用于排除  \( -type f -print \)指明了需要的操作</div><div class="line">find devel/source_path  \( -name &quot;.git&quot; -prune \) -o \( -type f -print \)</div></pre></td></tr></table></figure>
+<h4 id="玩转xargs"><a href="#玩转xargs" class="headerlink" title="玩转xargs"></a>玩转xargs</h4><p><code>xargs</code>：可以将标准输入数据转换成命令行参数，可以把从stdin接受到的数据重新格式化，再将其作为参数提供给其他命令。</p>
+<ul>
+<li><p>将多行输入转换成单行输出</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">cat file.txt | xargs</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用自定义的分隔符</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;aaaXbbbXcccX&quot; | xargs -d X</div><div class="line">$ echo &quot;splitXsplitXsplitXsplit&quot; | xargs -d X -n 2 # 可以将输入划分为多行</div><div class="line">split split</div><div class="line">split split</div></pre></td></tr></table></figure>
+</li>
+<li><p>结合find使用xargs</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">find . -type f -name &quot;*.txt&quot;  -print | xargs rm -f</div><div class="line"># 用find的输出作为xargs的输入就必须将-print0与find结合使用，以null(&apos;\0&apos;)来分隔输出</div><div class="line"># xargs -0将\0作为输入定界符</div><div class="line">find . -type f -name &quot;*.txt&quot; -print0 | xargs -0 rm -f</div><div class="line"># 统计行数</div><div class="line">find . -type f -name &quot;*.java&quot; -print0 | xargs -0 wc -l</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="用tr进行转换"><a href="#用tr进行转换" class="headerlink" title="用tr进行转换"></a>用tr进行转换</h4><p><code>tr</code>：可以对来自标准输入的内容进行字符替换、删除以及重复字符压缩，可以将一组字符变成另一组字符。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># if set2&lt;set1 set2会重复其最后一个字符直到长度和set1相同</div><div class="line"># if set2&gt;set1 超过的部分会被忽略</div><div class="line">tr [option] set1 set2</div></pre></td></tr></table></figure>
+<ul>
+<li><p>大小写转换</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># &apos;a-z&apos; &apos;A-Z&apos;都是集合</div><div class="line"># &apos;ABD-&#125;&apos; &apos;aA.,&apos; &apos;a-ce-x&apos; &apos;a-c0-9&apos;都是合法的集合</div><div class="line"># 定义集合: “起始字符-终止字符”</div><div class="line">echo &quot;zzxxx&quot; | tr &apos;a-z&apos; &apos;A-Z&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>简单加密解密</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;james, kobe, anthow&quot; | tr &apos;a-zA-Z&apos; &apos;n-za-mN-ZA-M&apos;</div><div class="line">echo &quot;wnzrf, xbor, nagubj&quot; | tr &apos;a-zA-Z&apos; &apos;n-za-mN-ZA-M&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>用tr删除字符</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#  使用set1， 使用set2</div><div class="line">cat file.txt | tr -d &apos;[set1]&apos;</div><div class="line">echo &quot;Hello 123 world 456&quot; | tr -d &apos;0-9&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>字符集补集</p>
+</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># set2是可选的 最典型的用法是从输入文本中将不在补集中的所有字符串全部删除</div><div class="line">tr -c [set1] [set2]</div><div class="line">echo hello 1 char 2 next 4 | tr -d -c &apos;0-9 \n&apos;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>用tr压缩字符</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># -s选项可以压缩输入中重复的字符</div><div class="line">echo &quot;GNU is       not     UNIX. Recursive   right ?&quot; | tr -s &apos; &apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>计算和（很巧妙）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">cat sum.txt</div><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line"># $[ operation ]执行算术运算</div><div class="line">cat sum.txt | echo $[ $(tr &apos;\n&apos; &apos;+&apos; ) 0 ]</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+<h4 id="排序、唯一与重复"><a href="#排序、唯一与重复" class="headerlink" title="排序、唯一与重复"></a>排序、唯一与重复</h4><p><code>sort</code>：既可以从特定的文件也可以从stdin中获取输入，并将输出写入stdout。<code>uniq</code>的工作方式和<code>sort</code>一样</p>
+<ul>
+<li><p>简单排序</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sort file1.txt file2.txt &gt; sorted.txt</div><div class="line">sort file1.txt file2.txt -o sorted.txt</div><div class="line">sort -n file.txt # 按照数字排序</div><div class="line">sort -r file.txt # 按照逆序排序</div><div class="line">sort -M months.txt # 按照月份排序</div><div class="line">sort -m sorted1 sorted2 # 合并两个已排过序的文件</div><div class="line">sort file1.txt file2.txt | uniq # 找出已排序文件中不重复的行</div><div class="line">sort -bd unsorted.txt # -b用于忽略文件中的前导空白行 -d用于指明以字典序进行排序</div></pre></td></tr></table></figure>
+</li>
+<li><p>指定列:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sort -nrk 1 data.txt # -nr表明按照数字，采用逆序形式排序</div><div class="line">sort -k 2 data.txt # 依据第2列进行排序</div><div class="line">sort -nk 2,3 data.txt # 起止位置是2和3</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>uniq</code>：通过消除重复内容，从给定输入中(stdin或命令行参数文件)找出唯一的行。它只能作用于排过序的数据输入，因此<code>uniq</code>要么使用管道要么将排过序的文件作为输入，与<code>sort</code>命令结合使用。</p>
+<ul>
+<li><p>简单使用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sort unsorted.txt | uniq -u # 只显示唯一的行</div><div class="line">sort unsorted.txt | uniq -c # 统计出现的额次数</div><div class="line">sort unsorted.txt  | uniq -d # 找出重复的行</div><div class="line">sort data.txt | uniq -s 2 -w 2 # -s指定可以跳过前n个字符，-w指定用于比较的最大字符数</div><div class="line">uniq -z file.txt # 生成包含0值字节终止的输出（可用做为xargs的参数）</div><div class="line">uniq -z file.txt | xargs -0 rm</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="临时文件和随机数"><a href="#临时文件和随机数" class="headerlink" title="临时文件和随机数"></a>临时文件和随机数</h4><p>编写shell脚本时，经常需要存储临时数据，最适合存储临时数据的位置是<code>/tmp</code>(重启后其中内容会被清空)</p>
+<ul>
+<li><p>创建临时文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">filename=`mktemp`</div><div class="line">echo $filename</div><div class="line">/tmp/tmp.8xvhkjF5fH</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建临时目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">dirname=`mktemp -d`</div><div class="line">echo $dirname</div><div class="line">tmp.NI8xzW7VRX</div></pre></td></tr></table></figure>
+</li>
+<li><p>仅仅生成文件名，不需要创建实际的文件或目录</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">tmpfile=`mktemp -u`</div><div class="line">echo $tmpfile</div><div class="line">/tmp/tmp.RsGmilRpcT</div></pre></td></tr></table></figure>
+</li>
+<li><p>根据模版创建临时文件名</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">mktemp test.XXX # X会被随机的字符(字母或者数字)替换，而且模板中至少有3个X</div><div class="line">test.2tc</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
 
       
     </div>
@@ -570,7 +638,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用cat进行拼接"><span class="nav-number">2.</span> <span class="nav-text">用cat进行拼接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#录制并回放终端回话"><span class="nav-number">3.</span> <span class="nav-text">录制并回放终端回话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件查找和文件列表"><span class="nav-number">4.</span> <span class="nav-text">文件查找和文件列表</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用cat进行拼接"><span class="nav-number">2.</span> <span class="nav-text">用cat进行拼接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#录制并回放终端回话"><span class="nav-number">3.</span> <span class="nav-text">录制并回放终端回话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件查找和文件列表"><span class="nav-number">4.</span> <span class="nav-text">文件查找和文件列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转xargs"><span class="nav-number">5.</span> <span class="nav-text">玩转xargs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用tr进行转换"><span class="nav-number">6.</span> <span class="nav-text">用tr进行转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序、唯一与重复"><span class="nav-number">7.</span> <span class="nav-text">排序、唯一与重复</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#临时文件和随机数"><span class="nav-number">8.</span> <span class="nav-text">临时文件和随机数</span></a></li></ol></div>
             
           </div>
         </section>
