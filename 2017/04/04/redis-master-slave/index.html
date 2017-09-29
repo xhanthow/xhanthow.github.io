@@ -84,21 +84,30 @@
 
 
 
-<meta name="description" content="前戏说明：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~">
+<meta name="description" content="“虚惊一场”这四个字是人世间最好的成语，比起什么兴高采烈，五彩缤纷，一帆风顺都要美好百倍。你可懂什么叫失去
+——《1988：我想和这个世界谈谈》
+
+前戏说明：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置redis主从复制以及哨兵模式">
 <meta property="og:url" content="http://yoursite.com/2017/04/04/redis-master-slave/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
-<meta property="og:description" content="前戏说明：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~">
+<meta property="og:description" content="“虚惊一场”这四个字是人世间最好的成语，比起什么兴高采烈，五彩缤纷，一帆风顺都要美好百倍。你可懂什么叫失去
+——《1988：我想和这个世界谈谈》
+
+前戏说明：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E8%B7%AF%E7%BC%96%E8%BE%91%E5%99%A8.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/NAT%E8%AE%BE%E7%BD%AE.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/salve.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/xshell.png">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E5%93%A8%E5%85%B5%E5%90%AF%E5%8A%A8.png">
-<meta property="og:updated_time" content="2017-06-02T15:06:08.000Z">
+<meta property="og:updated_time" content="2017-09-29T01:29:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置redis主从复制以及哨兵模式">
-<meta name="twitter:description" content="前戏说明：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~">
+<meta name="twitter:description" content="“虚惊一场”这四个字是人世间最好的成语，比起什么兴高采烈，五彩缤纷，一帆风顺都要美好百倍。你可懂什么叫失去
+——《1988：我想和这个世界谈谈》
+
+前戏说明：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~">
 <meta name="twitter:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E8%B7%AF%E7%BC%96%E8%BE%91%E5%99%A8.png">
 
 
@@ -301,7 +310,7 @@
 		  
 			  <span class="post-letters-count">
 				&nbsp; | &nbsp;
-				<span>1,492 字</span>
+				<span>1,549 字</span>
 				&nbsp; | &nbsp;
 				<span>6 min</span>
 			  </span>
@@ -362,7 +371,11 @@
       
 
       
-        <p><strong>前戏说明</strong>：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~</p>
+        <blockquote>
+<p>“虚惊一场”这四个字是人世间最好的成语，比起什么兴高采烈，五彩缤纷，一帆风顺都要美好百倍。你可懂什么叫失去</p>
+<p>——《1988：我想和这个世界谈谈》</p>
+</blockquote>
+<p><strong>前戏说明</strong>：前几天看了一下redis的主从复制和哨兵相关一些知识，看起来很简单的配置。但是万万没想到期间踩了辣么多的坑，于是乎小小总结一下把~</p>
 <a id="more"></a>
 <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><h4 id="安装多台虚拟机"><a href="#安装多台虚拟机" class="headerlink" title="安装多台虚拟机"></a>安装多台虚拟机</h4><p>先在vm上安装一台虚拟机，然后安装redis，直接这样干简单粗暴<br><strong>redis apt-get install redis-server</strong><br>但是主从模式嘛，所以需要n台虚拟机。然后咧，直接在vm中<strong>克隆</strong>已经安装过的虚拟机即可~<br><strong>注意:</strong> 克隆好之后，右击它，然后选择设置-&gt;网络适配器-&gt;高级-&gt;生成(随机生成MAC地址)</p>
 <h4 id="配置固定IP"><a href="#配置固定IP" class="headerlink" title="配置固定IP"></a>配置固定IP</h4><p>上面操作over之后，还有一个问题，就是每次启动的时候每台虚拟机的ip都是不固定的(不固定玩毛啊)。话不多说，看操作！</p>
