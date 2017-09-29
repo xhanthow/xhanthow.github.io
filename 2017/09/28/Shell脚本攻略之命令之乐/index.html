@@ -81,7 +81,7 @@
 ——《追风筝的人》
 
 前戏说明:进过第一章的学习，对shell脚本也有一个基本的了解和认识，知道这玩意大概长啥样了。so，就接着深入了解她吧～">
-<meta property="og:updated_time" content="2017-09-29T01:44:06.000Z">
+<meta property="og:updated_time" content="2017-09-29T09:21:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之命令之乐">
 <meta name="twitter:description" content="被真相伤害总比被谎言欺骗的好，得到了再失去，总是比从来就没有得到更伤人 。
@@ -442,6 +442,7 @@
 </li>
 </ul>
   <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># set2是可选的 最典型的用法是从输入文本中将不在补集中的所有字符串全部删除</div><div class="line">tr -c [set1] [set2]</div><div class="line">echo hello 1 char 2 next 4 | tr -d -c &apos;0-9 \n&apos;</div></pre></td></tr></table></figure>
+<p>  ​</p>
 <ul>
 <li><p>用tr压缩字符</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># -s选项可以压缩输入中重复的字符</div><div class="line">echo &quot;GNU is       not     UNIX. Recursive   right ?&quot; | tr -s &apos; &apos;</div></pre></td></tr></table></figure>
@@ -463,7 +464,7 @@
 <p><code>uniq</code>：通过消除重复内容，从给定输入中(stdin或命令行参数文件)找出唯一的行。它只能作用于排过序的数据输入，因此<code>uniq</code>要么使用管道要么将排过序的文件作为输入，与<code>sort</code>命令结合使用。</p>
 <ul>
 <li><p>简单使用</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sort unsorted.txt | uniq -u # 只显示唯一的行</div><div class="line">sort unsorted.txt | uniq -c # 统计出现的额次数</div><div class="line">sort unsorted.txt  | uniq -d # 找出重复的行</div><div class="line">sort data.txt | uniq -s 2 -w 2 # -s指定可以跳过前n个字符，-w指定用于比较的最大字符数</div><div class="line">uniq -z file.txt # 生成包含0值字节终止的输出（可用做为xargs的参数）</div><div class="line">uniq -z file.txt | xargs -0 rm</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sort unsorted.txt | uniq -u # 只显示唯一的行</div><div class="line">sort unsorted.txt | uniq -c # 统计出现的额次数</div><div class="line">sort unsorted.txt  | uniq -d # 找出重复的行</div><div class="line">sort data.txt | uniq -s 2 -w 2 # -s指定可以跳过前n个字符，-w指定用于比较的最大字符数</div><div class="line">uniq -z file.txt # 生成包含0值字节终止的输出（可用做为xargs的参数）</div><div class="line">uniq -z file.txt | xargs -0 rm</div><div class="line"></div><div class="line"># 综合</div><div class="line">grep &quot;macAddress&quot; mac.txt | sort | uniq -u &gt; uniq_mac.txt</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h4 id="临时文件和随机数"><a href="#临时文件和随机数" class="headerlink" title="临时文件和随机数"></a>临时文件和随机数</h4><p>编写shell脚本时，经常需要存储临时数据，最适合存储临时数据的位置是<code>/tmp</code>(重启后其中内容会被清空)</p>
