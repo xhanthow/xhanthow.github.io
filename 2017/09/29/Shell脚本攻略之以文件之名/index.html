@@ -81,7 +81,7 @@
 ——《乖，摸摸头》
 
 前戏说明:今天来了解一哈shell在文件方面有哪些操作，毕竟Unix将操作系统中的一切都视为文件，所有操作都离不开文件。所以这个有多重要，心里有点x数。">
-<meta property="og:updated_time" content="2017-09-29T06:17:56.000Z">
+<meta property="og:updated_time" content="2017-09-29T09:35:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之以文件之名">
 <meta name="twitter:description" content="请相信，这个世界上真的有人过着你想要的生活。忽晴忽雨的江湖，祝你有梦为马，随处可栖。
@@ -380,8 +380,6 @@
 </blockquote>
 <p><strong>前戏说明</strong>:今天来了解一哈shell在文件方面有哪些操作，毕竟Unix将操作系统中的一切都视为文件，所有操作都离不开文件。所以这个有多重要，心里有点x数。</p>
 <a id="more"></a>
-<p>####简介</p>
-<p>请看<strong><em>前戏说明</em></strong></p>
 <h4 id="生成任意大小的文件"><a href="#生成任意大小的文件" class="headerlink" title="生成任意大小的文件"></a>生成任意大小的文件</h4><p><code>dd</code>：创建特定大小的文件的命令，它会克隆给定的输入内容，然后将一摸一样的一份副本写入到输出。stdin、设备文件、普通文件等都可以作为输入，stdout、设备文件、普通文件等也可以作为输出。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># if(input file)代表输入文件  of(output file)代表输出文件</div><div class="line"># bs(block size)代表以字节为单位的块大小 count代表需要被复制的块数</div><div class="line"># ／dev/zero是一个字符设备，它会不断返回0值字节(\0)</div><div class="line">dd if=/dev/zero of=junk.data bs=1M count=1</div></pre></td></tr></table></figure>
 <blockquote>
