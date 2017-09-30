@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="shell," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="钱仲书先生对杨绛说，从今往后，咱们只有死别，再无生离。
+——《我们仨》
+
+前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell脚本攻略之小试牛刀">
+<meta property="og:url" content="http://yoursite.com/2017/09/26/Shell脚本攻略之小试牛刀/index.html">
+<meta property="og:site_name" content="敲音乐听代码">
+<meta property="og:description" content="钱仲书先生对杨绛说，从今往后，咱们只有死别，再无生离。
+——《我们仨》
+
+前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
+<meta property="og:updated_time" content="2017-09-29T01:44:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shell脚本攻略之小试牛刀">
+<meta name="twitter:description" content="钱仲书先生对杨绛说，从今往后，咱们只有死别，再无生离。
+——《我们仨》
+
+前戏说明:最近在看Linux Shell脚本攻略这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"hide","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/26/Shell脚本攻略之小试牛刀/"/>
+
+
+
+
+
+  <title>Shell脚本攻略之小试牛刀 | 敲音乐听代码</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?98a46a959815687857bc4ec6db84e333";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">敲音乐听代码</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">敲音乐听代码</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/26/Shell脚本攻略之小试牛刀/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="anthow">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/headPic.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="敲音乐听代码">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Shell脚本攻略之小试牛刀</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-26T15:39:48+08:00">
+                2017-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/09/26/Shell脚本攻略之小试牛刀/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/26/Shell脚本攻略之小试牛刀/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文被瞅了
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>钱仲书先生对杨绛说，从今往后，咱们只有死别，再无生离。</p>
+<p>——《我们仨》</p>
+</blockquote>
+<p><strong>前戏说明</strong>:最近在看<code>Linux Shell脚本攻略</code>这本书，所以打算记录一下学习历程，毕竟好记性不如烂笔头。。。本人完全是shell小白，慢慢啃这本书把～（之前看书的时候总想记录一下，但是总是由于各种狗屁的理由而放弃，所以这次一定要坚持下来✊）</p>
+<a id="more"></a>
+<h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>shell脚本通常是一个以<code>shebang</code>起始的文本文件: <code>#!/bin/sh</code></p>
+<p><a href="https://zh.wikipedia.org/wiki/Shebang" target="_blank" rel="external">我是传送门</a></p>
+<blockquote>
+<p>如果将脚本作为bash的命令行参数来运行，那么就用不着脚本中的shebang了。而且没有<code>x</code>权限亦可执行（不同于./xx.sh）</p>
+</blockquote>
+<h4 id="终端打印"><a href="#终端打印" class="headerlink" title="终端打印"></a>终端打印</h4><p>echo：后面接要打印的东东，可以用<code>&quot;&quot;</code> <code>&#39;&#39;</code> 或者裸奔</p>
+<ul>
+<li>裸奔时候，没法在所要显示的文本中使用分号(;)，因为分号在Bash shell中被用作命令定界符。</li>
+<li>以echo hello;hello为例，echo hello被视为一个命令，第二个hello则被视为另一个命令。</li>
+<li>变量替换在单引号中无效，双引号注意转义。</li>
+</ul>
+<p>printf：格式化的输出字符串，可以指定字符串宽度，对齐方式和输出类型等，不会自动添加换行符。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">printf  &quot;%-5s %-10s %-4s\n&quot; No Name  Mark</div><div class="line">printf  &quot;%-5s %-10s %-4.2f\n&quot; 1 Sarath 80.3456</div><div class="line">printf  &quot;%-5s %-10s %-4.2f\n&quot; 2 James 90.9989</div><div class="line">printf  &quot;%-5s %-10s %-4.2f\n&quot; 3 Jeff 77.564</div></pre></td></tr></table></figure>
+<p>我们会得到如下格式化的输出:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">No    Name       Mark</div><div class="line">1     Sarath     80.35</div><div class="line">2     James      91.00</div><div class="line">3     Jeff       77.56</div></pre></td></tr></table></figure>
+<p>解释:</p>
+<p><code>%s</code>、<code>%c</code>、<code>%d</code>和<code>%f</code>都是格式替换符。<code>%-5s</code>指明了一个格式为左对齐且宽度为5的字符串替换(-表示左对齐)。如果不用-指定对齐方式，字符串就采用右对齐形式。宽度指定了保留给某个变量的字符数。对Name而言，保留宽度是10。因此，任何Name字段的内容都会被显示在10字符宽的保留区域内，如果内容不足10个字符，余下的则以空格符填充。对于浮点数，可以使用其他参数对小数部分进行舍入。对于Mark字段，将其格式化为%-4.2f，其中.2指定保留2个小数位。注意，在每行格式字符串后都有一个换行符(\n)。</p>
+<h4 id="玩转变量和环境变量"><a href="#玩转变量和环境变量" class="headerlink" title="玩转变量和环境变量"></a>玩转变量和环境变量</h4><p><strong>在Bash中，每一个变量的值都是字符串。无论你给变量赋值时有没有使用引号，值都会以字符串的形式存储</strong></p>
+<blockquote>
+<p>注意，var = value不同于var=value。把var=value写成var = value是一个常见的错误，<br>但前者是赋值操作，后者则是相等操作。（代码洁癖者真滴很难受啊）    </p>
+</blockquote>
+<p>export命令用来设置环境变量。至此之后，从当前shell脚本执行的任何应用程序都会继承<br>这个变量。</p>
+<p><code>export1.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">var1=hello</div><div class="line">var2=world</div><div class="line">export var2</div><div class="line">./export2.sh</div></pre></td></tr></table></figure>
+<p><code>export2.sh</code>:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">echo $var1</div><div class="line">echo $var2</div></pre></td></tr></table></figure>
+<p>执行<code>./export1.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"></div><div class="line">world</div></pre></td></tr></table></figure>
+<p>对，hello消失了～</p>
+<p><strong>番外篇:</strong></p>
+<ul>
+<li>获取字符串的长度：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">length=$&#123;#var&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>识别当前所使用的shell:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo $0</div><div class="line">echo $SHELL</div></pre></td></tr></table></figure>
+<h4 id="使用shell进行数学运算"><a href="#使用shell进行数学运算" class="headerlink" title="使用shell进行数学运算"></a>使用shell进行数学运算</h4><blockquote>
+<p>在Bash shell环境中，可以利用<code>let</code>、<code>(())</code>和<code>[]</code>执行基本的算术操作。而在进行高级操作时，<br>expr和bc这两个工具也会非常有用。</p>
+</blockquote>
+<ul>
+<li><code>let</code>：可以直接执行基本的算术操作，变量前不需要加$</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">no1=1;</div><div class="line">no2=2;</div><div class="line">let result=no1+no2</div><div class="line"># ++</div><div class="line">let no1++</div><div class="line"># --</div><div class="line">let no2--</div></pre></td></tr></table></figure>
+<ul>
+<li><p><code>[]</code>：使用方法和let命令类似</p>
+<p><code>result=$[ no1 + no2 ]</code></p>
+<p><code>result=$[ $no1 + 5 ]</code></p>
+</li>
+<li><p><code>(())</code>：变量名之前必须加上$</p>
+<p><code>result=$(( no1 + 50 ))</code></p>
+</li>
+<li><p><code>expire</code>：<code>result=expr 3 + 4</code>  <code>result=$(expr $no1 + 5)</code></p>
+</li>
+<li><p><code>bc</code>：是一个用于数学运算的高级工具，这个精密计算器包含了大量的选项</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;4 * 0.56&quot; | bc</div><div class="line">2.24</div><div class="line">no=54;</div><div class="line">result=`echo &quot;$no * 1.5&quot; | bc`</div><div class="line">echo $result</div><div class="line">81.0</div></pre></td></tr></table></figure>
+<ul>
+<li>设置小数精度:</li>
+</ul>
+<p><code>echo &quot;scale=2;3/8&quot; | bc   0.37</code></p>
+<ul>
+<li>进制转换:</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">no=100</div><div class="line">echo &quot;obase=2;$no&quot; | bc</div><div class="line">1100100</div><div class="line">no=1100100</div><div class="line">echo &quot;obase=10;ibase=2;$no&quot; | bc</div><div class="line">100</div></pre></td></tr></table></figure>
+<ul>
+<li>计算平方以及平方根</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;sqrt(100)&quot; | bc #Square root</div><div class="line">echo &quot;10^10&quot; | bc #Square</div></pre></td></tr></table></figure>
+<p>​</p>
+<h4 id="玩转文件描述符及重定向"><a href="#玩转文件描述符及重定向" class="headerlink" title="玩转文件描述符及重定向"></a>玩转文件描述符及重定向</h4><p>文件描述符0、1和2是系统预留的。</p>
+</li>
+<li><p>0-&gt;stdin(标准输入)</p>
+</li>
+<li><p>1-&gt;stdout(标准输出)</p>
+</li>
+<li><p>2-&gt;stderr(标准错误)</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;This is a sample text 1&quot; &gt; temp.txt  # 会清空原始文件内容</div><div class="line">echo &quot;This is sample text 2&quot; &gt;&gt; temp.txt   # 追加内容</div><div class="line">ls + 2&gt; out.txt  # 将stderr重定向到out.txt</div><div class="line">cmd 2&gt;&amp;1 output.txt # stderr和stdout都重定向到output.txt</div><div class="line">cmd 2&gt;/dev/null # stderr的输出重定向到/dev/null中</div></pre></td></tr></table></figure>
+<p>有一个方法既可以将数据重定向到文件，还可以提供一份重定向的副本作为后续命令的stdin—&gt;<code>tee</code>命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">cat a* | tee out.txt | cat -n</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>tee</code>只能从stdin中读取，默认情况是覆盖文件，<code>tee -a</code>追加内容。</p>
+</blockquote>
+<h4 id="数组和关联数组"><a href="#数组和关联数组" class="headerlink" title="数组和关联数组"></a>数组和关联数组</h4><p>定义方式:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">array_var=(1 2 3 4 5 6)</div><div class="line"></div><div class="line">array_var[0]=&quot;test1&quot;</div><div class="line">array_var[1]=&quot;test2&quot;</div><div class="line">array_var[2]=&quot;test3&quot;</div><div class="line">array_var[3]=&quot;test4&quot;</div><div class="line">array_var[4]=&quot;test5&quot;</div><div class="line">array_var[5]=&quot;test6&quot;</div></pre></td></tr></table></figure>
+<p>打印所有元素:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo $&#123;array_var[*]&#125;</div><div class="line">echo $&#123;array_var[@]&#125;</div></pre></td></tr></table></figure>
+<p>长度：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo $&#123;#array_var[*]&#125;</div></pre></td></tr></table></figure>
+<p><strong><em>关联数组</em></strong>:</p>
+<p>声明:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">declare -A ass_array	</div><div class="line"></div><div class="line">declare -A fruits_value</div><div class="line">fruits_value=([apple]=&apos;100dollars&apos; [orange]=&apos;150 dollars&apos;)</div><div class="line">echo &quot;Apple costs $&#123;fruits_value[apple]&#125;&quot;</div></pre></td></tr></table></figure>
+<p>列出数组索引：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo $&#123;!array_var[*]&#125;</div><div class="line">echo $&#123;!array_var[@]&#125;</div></pre></td></tr></table></figure>
+<h4 id="调试脚本"><a href="#调试脚本" class="headerlink" title="调试脚本"></a>调试脚本</h4><ul>
+<li><p>可以使用-x，启用shell脚本的跟踪调试功能:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">bash -x script.sh</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用set -x和set +x对脚本进行部分调试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/bash </div><div class="line">#文件名: debug.sh </div><div class="line">for i in &#123;1..6&#125;; </div><div class="line">do</div><div class="line">	set -x</div><div class="line">    echo $i</div><div class="line">    set +x</div></pre></td></tr></table></figure>
+</li>
+<li><p>自定义调试：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">function DEBUG()</div><div class="line">&#123;</div><div class="line"> 	[ &quot;$_DEBUG&quot; == &quot;on&quot; ] &amp;&amp; $@ || :</div><div class="line">&#125;</div><div class="line">for i in &#123;1..10&#125;</div><div class="line">do</div><div class="line">    DEBUG echo $i</div><div class="line">done</div></pre></td></tr></table></figure>
+<p>可以将调试功能设置为”on”来运行上面的脚本:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ _DEBUG=on ./script.sh</div></pre></td></tr></table></figure>
+<p>在每一个需要打印调试信息的语句前加上<code>DEBUG</code>。在bash中命令<code>:</code>告诉shell不要进行任何操作。</p>
+<blockquote>
+<p>把shebang从<code>#!/bin/bash</code>改成<code>#!/bin/bash -xv</code>，这样一来不用任何其他选项就可以启动调试功能了。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="不使用回车键来读取n个字符"><a href="#不使用回车键来读取n个字符" class="headerlink" title="不使用回车键来读取n个字符"></a>不使用回车键来读取n个字符</h4><ul>
+<li><p>从输入中读取n个字符并存入变量variable_name：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -n number_of_chars variable_name</div></pre></td></tr></table></figure>
+</li>
+<li><p>用无回显的方式读取密码:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -s var</div></pre></td></tr></table></figure>
+</li>
+<li><p>显示提示信息:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -p &quot;Enter input:&quot; var</div></pre></td></tr></table></figure>
+</li>
+<li><p>在特定时间内读取输入:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -t timeout var</div></pre></td></tr></table></figure>
+</li>
+<li><p>用特定的定界符作为输入行的结束:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">read -d delim_char var</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><ul>
+<li><p>for循环:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">for var in list;</div><div class="line">do</div><div class="line">	command; #使用变量$var</div><div class="line">done</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">data=&quot;name,sex,localtion&quot;</div><div class="line"># 分隔符</div><div class="line">oldIFS=$IFS</div><div class="line">IFS=,</div><div class="line">for item in $data;</div><div class="line">do</div><div class="line">    echo Item: $item</div><div class="line">done</div><div class="line">IFS=$oldIFS</div></pre></td></tr></table></figure>
+</li>
+<li><p>while循环:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">while condition;</div><div class="line">do</div><div class="line">	command;</div><div class="line">done</div></pre></td></tr></table></figure>
+</li>
+<li><p>until循环:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">x=0;</div><div class="line">until [ $x -eq 9 ];  #条件</div><div class="line">do</div><div class="line">	let x++;</div><div class="line">	echo $x;</div><div class="line">done​</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="比较和测试"><a href="#比较和测试" class="headerlink" title="比较和测试"></a>比较和测试</h4><ul>
+<li><p>if条件：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">if condition;</div><div class="line">then</div><div class="line">	command;</div><div class="line">fi</div></pre></td></tr></table></figure>
+</li>
+<li><p>else if和else:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">if condition;</div><div class="line">then</div><div class="line">	command;</div><div class="line">else if condition; then</div><div class="line">	command;</div><div class="line">else</div><div class="line">	command;</div><div class="line">fi</div></pre></td></tr></table></figure>
+</li>
+<li><p>算术比较:</p>
+<p>  条件通常被放置在封闭的中括号中。一定要注意<strong>在<code>[</code>或<code>]</code>与操作数之间有一个空格</strong></p>
+<p> ​<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[ $var -eq 0 ] #等于0 true</div><div class="line">[ $var -nq 0 ] #不等于0 true</div><div class="line">-gt:大于		-ge:大于等于</div><div class="line">-lt:小于		-le:小于等于</div><div class="line">-a:逻辑与	   -o:逻辑或</div><div class="line"> ​</div></pre></td></tr></table></figure></p>
+</li>
+<li><p>文件系统:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[ -f $file_var ] #如果给定的变量包含正常的文件路径或文件名,true</div><div class="line">[ -x $var ] #如果给定的变量包含的文件可执行,true</div><div class="line">[ -d $var ] #如果给定的变量包含的是目录,true</div><div class="line">[ -e $var ] #如果给定的变量包含的文件存在,true</div><div class="line">[ -w $var ] #如果给定的变量包含的文件可写,true</div><div class="line">[ -r $var ] #如果给定的变量包含的文件可读,true</div></pre></td></tr></table></figure>
+</li>
+<li><p>字符串比较:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[[ $str1 = $str1 ]] #注意=两边有空格,相等,true</div><div class="line">[[ $str1 != $str1 ]] #不相等,true</div><div class="line">[[ $str1 &gt; $str1 ]] #str1字母顺序比str2大,true</div><div class="line">[[ $str1 &lt; $str1 ]] #str1字母顺序比str2小,true</div><div class="line">[[ -z $str1 ]] #str1是空字符串,true</div><div class="line">[[ -n $str1 ]] #str1是非空字符串,true</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>好啦，第一章就到此结束咯～ 对shell也有了一个初步的认识，下面的篇章将会继续和shell干下去</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/shell/" rel="tag"># shell</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/19/springboot远程连接mysql/" rel="next" title="springboot远程连接mysql">
+                <i class="fa fa-chevron-left"></i> springboot远程连接mysql
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/28/Shell脚本攻略之命令之乐/" rel="prev" title="Shell脚本攻略之命令之乐">
+                Shell脚本攻略之命令之乐 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/09/26/Shell脚本攻略之小试牛刀/"
+           data-title="Shell脚本攻略之小试牛刀" data-url="http://yoursite.com/2017/09/26/Shell脚本攻略之小试牛刀/">
+      </div>
+    
+
+  </div>
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/headPic.jpg"
+              alt="anthow" />
+          
+            <p class="site-author-name" itemprop="name">anthow</p>
+            <p class="site-description motion-element" itemprop="description">Some Notes</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/xhanthow" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-globe"></i>GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/anthow" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>Weibo</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终端打印"><span class="nav-number">2.</span> <span class="nav-text">终端打印</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转变量和环境变量"><span class="nav-number">3.</span> <span class="nav-text">玩转变量和环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用shell进行数学运算"><span class="nav-number">4.</span> <span class="nav-text">使用shell进行数学运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#玩转文件描述符及重定向"><span class="nav-number">5.</span> <span class="nav-text">玩转文件描述符及重定向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组和关联数组"><span class="nav-number">6.</span> <span class="nav-text">数组和关联数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试脚本"><span class="nav-number">7.</span> <span class="nav-text">调试脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不使用回车键来读取n个字符"><span class="nav-number">8.</span> <span class="nav-text">不使用回车键来读取n个字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环"><span class="nav-number">9.</span> <span class="nav-text">循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较和测试"><span class="nav-number">10.</span> <span class="nav-text">比较和测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">anthow</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>已有
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人溜了进来
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>被监视了
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"anthow"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyteSCvbs';
+      var conf = 'ca2374df249463654cfe9d6c4e98bfad';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 背景动画 -->
+<script type="text/javascript" src="/js/src/particle.js"></script>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
