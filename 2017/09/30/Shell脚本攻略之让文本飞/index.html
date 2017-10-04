@@ -72,15 +72,15 @@
 <meta name="description" content="前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shell脚本攻略之让文本飞">
-<meta property="og:url" content="http://yoursite.com/2017/09/30/Shell脚本攻略之让文本飞/index.html">
+<meta property="og:url" content="https://xhanthow.github.io/2017/09/30/Shell脚本攻略之让文本飞/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
 <meta property="og:description" content="前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
-<meta property="og:image" content="http://yoursite.com/Users/zhima/Desktop/正则.png">
-<meta property="og:updated_time" content="2017-10-01T04:42:51.000Z">
+<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E6%AD%A3%E5%88%99.png">
+<meta property="og:updated_time" content="2017-10-04T13:45:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之让文本飞">
 <meta name="twitter:description" content="前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
-<meta name="twitter:image" content="http://yoursite.com/Users/zhima/Desktop/正则.png">
+<meta name="twitter:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E6%AD%A3%E5%88%99.png">
 
 
 
@@ -110,7 +110,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/30/Shell脚本攻略之让文本飞/"/>
+  <link rel="canonical" href="https://xhanthow.github.io/2017/09/30/Shell脚本攻略之让文本飞/"/>
 
 
 
@@ -301,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/30/Shell脚本攻略之让文本飞/">
+    <link itemprop="mainEntityOfPage" href="https://xhanthow.github.io/2017/09/30/Shell脚本攻略之让文本飞/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="anthow">
@@ -411,7 +411,7 @@
 <h4 id="使用正则表达式"><a href="#使用正则表达式" class="headerlink" title="使用正则表达式"></a>使用正则表达式</h4><blockquote>
 <p>正则表达式是基于模式匹配的文本处理技术的关键所在</p>
 </blockquote>
-<p><img src="/Users/zhima/Desktop/正则.png" alt="正则"></p>
+<p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E6%AD%A3%E5%88%99.png" alt=""></p>
 <h4 id="用grep在文本中搜索文本"><a href="#用grep在文本中搜索文本" class="headerlink" title="用grep在文本中搜索文本"></a>用grep在文本中搜索文本</h4><ul>
 <li><p>搜索包含指定文字的文本行</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">grep pattern filename</div><div class="line"></div><div class="line">echo -e &quot;this is a word&quot; | grep word</div><div class="line"></div><div class="line">grep match_file file1 file2 file3</div></pre></td></tr></table></figure>
@@ -443,7 +443,90 @@
 <li><p>忽略大小写</p>
 </li>
 </ul>
-
+  <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo hello world | grep -i &quot;HELLO&quot;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>匹配多个</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">grep -e &quot;pattern2&quot; -e &quot;pattern2&quot;</div><div class="line"></div><div class="line">echo this is a line of text | grep -e &quot;this&quot; -e &quot;line&quot; -o</div></pre></td></tr></table></figure>
+</li>
+<li><p>在grep搜索中指定或排除文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 递归搜索所有的.c和.cpp文件</div><div class="line">grep &quot;main()&quot; . -r  --include *.&#123;c,cpp&#125;</div><div class="line"></div><div class="line">grep &quot;main()&quot; . -r --exclude &quot;README&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用0 值字节作为后缀的grep和xargs</p>
+<blockquote>
+<p>为了指明输入的文件名是以0值字节(\0)作为终止符，需要在xargs中使用-0</p>
+<p>grep使用-Z输出以0值字节作为终止符的文件名(\0)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># -Z和-l通常结合使用</div><div class="line">grep &quot;test&quot; file* -lZ | xargs -0 rm</div></pre></td></tr></table></figure>
+</li>
+<li><p>grep的静默输出</p>
+<blockquote>
+<p>在静默模式中，grep命令不会输出任何内容，仅是运行命令，然后根据命令的执行成功与否返回退出状态。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo xxx | grep xxx -q</div></pre></td></tr></table></figure>
+</li>
+<li><p>打印出匹配文本之前或之后的行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 打印匹配结果之后的3行</div><div class="line">seq 10 | grep 5 -A 3</div><div class="line"># 打印匹配结果之前的3行</div><div class="line">seq 10 | grep 5 -B 3</div><div class="line"># 打印匹配结果之前之后的3行</div><div class="line">seq 10 | grep 5 -C 3</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="用cut按列切分文件"><a href="#用cut按列切分文件" class="headerlink" title="用cut按列切分文件"></a>用cut按列切分文件</h4><blockquote>
+<p> 在cut的术语中，每列被称为一个字段 </p>
+</blockquote>
+<ul>
+<li><p>提取特定的字段或列</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># FIELD_LIST是需要显示的列，它由列号组成，彼此之间用逗号分隔</div><div class="line">cut -f FIELD_LIST filename</div><div class="line">cut -f 2,3 filename</div><div class="line"># 制表符是字段或列的默认定界符，对于没有定界符的行，会将该行照原样打印出来。如果不想打印不包括定界符的行，则可以使用-s选项.</div><div class="line"># --complement选项对提取的字段进行补集运算。如下，打印除第3列之外的所有列</div><div class="line">cut -f3 --complement student_data.txt</div><div class="line"># 自定义定界符 -d</div><div class="line">cut -f2 -d&quot;;&quot; delimited_data.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>指定字段的字符或字节范围</p>
+<blockquote>
+<p>N-：从第N个字节，字符或字段到行尾</p>
+<p>N-M：从第N个字节，字符或字段到第M(包括第M个在内)字节，字符或字段</p>
+<p>-M：从第1个字节，字符或者字段到第M个(包括第Mge在内)字节，字符或字段</p>
+<p>​</p>
+<p>-b：表示字节</p>
+<p>-c：表示字符</p>
+<p>-f：表示定义字段</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 打印第1个到第5个字符</div><div class="line">cut -c 1-5 range_fields.txt</div><div class="line"># 打印前2个字符</div><div class="line">cut -c -2 range_fields.txt</div><div class="line"># 当使用-b或-c提取多个字段时，必须使用--output-delimiter</div><div class="line">cut range_fields.txt -c1-3,6-9 --output-delimiter &quot;,&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="使用sed进行文本替换"><a href="#使用sed进行文本替换" class="headerlink" title="使用sed进行文本替换"></a>使用sed进行文本替换</h4><blockquote>
+<p>sed是流编辑器(stream editor)的缩写 </p>
+</blockquote>
+<ul>
+<li><p>替换文本文字</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sed &apos;s/pattern/replace_string/&apos; file</div><div class="line">cat file | sed &apos;s/pattern/replace_string/&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>替换的同时保存更改</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 在默认的情况下,sed只会打印替换后的文本，-i可以将替换的结果应用于源文件</div><div class="line">sed -i &apos;s/text/replace/&apos; file</div><div class="line"></div><div class="line"># 不仅执行文件内容替换，还会创建一个名为file.bak的文件，其中包含着原始文件内容的副本</div><div class="line">sed -i .bak &apos;s/adc/def&apos; file</div></pre></td></tr></table></figure>
+</li>
+<li><p>全局替换</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 如果要替换所有内容，需要在命令尾部加上参数g</div><div class="line">sed &apos;s/pattern/replace_string/g&apos; file</div><div class="line"># 后缀/g意味着sed会替换每一处匹配，需要从第n处匹配开始替换，可使用/Ng</div><div class="line">echo thisthisthisthis | sed &apos;s/this/THIS/2g&apos;</div><div class="line">thisTHISTHISTHIS</div></pre></td></tr></table></figure>
+</li>
+<li><p>移除空白行</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 空白行可以用正则^$进行匹配(空白行中行尾紧随着行首标记)</div><div class="line"># /pattern/d会移除匹配样式的行</div><div class="line">sed &apos;/^$/d&apos; file</div></pre></td></tr></table></figure>
+</li>
+<li><p>已匹配字符串标记(&amp;)</p>
+<blockquote>
+<p>在sed中我们可以用&amp;标记匹配样式的字符串，这样就能在替换字符串时使用已匹配的内容</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 正则表达式\w\+匹配每一个单词，然后用[&amp;]替换它。&amp;对应于之前所匹配到的单词</div><div class="line">echo this is an example | sed &apos;s/\w\+/[&amp;]/g&apos;</div><div class="line">[this] [is] [an] [example]</div></pre></td></tr></table></figure>
+</li>
+<li><p>子串匹配标记</p>
+</li>
+</ul>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 这条命令将digit 7替换为7。匹配到的子串是7。\(pattern\)用于匹配子串。</div><div class="line"># 模式被包括在使用斜线转移过的()中，对于匹配到的第一个子串，其对应的标记是\1,匹配到的第二个就是\2</div><div class="line">echo this is digit 7 in a number | sed &apos;s/digit \([0-9]\)/\1/&apos;</div><div class="line">this is 7 in a number</div></pre></td></tr></table></figure>
+<ul>
+<li><p>组合多个表达式</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sed &apos;expression&apos; | sed &apos;expression&apos;</div><div class="line">sed &apos;expression; expression&apos;</div><div class="line">sed -e &apos;expression&apos; -e expression&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>引用</p>
+<blockquote>
+<p>sed表达式通常用单引号来引用，双引号会通过对表达式求值来对其进行扩展，当sed表达式中使用一些变量时，双引号就能派上用场</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">text=hello</div><div class="line">echo hello world | sed &quot;s/$text/HELLO/&quot;</div><div class="line">HELLO world</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+</ul>
+<h4 id="使用awk进行高级文本处理"><a href="#使用awk进行高级文本处理" class="headerlink" title="使用awk进行高级文本处理"></a>使用awk进行高级文本处理</h4>
       
     </div>
     
@@ -636,7 +719,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用正则表达式"><span class="nav-number">1.</span> <span class="nav-text">使用正则表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用grep在文本中搜索文本"><span class="nav-number">2.</span> <span class="nav-text">用grep在文本中搜索文本</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用正则表达式"><span class="nav-number">1.</span> <span class="nav-text">使用正则表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用grep在文本中搜索文本"><span class="nav-number">2.</span> <span class="nav-text">用grep在文本中搜索文本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用cut按列切分文件"><span class="nav-number">3.</span> <span class="nav-text">用cut按列切分文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用sed进行文本替换"><span class="nav-number">4.</span> <span class="nav-text">使用sed进行文本替换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用awk进行高级文本处理"><span class="nav-number">5.</span> <span class="nav-text">使用awk进行高级文本处理</span></a></li></ol></div>
             
 
           </div>
