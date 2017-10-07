@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="HTTP基本知识," />
+  <meta name="keywords" content="shell," />
 
 
 
@@ -69,41 +69,25 @@
 
 
 
-<meta name="description" content="那一天我二十一岁，在我一生的黄金时代，我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。
-——《黄金时代》
+<meta name="description" content="心，一旦离开了，就再不会回来。
+——《解忧杂货铺》
 
-TCP/IP分层:
-分为4层:应用层、传输层、网络层和数据链路层(这里要区分OSI分层模式)
-应用层:决定了向用户提供应用服务时通信的活动，FTP、DNS、HTTP都属于应用层。
-传输层:对上层应用层，提供处于网络连接中的两台计算机之间的数据传输。TCP、UDP都属于传输层。">
+前戏说明:感觉上篇扯得有点多，因而把一些其他的内容放到这里哔一下。而且操作文本的内容略多，所以还是要经常看看，毕竟也是用处最广的一部分内容。这篇也是结合了实际的应用来学习的～">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图解HTTP——了解web及网络基础">
-<meta property="og:url" content="https://xhanthow.github.io/2016/08/21/HTTP/index.html">
+<meta property="og:title" content="Shell脚本攻略之让文本飞下篇">
+<meta property="og:url" content="https://xhanthow.github.io/2017/10/07/Shell脚本攻略之让文本飞下篇/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
-<meta property="og:description" content="那一天我二十一岁，在我一生的黄金时代，我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。
-——《黄金时代》
+<meta property="og:description" content="心，一旦离开了，就再不会回来。
+——《解忧杂货铺》
 
-TCP/IP分层:
-分为4层:应用层、传输层、网络层和数据链路层(这里要区分OSI分层模式)
-应用层:决定了向用户提供应用服务时通信的活动，FTP、DNS、HTTP都属于应用层。
-传输层:对上层应用层，提供处于网络连接中的两台计算机之间的数据传输。TCP、UDP都属于传输层。">
-<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
-<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
-<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E5%90%84%E5%8D%8F%E8%AE%AE%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.png">
-<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E4%BB%A3%E7%90%861.png">
-<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E5%85%B3.png">
-<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E9%9A%A7%E9%81%931.png">
-<meta property="og:updated_time" content="2017-09-29T01:43:59.000Z">
+前戏说明:感觉上篇扯得有点多，因而把一些其他的内容放到这里哔一下。而且操作文本的内容略多，所以还是要经常看看，毕竟也是用处最广的一部分内容。这篇也是结合了实际的应用来学习的～">
+<meta property="og:updated_time" content="2017-10-07T04:21:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图解HTTP——了解web及网络基础">
-<meta name="twitter:description" content="那一天我二十一岁，在我一生的黄金时代，我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。
-——《黄金时代》
+<meta name="twitter:title" content="Shell脚本攻略之让文本飞下篇">
+<meta name="twitter:description" content="心，一旦离开了，就再不会回来。
+——《解忧杂货铺》
 
-TCP/IP分层:
-分为4层:应用层、传输层、网络层和数据链路层(这里要区分OSI分层模式)
-应用层:决定了向用户提供应用服务时通信的活动，FTP、DNS、HTTP都属于应用层。
-传输层:对上层应用层，提供处于网络连接中的两台计算机之间的数据传输。TCP、UDP都属于传输层。">
-<meta name="twitter:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E5%9B%BE.png">
+前戏说明:感觉上篇扯得有点多，因而把一些其他的内容放到这里哔一下。而且操作文本的内容略多，所以还是要经常看看，毕竟也是用处最广的一部分内容。这篇也是结合了实际的应用来学习的～">
 
 
 
@@ -133,13 +117,13 @@ TCP/IP分层:
 
 
 
-  <link rel="canonical" href="https://xhanthow.github.io/2016/08/21/HTTP/"/>
+  <link rel="canonical" href="https://xhanthow.github.io/2017/10/07/Shell脚本攻略之让文本飞下篇/"/>
 
 
 
 
 
-  <title>图解HTTP——了解web及网络基础 | 敲音乐听代码</title>
+  <title>Shell脚本攻略之让文本飞下篇 | 敲音乐听代码</title>
   
 
 
@@ -324,7 +308,7 @@ TCP/IP分层:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xhanthow.github.io/2016/08/21/HTTP/">
+    <link itemprop="mainEntityOfPage" href="https://xhanthow.github.io/2017/10/07/Shell脚本攻略之让文本飞下篇/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="anthow">
@@ -341,7 +325,7 @@ TCP/IP分层:
 
         
         
-          <h1 class="post-title" itemprop="name headline">图解HTTP——了解web及网络基础</h1>
+          <h1 class="post-title" itemprop="name headline">Shell脚本攻略之让文本飞下篇</h1>
         
 
         <div class="post-meta">
@@ -353,8 +337,8 @@ TCP/IP分层:
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-21T12:12:24+08:00">
-                2016-08-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-07T10:46:12+08:00">
+                2017-10-07
               </time>
             
 
@@ -376,8 +360,8 @@ TCP/IP分层:
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/网络/" itemprop="url" rel="index">
-                    <span itemprop="name">网络</span>
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
                   </a>
                 </span>
 
@@ -395,8 +379,8 @@ TCP/IP分层:
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2016/08/21/HTTP/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/08/21/HTTP/" itemprop="commentsCount"></span>
+                <a href="/2017/10/07/Shell脚本攻略之让文本飞下篇/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/10/07/Shell脚本攻略之让文本飞下篇/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -430,46 +414,55 @@ TCP/IP分层:
 
       
         <blockquote>
-<p>那一天我二十一岁，在我一生的黄金时代，我有好多奢望。我想爱，想吃，还想在一瞬间变成天上半明半暗的云。</p>
-<p>——《黄金时代》</p>
+<p>心，一旦离开了，就再不会回来。</p>
+<p>——《解忧杂货铺》</p>
 </blockquote>
-<h3 id="TCP-IP分层"><a href="#TCP-IP分层" class="headerlink" title="TCP/IP分层:"></a>TCP/IP分层:</h3><ul>
-<li>分为4层:应用层、传输层、网络层和数据链路层(<strong><a href="https://zh.wikipedia.org/wiki/OSI%E6%A8%A1%E5%9E%8B" target="_blank" rel="external">这里要区分OSI分层模式<7层或5层></7层或5层></a></strong>)<ul>
-<li>应用层:决定了向用户提供应用服务时通信的活动，FTP、DNS、HTTP都属于应用层。</li>
-<li>传输层:对上层应用层，提供处于网络连接中的两台计算机之间的数据传输。TCP、UDP都属于传输层。</li>
-<li>网络层:网络层用来处理在网络上流动的数据包。数据包是网络传输的最小数据单位。多台计算机连接传输时，网络层也负责在多条线路中选择一条传输线路。</li>
-<li>数据链路层（网络接口层）:用来处理连接网络的硬件部分。</li>
-</ul>
-</li>
-</ul>
+<p><strong>前戏说明</strong>:感觉上篇扯得有点多，因而把一些其他的内容放到这里哔一下。而且操作文本的内容略多，所以还是要经常看看，毕竟也是用处最广的一部分内容。这篇也是结合了实际的应用来学习的～</p>
 <a id="more"></a>
-<h3 id="一般的请求流程图"><a href="#一般的请求流程图" class="headerlink" title="一般的请求流程图:"></a>一般的请求流程图:</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="客户端和服务端的通信图"></p>
-<h3 id="常见的协议"><a href="#常见的协议" class="headerlink" title="常见的协议:"></a>常见的协议:</h3><ul>
-<li>ARP协议:一种用以解析地址的协议，根据通信方的IP地址就可以反查出对应的MAC地址。</li>
-<li><p>TCP协议:位于传输层，提供可靠的字节流服务。</p>
-<ul>
-<li><p>三次握手:使用TCP的标志(flag)——<code>SYN(synchronize)</code>和<code>ACK(acknowledgement)</code><br>具体过程:发送端首先发送一个带SYN标志的数据包给对方。接收端收到后，回传一个带有SYN/ACK标志的数据包以示传达确认信息。最后，发送端再回传一个带ACK标志的数据包，代表“握手”结束。若在握手过程中某个阶段莫名中断，TCP协议会再次以相同你给的顺序发送相同的数据包。</p>
-</li>
-<li><p><strong>三次握手流程图:</strong><br><img src="http://oc8wh8qu5.bkt.clouddn.com/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="三次握手"></p>
-</li>
-</ul>
-</li>
-<li><p>DNS服务:提供域名到IP之间的解析。</p>
-</li>
-</ul>
-<h3 id="各协议和HTTP协议的关系"><a href="#各协议和HTTP协议的关系" class="headerlink" title="各协议和HTTP协议的关系:"></a>各协议和HTTP协议的关系:</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E5%90%84%E5%8D%8F%E8%AE%AE%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.png" alt="各协议和HTTP协议的关系"></p>
-<h3 id="代理："><a href="#代理：" class="headerlink" title="代理："></a>代理：</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E4%BB%A3%E7%90%861.png" alt="代理示意图"><br>代理服务器的基本行为就是接收客户端发送的请求后转发给其他服务器。代理不改变请求的URI，会直接发送给前方持有资源的目标服务器。持有资源实体的服务器被称为源服务器，从源服务器返回的响应经过代理服务器后再传给客户端。<br>HTTP通信的过程中，可级联多台代理服务器。请求和响应的转发会经过数台类似锁链一样连接起来的代理服务器。转发时，需要附加Via首部字段以标记出经过的主机信息。</p>
-<ul>
-<li><p><strong>缓存代理</strong><br>代理转发响应时，缓存代理（Caching Proxy）会预先将资源的副本（缓存）保存在代理服务器上。当代理再次接收到相同资源的请求时，就可以不从源服务器那里获取资源，而是将之前缓存的资源作为响应返回。</p>
-</li>
-<li><p><strong>透明代理</strong><br>转发请求或响应时，不对报文做任何加工的代理类型被称为透明代理（Transparent Proxy）。反之，对报文内容进行加工的代理被称为非透明代理。</p>
-</li>
-</ul>
-<h3 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E7%BD%91%E5%85%B3.png" alt="网关"><br>网关的工作机制和代理十分相似。而网关能使通信线路上的服务器提供非HTTP协议服务。<br>利用网关可以提高通信的安全性，因为可以在客户端与网关之间的通信线路上加密以确保连接的安全。比如，网关可以连接数据库，使用<code>SQL</code>语句查询数据。</p>
-<h3 id="隧道"><a href="#隧道" class="headerlink" title="隧道"></a>隧道</h3><p><img src="http://oc8wh8qu5.bkt.clouddn.com/%E9%9A%A7%E9%81%931.png" alt="隧道"><br>隧道可按要求建立起一条与其他服务器的通信线路。届时使用<code>SSL</code>等加密手段进行加密。隧道的目的是确保客户端能与服务器进行安全的通信。隧道本身不会去解析HTTP请求。也就是说，请求保持原样中转给之后的服务器。隧道会在通信双方断开连接时结束。</p>
-<blockquote>
-<p>乱入：<a href="http://vc2tea.com/whats-shadowsocks/" target="_blank" rel="external">ss翻墙原理</a></p>
+<h4 id="统计特定文件中的词频"><a href="#统计特定文件中的词频" class="headerlink" title="统计特定文件中的词频"></a>统计特定文件中的词频</h4><blockquote>
+<p>可以使用关联数组、awk、sed、grep等不同的方式来解决这个问题。</p>
 </blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">if [ $# -ne 1 ];</div><div class="line">    then</div><div class="line">    echo &quot;Usage: $0 filename&quot;;</div><div class="line">exit -1</div><div class="line">fi</div><div class="line">filename=$1</div><div class="line"></div><div class="line">egrep -o &quot;\b[[:alpha:]]+\b&quot; $filename | \</div><div class="line">    awk &apos;&#123; count[$0]++ &#125; END&#123; printf(&quot;%-14s%s\n&quot;,&quot;Word&quot;,&quot;Count&quot;) ;</div><div class="line">    for(ind in count)</div><div class="line">    &#123;  printf(&quot;%-14s%d\n&quot;,ind,count[ind]);  &#125;</div><div class="line">&#125;&apos;</div></pre></td></tr></table></figure>
+<p><strong>分析</strong>:<code>egrep -o &quot;\b[[:alpha:]]+\b&quot; $filename</code>只用于输出匹配到的内容。<a href="https://xhanthow.github.io/2017/09/30/Shell%E8%84%9A%E6%9C%AC%E6%94%BB%E7%95%A5%E4%B9%8B%E8%AE%A9%E6%96%87%E6%9C%AC%E9%A3%9E%E4%B8%8A%E7%AF%87/">只输出文件中匹配到的文本部分，可使用-o</a>   <code>\b</code>是单词边界标记符，<code>[:alpha:]</code>表示字母的字符类。awk命令用来避免对每一个单词进行迭代。因为awk默认会逐行执行{}块中的语句，借助关联数组，当执行<code>count[$0]++</code>时，单词计数就增加。最后在END{}语句块中通过迭代所有的单词，打印单词以及它们各自出现的次数。</p>
+<h4 id="按列合并多个文件"><a href="#按列合并多个文件" class="headerlink" title="按列合并多个文件"></a>按列合并多个文件</h4><blockquote>
+<p>很多时候我们需要按列拼接文件，比如要将一个文件内容作为单独的一列。而cat命令所实现的拼接通常是按照行来进行的。</p>
+</blockquote>
+<p>可以使用<code>paste</code>命令实现按列拼接</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">paste file1 file2 file3</div><div class="line"># 默认定界符是制表符，可以用-d明确指定定界符</div><div class="line">paste file1.txt file2.txt -d &quot;,&quot;</div></pre></td></tr></table></figure>
+<h4 id="打印文件或行中的第n个单词或列"><a href="#打印文件或行中的第n个单词或列" class="headerlink" title="打印文件或行中的第n个单词或列"></a>打印文件或行中的第n个单词或列</h4><blockquote>
+<p>可能有一个包含了多列数据的文件，不过只有其中一小部分能派上用场。例如，在以成绩排序的学生列表中，希望得到成绩最高的四名学生</p>
+</blockquote>
+<p>处理这类任务最广泛的方法就是借助awk或者cut</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#  打印第5列</div><div class="line">awk &apos;&#123; print $5 &#125;&apos; filename</div><div class="line"># 打印多列数据，并在各列间插入指定的字符串</div><div class="line"># 打印当前目录下个文件的权限和文件名</div><div class="line">ls -l | awk &apos;&#123; print $1 &quot; : &quot; $9&#125;&apos;</div></pre></td></tr></table></figure>
+<h4 id="打印行或样式之间的文本"><a href="#打印行或样式之间的文本" class="headerlink" title="打印行或样式之间的文本"></a>打印行或样式之间的文本</h4><blockquote>
+<p>我们有时候可能需要根据某些条件打印文本的某一部分，比如由行号或起止样式所匹配的文本范围。</p>
+</blockquote>
+<ul>
+<li><p>要打印出从M行到N行这个范围内的所有文本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">awk &apos;NR==M, NR==N&apos; filename</div><div class="line">cat filename | awk &apos;NR==M, NR==N&apos;</div><div class="line">seq 100 | awk &apos;NR==4,NR==6&apos;</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td></tr></table></figure>
+</li>
+<li><p>要打印处于start_pattern与end_pattern之间的文本</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">awk &apos;/start_pattern/, /end _pattern/&apos; filename</div><div class="line"></div><div class="line">cat section.txt</div><div class="line">line with pattern1</div><div class="line">line with pattern2</div><div class="line">line with pattern3</div><div class="line">line end with pattern4</div><div class="line">line with pattern5</div><div class="line">awk &apos;/pa.*3/ ,/end/&apos; section.txt</div><div class="line">line with pattern3</div><div class="line">line end with pattern4</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="以逆序形式打印行"><a href="#以逆序形式打印行" class="headerlink" title="以逆序形式打印行"></a>以逆序形式打印行</h4><blockquote>
+<p>可用于bash中模拟栈结构</p>
+</blockquote>
+<ul>
+<li><p>tac命令可以直接搞定</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">tac file1 file2</div><div class="line"># 在tac中，\n是默认的行分隔符,可以使用-s &quot;delimiter&quot;自己指定</div><div class="line">seq 3 | tac</div><div class="line">3</div><div class="line">2</div><div class="line">1</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用awk</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># NR：表示记录数量，在执行过程中对应于当前行号</div><div class="line">seq 9 | \</div><div class="line">awk &apos;&#123; lifo[NR]=$0 &#125;</div><div class="line">END&#123; for(lno=NR;lno&gt;-1;lno--)&#123; print lifo[lno]; &#125;</div><div class="line">&#125;&apos;</div></pre></td></tr></table></figure>
+<p><strong>分析</strong>：将每一行存入一个关联数组，用行号作为数组索引(行号由NR给出)，最后执行END语句块。</p>
+</li>
+</ul>
+<h4 id="对目录中的所有文件进行文本替换"><a href="#对目录中的所有文件进行文本替换" class="headerlink" title="对目录中的所有文件进行文本替换"></a>对目录中的所有文件进行文本替换</h4><blockquote>
+<p>我们经常需要将某个目录中的所有文件内的一部分文本替换成另一部分</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 将所有.txt文件中的kobe替换为james</div><div class="line">find . -name *.txt -print0 | xargs -I&#123;&#125; -0 sed -i &apos;s/kobe/james/g&apos; &#123;&#125;</div></pre></td></tr></table></figure>
+<p><strong>分析</strong>：使用find在当前目录中查找所有.txt文件，然后使用print0打印出null字符(\0)作为分隔符的文件列表(可以避免文件名中的空格所带来的麻烦)。接着使用通道将列表传递给xargs，后者将对应的文件作为sed的参数，由sed对文件内容进行修改。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 尽管两个命令相同，但是第一个命令会为每个查找到的文件调用一次sed，而第二个命令中，find会将多个文件名一并传递给sed</div><div class="line">find . -name *.txt -exec sed -i &apos;s/james/kobe/g&apos; \&#123;\&#125; \;</div><div class="line">find . -name *.txt -exec sed -i &apos;s/james/kobe/g&apos; \&#123;\&#125; \+</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -487,7 +480,7 @@ TCP/IP分层:
       
         <div class="post-tags">
           
-            <a href="/tags/HTTP基本知识/" rel="tag"># HTTP基本知识</a>
+            <a href="/tags/shell/" rel="tag"># shell</a>
           
         </div>
       
@@ -500,15 +493,15 @@ TCP/IP分层:
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/09/30/Shell脚本攻略之让文本飞上篇/" rel="next" title="Shell脚本攻略之让文本飞上篇">
+                <i class="fa fa-chevron-left"></i> Shell脚本攻略之让文本飞上篇
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/04/++i i++/" rel="prev" title="从字节码中看清++i和i++的本质">
-                从字节码中看清++i和i++的本质 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -663,7 +656,7 @@ TCP/IP分层:
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP-IP分层"><span class="nav-number">1.</span> <span class="nav-text">TCP/IP分层:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般的请求流程图"><span class="nav-number">2.</span> <span class="nav-text">一般的请求流程图:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的协议"><span class="nav-number">3.</span> <span class="nav-text">常见的协议:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各协议和HTTP协议的关系"><span class="nav-number">4.</span> <span class="nav-text">各协议和HTTP协议的关系:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理："><span class="nav-number">5.</span> <span class="nav-text">代理：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网关"><span class="nav-number">6.</span> <span class="nav-text">网关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隧道"><span class="nav-number">7.</span> <span class="nav-text">隧道</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#统计特定文件中的词频"><span class="nav-number">1.</span> <span class="nav-text">统计特定文件中的词频</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按列合并多个文件"><span class="nav-number">2.</span> <span class="nav-text">按列合并多个文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#打印文件或行中的第n个单词或列"><span class="nav-number">3.</span> <span class="nav-text">打印文件或行中的第n个单词或列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#打印行或样式之间的文本"><span class="nav-number">4.</span> <span class="nav-text">打印行或样式之间的文本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以逆序形式打印行"><span class="nav-number">5.</span> <span class="nav-text">以逆序形式打印行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对目录中的所有文件进行文本替换"><span class="nav-number">6.</span> <span class="nav-text">对目录中的所有文件进行文本替换</span></a></li></ol></div>
             
 
           </div>
