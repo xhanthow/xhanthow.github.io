@@ -74,7 +74,7 @@
 
 前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell脚本攻略之让文本飞">
+<meta property="og:title" content="Shell脚本攻略之让文本飞上篇">
 <meta property="og:url" content="https://xhanthow.github.io/2017/09/30/Shell脚本攻略之让文本飞/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
 <meta property="og:description" content="请把面向过去的那扇门永远锁好
@@ -82,9 +82,9 @@
 
 前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E6%AD%A3%E5%88%99.png">
-<meta property="og:updated_time" content="2017-10-07T02:29:57.000Z">
+<meta property="og:updated_time" content="2017-10-07T02:44:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shell脚本攻略之让文本飞">
+<meta name="twitter:title" content="Shell脚本攻略之让文本飞上篇">
 <meta name="twitter:description" content="请把面向过去的那扇门永远锁好
 ——《二十几岁，没有十年》
 
@@ -125,7 +125,7 @@
 
 
 
-  <title>Shell脚本攻略之让文本飞 | 敲音乐听代码</title>
+  <title>Shell脚本攻略之让文本飞上篇 | 敲音乐听代码</title>
   
 
 
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Shell脚本攻略之让文本飞</h1>
+          <h1 class="post-title" itemprop="name headline">Shell脚本攻略之让文本飞上篇</h1>
         
 
         <div class="post-meta">
@@ -596,6 +596,23 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">awk -F : &apos;&#123; print $NF&#125;&apos; /etc/passwd</div><div class="line">#  在BEGIN语句块中可以使用OFS=&quot;delimiter&quot;设置输出字段的定界符</div><div class="line">awk &apos;BEGIN &#123; FS=&quot;:&quot; &#125; &#123; print $NF&#125;&apos; /etc/passwd</div></pre></td></tr></table></figure>
 <ul>
 <li>从awk中读取命令输出</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&quot;commad&quot; | getline output</div><div class="line">#  echo会生成一个空白行，变量cmdout包含命令grep root /etc/passwd的输出</div><div class="line">echo | awk &apos;&#123; &quot;grep root /etc/passwd&quot; | getline cmdout ; print cmdout &#125;&apos;</div></pre></td></tr></table></figure>
+<ul>
+<li>在awk中使用循环</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">for(i=0;i&lt;10;i++) &#123; print $i ; &#125;</div><div class="line">for(i in array) &#123; print array[i]; &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>awk内建的字符串控制函数<ul>
+<li>length(string)：返回字符串的长度</li>
+<li>index(string, search_string)：返回search_string在字符串中出现的位置</li>
+<li>split(string, array, delimiter)：用定界符生成一个字符串列表，并将该列表存入数组</li>
+<li>substr(string, start_position,end_position)：在字符串中用字符起止偏移量生成子串，并返回该子串</li>
+<li>sub(regex, replacement_str,string)：将正则表达式匹配到的第一处内容替换成replacement_str</li>
+<li>gsub(regex, replacement_str,string)：和sub()类似，不过会替换所有的内容</li>
+<li>match(regex,string)：检查正则表达式是否能够匹配字符串，如果匹配返回非0值，否则返回0。</li>
+</ul>
+</li>
 </ul>
 
       
