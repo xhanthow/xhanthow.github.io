@@ -81,7 +81,7 @@
 ——— 《摆渡人》
 
 前戏说明:知道了系统的“健康”才可以更加高效的使用它。">
-<meta property="og:updated_time" content="2017-10-15T15:10:43.000Z">
+<meta property="og:updated_time" content="2017-10-16T11:26:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之当个好管家">
 <meta name="twitter:description" content="时间一直走，没有尽头，只有路口。
@@ -465,6 +465,20 @@
 <p><code>watch</code>命令可以用来在终端中以固定的间隔监视命令输出</p>
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">watch COMMADN</div><div class="line">watch ls</div><div class="line"></div><div class="line"><span class="comment"># 命令默认每2秒更新一次输出</span></div><div class="line"><span class="comment"># 可以使用-n SECOND指定更新输出的时间间隔</span></div><div class="line">watch <span class="string">'ls -l | grep "^d"'</span></div><div class="line">watch -n 5 <span class="string">'ls -l'</span></div><div class="line"></div><div class="line"><span class="comment"># 将时间间隔前后命令输出的差异以不同的颜色突出标示出来</span></div><div class="line">watch <span class="_">-d</span> <span class="string">'COMMAND'</span></div></pre></td></tr></table></figure>
+<h4 id="收集进程信息"><a href="#收集进程信息" class="headerlink" title="收集进程信息"></a>收集进程信息</h4><blockquote>
+<p><code>ps</code>命令中的参数-&gt;<code>-f</code>:full         <code>-e</code>:(every)         <code>-ax</code>:(all)</p>
+<p><code>-o</code>:参数以逗号操作符作为定界符，逗号操作符与它分隔的参数之间是没有空格的。一般<code>-oe</code>这样使用，列出运行在系统中的每一个进程。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="comment"># comm表示COMMAND,pcup表示CPU占用率</span></div><div class="line">ps -eo comm,pcpu | head</div></pre></td></tr></table></figure>
+<p><code>-o</code>可以使用不同的参数:</p>
+<p><code>pcpu</code>：CPU占用率</p>
+<p><code>pid</code>：进程ID</p>
+<p><code>ppid</code>：父进程ID</p>
+<p><code>pmem</code>：内存使用率</p>
+<p><code>comm</code>：可执行文件名</p>
+<p><code>stat</code>：进程状态</p>
+<p>可以使用<code>--sort</code>将ps命令的输出根据特定的列进行排序，<code>+</code>(升序)      <code>-</code>(降序)</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">ps -eo comm,pcpu --sort -pcpu | head</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -658,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#监视磁盘使用情况"><span class="nav-number">1.</span> <span class="nav-text">监视磁盘使用情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收集与当前登录用户、启动日志及故障的相关信息"><span class="nav-number">2.</span> <span class="nav-text">收集与当前登录用户、启动日志及故障的相关信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用watch监视命令输出"><span class="nav-number">3.</span> <span class="nav-text">使用watch监视命令输出</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#监视磁盘使用情况"><span class="nav-number">1.</span> <span class="nav-text">监视磁盘使用情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收集与当前登录用户、启动日志及故障的相关信息"><span class="nav-number">2.</span> <span class="nav-text">收集与当前登录用户、启动日志及故障的相关信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用watch监视命令输出"><span class="nav-number">3.</span> <span class="nav-text">使用watch监视命令输出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#收集进程信息"><span class="nav-number">4.</span> <span class="nav-text">收集进程信息</span></a></li></ol></div>
             
 
           </div>
