@@ -81,15 +81,15 @@
 ———《摆渡人》
 
 前戏说明:“小仙女”在周杰伦演唱会成功火了一把，后来人们发现她后面有一个“包装”公司，咦，这不就是Adapter模式么～">
-<meta property="og:image" content="https://xhanthow.github.io/images/iterator.png">
-<meta property="og:updated_time" content="2017-11-02T02:40:48.000Z">
+<meta property="og:image" content="https://xhanthow.github.io/images/adapter_class.png">
+<meta property="og:updated_time" content="2017-11-02T03:44:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解设计模式之Adapter模式">
 <meta name="twitter:description" content="我熬夜成瘾，却换不来你一句晚安。
 ———《摆渡人》
 
 前戏说明:“小仙女”在周杰伦演唱会成功火了一把，后来人们发现她后面有一个“包装”公司，咦，这不就是Adapter模式么～">
-<meta name="twitter:image" content="https://xhanthow.github.io/images/iterator.png">
+<meta name="twitter:image" content="https://xhanthow.github.io/images/adapter_class.png">
 
 
 
@@ -426,7 +426,12 @@
 <li>类适配器模式(使用继承的适配器)</li>
 <li>对象适配器模式(使用委托的适配器)</li>
 </ul>
-<p><img src="/images/iterator.png" alt=""></p>
+<h4 id="类适配器模式"><a href="#类适配器模式" class="headerlink" title="类适配器模式"></a>类适配器模式</h4><figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Banner</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String string;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Banner</span><span class="params">(String string)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.string = string;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWithParen</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"("</span> + string + <span class="string">")"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showWithAster</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"*"</span> + string + <span class="string">"*"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Print</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintBanner</span> <span class="keyword">extends</span> <span class="title">Banner</span> <span class="keyword">implements</span> <span class="title">Print</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PrintBanner</span><span class="params">(String string)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(string);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span> </span>&#123;</div><div class="line">        showWithParen();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span> </span>&#123;</div><div class="line">        showWithAster();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Print p = <span class="keyword">new</span> PrintBanner(<span class="string">"Hello"</span>);</div><div class="line">        p.printWeak();</div><div class="line">        p.printStrong();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>类图关系：</p>
+<p><img src="/images/adapter_class.png" alt=""></p>
 
       
     </div>
@@ -521,8 +526,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -601,6 +615,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#类适配器模式"><span class="nav-number">1.</span> <span class="nav-text">类适配器模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

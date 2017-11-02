@@ -81,7 +81,7 @@
 ——《乖，摸摸头》
 
 前戏说明:今天来了解一哈shell在文件方面有哪些操作，毕竟Unix将操作系统中的一切都视为文件，所有操作都离不开文件。所以这个有多重要，心里有点x数。">
-<meta property="og:updated_time" content="2017-10-20T07:57:04.000Z">
+<meta property="og:updated_time" content="2017-11-02T08:52:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之以文件之名">
 <meta name="twitter:description" content="请相信，这个世界上真的有人过着你想要的生活。忽晴忽雨的江湖，祝你有梦为马，随处可栖。
@@ -459,7 +459,8 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 打印前10行</div><div class="line">head file	</div><div class="line"># 指定打印前几行</div><div class="line">head -n 4 file</div><div class="line"># 打印除了最后M行之外所有的行 注意⚠️-M是一个负数</div><div class="line">head -n -M file</div><div class="line"></div><div class="line"># 打印文件最后10行</div><div class="line">tail file</div><div class="line"># 打印最后5行</div><div class="line">tail -n 5 file</div><div class="line"># 打印除了前M行之外所有的行</div><div class="line">tail -n +(M+1) file</div><div class="line"># 如打印除前5行之外的所有行M+1=6(打印第6行至第100行)</div><div class="line">seq 100 | tail -n +6</div><div class="line"></div><div class="line"># -f选项常用于查看日志</div><div class="line">tail -f growing_file</div></pre></td></tr></table></figure>
 <h4 id="只列出目录的各种方法"><a href="#只列出目录的各种方法" class="headerlink" title="只列出目录的各种方法"></a>只列出目录的各种方法</h4><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 使用ls -d</div><div class="line">ls -d */</div><div class="line"></div><div class="line"># 使用grep结合ls -l</div><div class="line">ls -l | grep &quot;^d&quot;</div><div class="line"></div><div class="line"># 使用grep结合ls -F</div><div class="line">ls -F | grep &quot;/$&quot;</div><div class="line"></div><div class="line"># 使用find</div><div class="line">find . -type d -maxdepth 1</div></pre></td></tr></table></figure>
 <h4 id="统计文件的行数、单词数和字符数"><a href="#统计文件的行数、单词数和字符数" class="headerlink" title="统计文件的行数、单词数和字符数"></a>统计文件的行数、单词数和字符数</h4><p><code>wc</code>：是一个用于统计的工具</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 统计行数</div><div class="line">wc -l file</div><div class="line"></div><div class="line"># 将stdin作为输入，并统计行数</div><div class="line">cat file | wc -l</div><div class="line"></div><div class="line"># 统计单词数</div><div class="line">wc -w file</div><div class="line">cat file | wc -w</div><div class="line"></div><div class="line"># 统计字数</div><div class="line">wc -c file</div><div class="line">cat file | wc -c</div><div class="line"></div><div class="line"># 分别打印文件的行数、单词数和紫薯(JR懂吧～)</div><div class="line">wc file</div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 统计行数</span></div><div class="line">wc <span class="_">-l</span> file</div><div class="line"></div><div class="line"><span class="comment"># 将stdin作为输入，并统计行数</span></div><div class="line">cat file | wc <span class="_">-l</span></div><div class="line"></div><div class="line"><span class="comment"># 统计单词数</span></div><div class="line">wc -w file</div><div class="line">cat file | wc -w</div><div class="line"></div><div class="line"><span class="comment"># 统计字数</span></div><div class="line">wc -c file</div><div class="line">cat file | wc -c</div><div class="line"></div><div class="line"><span class="comment"># 分别打印文件的行数、单词数和紫薯(JR懂吧～)</span></div><div class="line">wc file</div></pre></td></tr></table></figure>
+
       
     </div>
     
