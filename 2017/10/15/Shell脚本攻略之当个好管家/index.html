@@ -81,7 +81,7 @@
 ——— 《摆渡人》
 
 前戏说明:知道了系统的“健康”才可以更加高效的使用它。">
-<meta property="og:updated_time" content="2017-10-16T11:26:48.000Z">
+<meta property="og:updated_time" content="2017-11-02T01:28:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之当个好管家">
 <meta name="twitter:description" content="时间一直走，没有尽头，只有路口。
@@ -453,10 +453,8 @@
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">w</div><div class="line"><span class="comment"># 第一行：当前时间、系统运行时间、当前登录的用户数量以及过去1分钟、5分钟、15分钟内的系统平均负载</span></div><div class="line"><span class="comment"># 第二行：登录用户名、TTY、远程主机、登录时间、空闲时间、自该用户登录后所使用的总CPU时间、当前运行进程所使用的CPU时间以及对应的命令行。</span></div><div class="line">23:25:18 up 2 days, 4 min,  1 user,  load average: 1.03, 1.02, 1.05</div><div class="line">USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT</div><div class="line">root     pts/2    121.225.35.112   23:25    0.00s  0.07s  0.07s -bash</div></pre></td></tr></table></figure>
 </li>
 <li><p>列出当前登录主机的用户名列表</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">users</div><div class="line"></div><div class="line"><span class="comment"># 排除重复的用户</span></div><div class="line">users | tr <span class="string">' '</span> <span class="string">'\n'</span> | sort | uniq</div></pre></td></tr></table></figure>
 </li>
-</ul>
-  <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">users</div><div class="line"></div><div class="line"><span class="comment"># 排除重复的用户</span></div><div class="line">users | tr <span class="string">' '</span> <span class="string">'\n'</span> | sort | uniq</div></pre></td></tr></table></figure>
-<ul>
 <li><p>查看当前系统已经运行了多长时间</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">uptime</div><div class="line">22:57:15 up 2 days, 13 min,  1 user,  load average: 1.02, 1.03, 1.05</div></pre></td></tr></table></figure>
 </li>

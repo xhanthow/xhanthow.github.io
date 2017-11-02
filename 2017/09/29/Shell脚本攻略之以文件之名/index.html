@@ -81,7 +81,7 @@
 ——《乖，摸摸头》
 
 前戏说明:今天来了解一哈shell在文件方面有哪些操作，毕竟Unix将操作系统中的一切都视为文件，所有操作都离不开文件。所以这个有多重要，心里有点x数。">
-<meta property="og:updated_time" content="2017-09-30T01:16:58.000Z">
+<meta property="og:updated_time" content="2017-10-20T07:57:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之以文件之名">
 <meta name="twitter:description" content="请相信，这个世界上真的有人过着你想要的生活。忽晴忽雨的江湖，祝你有梦为马，随处可栖。
@@ -420,7 +420,7 @@
 <p><strong>前戏说明</strong>:今天来了解一哈shell在文件方面有哪些操作，毕竟Unix将操作系统中的一切都视为文件，所有操作都离不开文件。所以这个有多重要，心里有点x数。</p>
 <a id="more"></a>
 <h4 id="生成任意大小的文件"><a href="#生成任意大小的文件" class="headerlink" title="生成任意大小的文件"></a>生成任意大小的文件</h4><p><code>dd</code>：创建特定大小的文件的命令，它会克隆给定的输入内容，然后将一摸一样的一份副本写入到输出。stdin、设备文件、普通文件等都可以作为输入，stdout、设备文件、普通文件等也可以作为输出。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># if(input file)代表输入文件  of(output file)代表输出文件</div><div class="line"># bs(block size)代表以字节为单位的块大小 count代表需要被复制的块数</div><div class="line"># ／dev/zero是一个字符设备，它会不断返回0值字节(\0)</div><div class="line">dd if=/dev/zero of=junk.data bs=1M count=1</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># if(input file)代表输入文件  of(output file)代表输出文件</div><div class="line"># bs(block size)代表以字节为单位的块大小 count代表需要被复制的块数</div><div class="line"># ／dev/zero是一个字符设备，它会不断返回0值字节(\0)</div><div class="line">dd if=/dev/zero of=junk.data bs=1M count=1</div><div class="line"></div><div class="line"># 千万别手贱去执行这个哟</div><div class="line">sudo dd if=/dev/zero of=/dev/sda bs=1m</div></pre></td></tr></table></figure>
 <blockquote>
 <p>dd该命令运行在设备底层，所以一定要反复检查dd命令的语法是否正确，尤其是参数of=</p>
 <p>如果不指定输入参数(if)，默认情况下dd会从stdin中读取输入，与之类似，如果不指定输出参数(of)，dd会将stdout作为默认输出。</p>
