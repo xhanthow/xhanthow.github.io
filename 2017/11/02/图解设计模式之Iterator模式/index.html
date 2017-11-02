@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="设计模式," />
 
 
 
@@ -69,16 +69,28 @@
 
 
 
-<meta name="description" content="Some Notes">
+<meta name="description" content="做一个自由的人，心不为形役，形也不为心役，坐拥一整块无人的疆域
+——《我承认我不曾历经沧桑》
+
+前戏说明:设计模式的重要性就不多说了，好吧。更重要的是学习它里面的思想并加以运用～">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图解设计模式之Iterator模式">
 <meta property="og:url" content="https://xhanthow.github.io/2017/11/02/图解设计模式之Iterator模式/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
-<meta property="og:description" content="Some Notes">
-<meta property="og:updated_time" content="2017-11-02T01:31:11.000Z">
+<meta property="og:description" content="做一个自由的人，心不为形役，形也不为心役，坐拥一整块无人的疆域
+——《我承认我不曾历经沧桑》
+
+前戏说明:设计模式的重要性就不多说了，好吧。更重要的是学习它里面的思想并加以运用～">
+<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/iterator.png">
+<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/iterator%E7%B1%BB%E5%9B%BE.png">
+<meta property="og:updated_time" content="2017-11-02T02:06:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解设计模式之Iterator模式">
-<meta name="twitter:description" content="Some Notes">
+<meta name="twitter:description" content="做一个自由的人，心不为形役，形也不为心役，坐拥一整块无人的疆域
+——《我承认我不曾历经沧桑》
+
+前戏说明:设计模式的重要性就不多说了，好吧。更重要的是学习它里面的思想并加以运用～">
+<meta name="twitter:image" content="http://oc8wh8qu5.bkt.clouddn.com/iterator.png">
 
 
 
@@ -339,6 +351,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -382,7 +416,31 @@
       
 
       
-        
+        <blockquote>
+<p>做一个自由的人，心不为形役，形也不为心役，坐拥一整块无人的疆域</p>
+<p>——《我承认我不曾历经沧桑》</p>
+</blockquote>
+<p><strong>前戏说明:</strong>设计模式的重要性就不多说了，好吧。更重要的是学习它里面的思想并加以运用～</p>
+<a id="more"></a>
+<p>不喜欢太理论的东西，所以直接上代码。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Book</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Aggregate</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Iterator <span class="title">iterator</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookShelf</span> <span class="keyword">implements</span> <span class="title">Aggregate</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Book[] books;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> last = <span class="number">0</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BookShelf</span><span class="params">(<span class="keyword">int</span> maxsize)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.books = <span class="keyword">new</span> Book[maxsize];</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Book <span class="title">getBookAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> books[index];</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">appendBook</span><span class="params">(Book book)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.books[last] = book;</div><div class="line">        last++;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLength</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> last;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Iterator <span class="title">iterator</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BookShelfIterator(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Object <span class="title">next</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookShelfIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> BookShelf bookShelf;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BookShelfIterator</span><span class="params">(BookShelf bookShelf)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.bookShelf = bookShelf;</div><div class="line">        <span class="keyword">this</span>.index = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (index &lt; bookShelf.getLength()) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</div><div class="line">        Book book = bookShelf.getBookAt(index);</div><div class="line">        index++;</div><div class="line">        <span class="keyword">return</span> book;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>类图关系如下：</p>
+<p><img src="http://oc8wh8qu5.bkt.clouddn.com/iterator.png" alt="类图关系"></p>
+<ul>
+<li>Iterator(迭代器)</li>
+<li>ConcreteIterator(具体的迭代器)</li>
+<li>Aggregate(集合)</li>
+<li>ConcreteAggregate(具体的集合)</li>
+</ul>
+<p>Iterator类图:</p>
+<p><img src="http://oc8wh8qu5.bkt.clouddn.com/iterator%E7%B1%BB%E5%9B%BE.png" alt="iterator类图"></p>
+<p><strong>不管实现如何变化，都可以使用Iterator</strong></p>
+<p><strong>不要使用具体类来编程，要优先使用抽象类和接口来编程</strong></p>
+
       
     </div>
     
@@ -396,6 +454,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
       
 
       
@@ -500,7 +564,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -511,7 +575,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
