@@ -81,7 +81,7 @@
 ——— 《摆渡人》
 
 前戏说明:知道了系统的“健康”才可以更加高效的使用它。">
-<meta property="og:updated_time" content="2017-11-02T01:29:06.000Z">
+<meta property="og:updated_time" content="2017-11-02T02:30:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之当个好管家">
 <meta name="twitter:description" content="时间一直走，没有尽头，只有路口。
@@ -433,10 +433,8 @@
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">du --exclude <span class="string">"WILDCARD"</span> DIRECTORY</div><div class="line">du --exclude <span class="string">"*.txt"</span> FILES(s)</div><div class="line"></div><div class="line"><span class="comment"># EXCLUDE.txt包含了需要排除的文件列表</span></div><div class="line">du --exclude-from EXCLUDE.txt DIRECTORY</div></pre></td></tr></table></figure>
 </li>
 <li><p>限制遍历的深度</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 同find命令一样</span></div><div class="line">du --max-depth 2 DIRECTORY</div></pre></td></tr></table></figure>
 </li>
-</ul>
-  <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 同find命令一样</span></div><div class="line">du --max-depth 2 DIRECTORY</div></pre></td></tr></table></figure>
-<ul>
 <li><p>找出指定目录中最大的10个文件</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="comment"># -a使得du遍历SOURCE_DIR并计算其中所有文件的大小，指定单位为kb。sort对第一列依数值逆序排序。head用来显示前10行输出</span></div><div class="line">du -ak SOURCE_DIR | sort -nrk 1 | head</div><div class="line"></div><div class="line"><span class="comment"># 输出最大的文件</span></div><div class="line">find . -type f -exec du -k &#123;&#125; \; | sort -nrk 1 | head</div></pre></td></tr></table></figure>
 </li>
@@ -603,7 +601,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
