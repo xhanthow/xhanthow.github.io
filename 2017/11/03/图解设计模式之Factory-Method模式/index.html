@@ -69,28 +69,28 @@
 
 
 
-<meta name="description" content="做一个自由的人，心不为形役，形也不为心役，坐拥一整块无人的疆域
-——《我承认我不曾历经沧桑》
+<meta name="description" content="时间无情第一，它会把你欠下的对不起，变得还不起。又会把很多对不起，变成来不及。
+——— 《好吗好的》
 
-前戏说明:设计模式的重要性就不多说了，好吧。更重要的是学习它里面的思想并加以运用～">
+前戏说明:感觉Factory Method和Template Method有些许的类似😯，慢慢体会吧～">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图解设计模式之Iterator模式">
-<meta property="og:url" content="https://xhanthow.github.io/2017/11/02/图解设计模式之Iterator模式/index.html">
+<meta property="og:title" content="图解设计模式之Factory Method模式">
+<meta property="og:url" content="https://xhanthow.github.io/2017/11/03/图解设计模式之Factory-Method模式/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
-<meta property="og:description" content="做一个自由的人，心不为形役，形也不为心役，坐拥一整块无人的疆域
-——《我承认我不曾历经沧桑》
+<meta property="og:description" content="时间无情第一，它会把你欠下的对不起，变得还不起。又会把很多对不起，变成来不及。
+——— 《好吗好的》
 
-前戏说明:设计模式的重要性就不多说了，好吧。更重要的是学习它里面的思想并加以运用～">
-<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/iterator.png">
-<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/iterator%E7%B1%BB%E5%9B%BE.png">
-<meta property="og:updated_time" content="2017-11-02T02:06:25.000Z">
+前戏说明:感觉Factory Method和Template Method有些许的类似😯，慢慢体会吧～">
+<meta property="og:image" content="https://xhanthow.github.io/images/factory-method.png">
+<meta property="og:image" content="https://xhanthow.github.io/images/factory-method2.png">
+<meta property="og:updated_time" content="2017-11-03T03:02:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图解设计模式之Iterator模式">
-<meta name="twitter:description" content="做一个自由的人，心不为形役，形也不为心役，坐拥一整块无人的疆域
-——《我承认我不曾历经沧桑》
+<meta name="twitter:title" content="图解设计模式之Factory Method模式">
+<meta name="twitter:description" content="时间无情第一，它会把你欠下的对不起，变得还不起。又会把很多对不起，变成来不及。
+——— 《好吗好的》
 
-前戏说明:设计模式的重要性就不多说了，好吧。更重要的是学习它里面的思想并加以运用～">
-<meta name="twitter:image" content="http://oc8wh8qu5.bkt.clouddn.com/iterator.png">
+前戏说明:感觉Factory Method和Template Method有些许的类似😯，慢慢体会吧～">
+<meta name="twitter:image" content="https://xhanthow.github.io/images/factory-method.png">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://xhanthow.github.io/2017/11/02/图解设计模式之Iterator模式/"/>
+  <link rel="canonical" href="https://xhanthow.github.io/2017/11/03/图解设计模式之Factory-Method模式/"/>
 
 
 
 
 
-  <title>图解设计模式之Iterator模式 | 敲音乐听代码</title>
+  <title>图解设计模式之Factory Method模式 | 敲音乐听代码</title>
   
 
 
@@ -311,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xhanthow.github.io/2017/11/02/图解设计模式之Iterator模式/">
+    <link itemprop="mainEntityOfPage" href="https://xhanthow.github.io/2017/11/03/图解设计模式之Factory-Method模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="anthow">
@@ -328,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">图解设计模式之Iterator模式</h1>
+          <h1 class="post-title" itemprop="name headline">图解设计模式之Factory Method模式</h1>
         
 
         <div class="post-meta">
@@ -340,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T09:31:11+08:00">
-                2017-11-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-03T10:28:34+08:00">
+                2017-11-03
               </time>
             
 
@@ -382,8 +382,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/11/02/图解设计模式之Iterator模式/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/02/图解设计模式之Iterator模式/" itemprop="commentsCount"></span>
+                <a href="/2017/11/03/图解设计模式之Factory-Method模式/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/03/图解设计模式之Factory-Method模式/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -417,29 +417,41 @@
 
       
         <blockquote>
-<p>做一个自由的人，心不为形役，形也不为心役，坐拥一整块无人的疆域</p>
-<p>——《我承认我不曾历经沧桑》</p>
+<p>时间无情第一，它会把你欠下的对不起，变得还不起。又会把很多对不起，变成来不及。</p>
+<p>——— 《好吗好的》</p>
 </blockquote>
-<p><strong>前戏说明:</strong>设计模式的重要性就不多说了，好吧。更重要的是学习它里面的思想并加以运用～</p>
+<p><strong>前戏说明:</strong>感觉<code>Factory Method</code>和<code>Template Method</code>有些许的类似😯，慢慢体会吧～</p>
 <a id="more"></a>
-<p>不喜欢太理论的东西，所以直接上代码。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Book</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Book</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> name;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Aggregate</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Iterator <span class="title">iterator</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookShelf</span> <span class="keyword">implements</span> <span class="title">Aggregate</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Book[] books;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> last = <span class="number">0</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BookShelf</span><span class="params">(<span class="keyword">int</span> maxsize)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.books = <span class="keyword">new</span> Book[maxsize];</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Book <span class="title">getBookAt</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> books[index];</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">appendBook</span><span class="params">(Book book)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.books[last] = book;</div><div class="line">        last++;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLength</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> last;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Iterator <span class="title">iterator</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BookShelfIterator(<span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterator</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Object <span class="title">next</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookShelfIterator</span> <span class="keyword">implements</span> <span class="title">Iterator</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> BookShelf bookShelf;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> index;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BookShelfIterator</span><span class="params">(BookShelf bookShelf)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.bookShelf = bookShelf;</div><div class="line">        <span class="keyword">this</span>.index = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (index &lt; bookShelf.getLength()) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">next</span><span class="params">()</span> </span>&#123;</div><div class="line">        Book book = bookShelf.getBookAt(index);</div><div class="line">        index++;</div><div class="line">        <span class="keyword">return</span> book;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>Factory Method模式:</strong> 父类决定实例的生成方式，但不决定生成的具体的类，具体的处理全部交给子类处理。</p>
+<p>所以如果把<code>Template Method</code>用于生成实例，就演变成了<code>Factory Method</code>模式了。</p>
+<p><strong>注意包名:</strong></p>
+<p><strong>framework:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">package</span> framework;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">use</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">package</span> framework;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Factory</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Product <span class="title">create</span><span class="params">(String owner)</span> </span>&#123;</div><div class="line">        Product p = createProduct(owner);</div><div class="line">        registerProduct(p);</div><div class="line">        <span class="keyword">return</span> p;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> Product <span class="title">createProduct</span><span class="params">(String owner)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">registerProduct</span><span class="params">(Product product)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>可以看到<code>Factory</code>的<code>create()</code>方法，调用了<code>createProduct()</code>和<code>registerProduct()</code>方法，而这些方法都是抽象方法，即需要子类去实现。的确和<code>Template Method</code>模式很像啊…</p>
+</blockquote>
+<p><strong>idcard:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">package</span> idcard;</div><div class="line"><span class="keyword">import</span> framework.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IDCard</span> <span class="keyword">extends</span> <span class="title">Product</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String owner;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> serial;</div><div class="line">    IDCard(String owner, <span class="keyword">int</span> serial) &#123;</div><div class="line">        System.out.println(<span class="string">"制作"</span> + owner + <span class="string">"("</span> + serial + <span class="string">")"</span> + <span class="string">"的ID卡。"</span>);</div><div class="line">        <span class="keyword">this</span>.owner = owner;</div><div class="line">        <span class="keyword">this</span>.serial = serial;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">use</span><span class="params">()</span> </span>&#123;</div><div class="line">        System.out.println(<span class="string">"使用"</span> + owner + <span class="string">"("</span> + serial + <span class="string">")"</span> + <span class="string">"的ID卡。"</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getOwner</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> owner;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSerial</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> serial;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">package</span> idcard;</div><div class="line"><span class="keyword">import</span> framework.*;</div><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IDCardFactory</span> <span class="keyword">extends</span> <span class="title">Factory</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> HashMap database = <span class="keyword">new</span> HashMap();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> serial = <span class="number">100</span>;</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">synchronized</span> Product <span class="title">createProduct</span><span class="params">(String owner)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> IDCard(owner, serial++);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">registerProduct</span><span class="params">(Product product)</span> </span>&#123;</div><div class="line">        IDCard card = (IDCard)product;</div><div class="line">        database.put(<span class="keyword">new</span> Integer(card.getSerial()), card.getOwner());</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> HashMap <span class="title">getDatabase</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> database;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">import</span> framework.*;</div><div class="line"><span class="keyword">import</span> idcard.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Factory factory = <span class="keyword">new</span> IDCardFactory();</div><div class="line">        Product card1 = factory.create(<span class="string">"小明"</span>);</div><div class="line">        Product card2 = factory.create(<span class="string">"小红"</span>);</div><div class="line">        Product card3 = factory.create(<span class="string">"小刚"</span>);</div><div class="line">        card1.use();</div><div class="line">        card2.use();</div><div class="line">        card3.use();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>类图关系如下：</p>
-<p><img src="http://oc8wh8qu5.bkt.clouddn.com/iterator.png" alt="类图关系"></p>
+<p><img src="/images/factory-method.png" alt=""></p>
 <ul>
-<li>Iterator(迭代器)</li>
-<li>ConcreteIterator(具体的迭代器)</li>
-<li>Aggregate(集合)</li>
-<li>ConcreteAggregate(具体的集合)</li>
+<li><p>Product(产品):属于框架的一方，是一个抽象类。定义了在<code>Factory Method</code>模式中生成的那些实例所持有的接口。但具体的处理则由子类<code>ConcreteProduct</code>角色决定。上例中由<code>Product</code>扮演。</p>
+</li>
+<li><p>Creator(创建者):属于框架的一方，是一个负责生成<code>Product</code>的抽象类。具体的处理则由子类<code>ConcreteCreator</code>决定。上例中由<code>Factory</code>扮演。</p>
+<blockquote>
+<p>不用<code>new</code>关键字生成实例，而是用方法，这样可以防止父类与其他具体类耦合。</p>
+</blockquote>
+</li>
+<li><p>ConcreteProduct(具体产品类):属于具体加工的一方，决定了具体的产品 。上例中由<code>IDCard</code>扮演。</p>
+</li>
+<li><p>ConcreteCreator(具体创建者):属于具体加工的一方，决定了生成具体的产品。上例中由<code>IDCardFactory</code>扮演。</p>
+</li>
 </ul>
-<p>Iterator类图:</p>
-<p><img src="http://oc8wh8qu5.bkt.clouddn.com/iterator%E7%B1%BB%E5%9B%BE.png" alt="iterator类图"></p>
-<p><strong>不管实现如何变化，都可以使用Iterator</strong></p>
-<p><strong>不要使用具体类来编程，要优先使用抽象类和接口来编程</strong></p>
+<p>类图如下:</p>
+<p><img src="/images/factory-method2.png" alt=""></p>
 
       
     </div>
@@ -470,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/15/Shell脚本攻略之当个好管家/" rel="next" title="Shell脚本攻略之当个好管家">
-                <i class="fa fa-chevron-left"></i> Shell脚本攻略之当个好管家
+              <a href="/2017/11/03/图解设计模式之Template-Method模式/" rel="next" title="图解设计模式之Template Method模式">
+                <i class="fa fa-chevron-left"></i> 图解设计模式之Template Method模式
               </a>
             
           </div>
@@ -479,10 +491,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/02/图解设计模式之Adapter模式/" rel="prev" title="图解设计模式之Adapter模式">
-                图解设计模式之Adapter模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
