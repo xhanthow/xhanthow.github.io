@@ -82,7 +82,10 @@
 
 前戏说明:“小仙女”在周杰伦演唱会成功火了一把，后来人们发现她后面有一个“包装”公司，咦，这不就是Adapter模式么～">
 <meta property="og:image" content="https://xhanthow.github.io/images/adapter_class.png">
-<meta property="og:updated_time" content="2017-11-02T03:44:33.000Z">
+<meta property="og:image" content="https://xhanthow.github.io/images/delegation.png">
+<meta property="og:image" content="https://xhanthow.github.io/images/class-adapter.png">
+<meta property="og:image" content="https://xhanthow.github.io/images/delegation-adapter.png">
+<meta property="og:updated_time" content="2017-11-03T01:44:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图解设计模式之Adapter模式">
 <meta name="twitter:description" content="我熬夜成瘾，却换不来你一句晚安。
@@ -430,8 +433,35 @@
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Print</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintBanner</span> <span class="keyword">extends</span> <span class="title">Banner</span> <span class="keyword">implements</span> <span class="title">Print</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PrintBanner</span><span class="params">(String string)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(string);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span> </span>&#123;</div><div class="line">        showWithParen();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span> </span>&#123;</div><div class="line">        showWithAster();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Print p = <span class="keyword">new</span> PrintBanner(<span class="string">"Hello"</span>);</div><div class="line">        p.printWeak();</div><div class="line">        p.printStrong();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Main类并不知道<code>PrintBanner</code>类是如何实现的，这样可以在不对Main类进行修改的情况下改变<code>PrintBanner</code>类的具体实现</p>
+</blockquote>
 <p>类图关系：</p>
 <p><img src="/images/adapter_class.png" alt=""></p>
+<h4 id="委托适配器模式"><a href="#委托适配器模式" class="headerlink" title="委托适配器模式"></a>委托适配器模式</h4><blockquote>
+<p>java中，委托就是指将某个方法中的实际处理交给其他实例的方法。</p>
+</blockquote>
+<p><code>Banner</code>和<code>Main</code>和上例是一样的。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Print</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span></span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrintBanner</span> <span class="keyword">extends</span> <span class="title">Print</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Banner banner;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PrintBanner</span><span class="params">(String string)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.banner = <span class="keyword">new</span> Banner(string);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printWeak</span><span class="params">()</span> </span>&#123;</div><div class="line">        banner.showWithParen();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printStrong</span><span class="params">()</span> </span>&#123;</div><div class="line">        banner.showWithAster();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>PrintBanner</code>在调用<code>printWeak()</code>时候，并不是自己处理的，而是交给<code>Banner</code>处理的。</p>
+</blockquote>
+<p>类图关系:</p>
+<p><img src="/images/delegation.png" alt=""></p>
+<p>Adapter模式中的角色：</p>
+<ul>
+<li>Target(对象):该角色定义所需的方法。由<code>Print</code>接口或者<code>Print</code>类所扮演。</li>
+<li>Client(请求者):该角色负责使用<code>Target</code>角色所定义的方法进行具体处理。由<code>Main</code>类所扮演。</li>
+<li>Adaptee(被适配):持有既定方法的角色。由<code>Banner</code>类扮演。</li>
+<li>Adapter(适配):使用<code>Adaptee</code>的方法满足<code>Target</code>的角色的需求。这是Adaptor模式的目的。由<code>PrintBanner</code>类扮演。</li>
+</ul>
+<p>类图关系如下：</p>
+<p><strong>继承:</strong></p>
+<p><img src="/images/class-adapter.png" alt=""></p>
+<p><strong>委托:</strong></p>
+<p><img src="/images/delegation-adapter.png" alt=""></p>
+<p><strong>Adapter模式会对现有的类进行适配，生成新的类。通过该模式可以很方便的创建我们所需要的方法群</strong></p>
 
       
     </div>
@@ -625,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#类适配器模式"><span class="nav-number">1.</span> <span class="nav-text">类适配器模式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#类适配器模式"><span class="nav-number">1.</span> <span class="nav-text">类适配器模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#委托适配器模式"><span class="nav-number">2.</span> <span class="nav-text">委托适配器模式</span></a></li></ol></div>
             
 
           </div>
