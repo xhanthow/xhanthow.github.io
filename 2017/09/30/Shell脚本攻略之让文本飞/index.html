@@ -69,17 +69,26 @@
 
 
 
-<meta name="description" content="前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
+<meta name="description" content="婚姻是一座围城，城外的人想进去，城里的人想出来。
+——— 《围城》
+
+前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shell脚本攻略之让文本飞">
 <meta property="og:url" content="https://xhanthow.github.io/2017/09/30/Shell脚本攻略之让文本飞/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
-<meta property="og:description" content="前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
+<meta property="og:description" content="婚姻是一座围城，城外的人想进去，城里的人想出来。
+——— 《围城》
+
+前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E6%AD%A3%E5%88%99.png">
-<meta property="og:updated_time" content="2017-10-09T02:12:53.000Z">
+<meta property="og:updated_time" content="2017-11-03T01:56:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之让文本飞">
-<meta name="twitter:description" content="前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
+<meta name="twitter:description" content="婚姻是一座围城，城外的人想进去，城里的人想出来。
+——— 《围城》
+
+前戏说明:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。">
 <meta name="twitter:image" content="http://oc8wh8qu5.bkt.clouddn.com/%E6%AD%A3%E5%88%99.png">
 
 
@@ -406,7 +415,11 @@
       
 
       
-        <p><strong>前戏说明</strong>:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。</p>
+        <blockquote>
+<p>婚姻是一座围城，城外的人想进去，城里的人想出来。</p>
+<p>——— 《围城》</p>
+</blockquote>
+<p><strong>前戏说明</strong>:讲道理，我就是为了可以随心所欲的”干”文本文件才开始学shell的～这不，这章就将重点来扯扯怎样用shell处理文本文件。而且这几天用前几章所学的命令解决了一些问题，贼happy。</p>
 <a id="more"></a>
 <h4 id="使用正则表达式"><a href="#使用正则表达式" class="headerlink" title="使用正则表达式"></a>使用正则表达式</h4><blockquote>
 <p>正则表达式是基于模式匹配的文本处理技术的关键所在</p>
@@ -511,10 +524,8 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 正则表达式\w\+匹配每一个单词，然后用[&amp;]替换它。&amp;对应于之前所匹配到的单词</div><div class="line">echo this is an example | sed &apos;s/\w\+/[&amp;]/g&apos;</div><div class="line">[this] [is] [an] [example]</div></pre></td></tr></table></figure>
 </li>
 <li><p>子串匹配标记</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 这条命令将digit 7替换为7。匹配到的子串是7。\(pattern\)用于匹配子串。</span></div><div class="line"><span class="comment"># 模式被包括在使用斜线转移过的()中，对于匹配到的第一个子串，其对应的标记是\1,匹配到的第二个就是\2</span></div><div class="line"><span class="built_in">echo</span> this is digit 7 <span class="keyword">in</span> a number | sed <span class="string">'s/digit \([0-9]\)/\1/'</span></div><div class="line">this is 7 <span class="keyword">in</span> a number</div></pre></td></tr></table></figure>
 </li>
-</ul>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 这条命令将digit 7替换为7。匹配到的子串是7。\(pattern\)用于匹配子串。</div><div class="line"># 模式被包括在使用斜线转移过的()中，对于匹配到的第一个子串，其对应的标记是\1,匹配到的第二个就是\2</div><div class="line">echo this is digit 7 in a number | sed &apos;s/digit \([0-9]\)/\1/&apos;</div><div class="line">this is 7 in a number</div></pre></td></tr></table></figure>
-<ul>
 <li><p>组合多个表达式</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sed &apos;expression&apos; | sed &apos;expression&apos;</div><div class="line">sed &apos;expression; expression&apos;</div><div class="line">sed -e &apos;expression&apos; -e expression&apos;</div></pre></td></tr></table></figure>
 </li>
@@ -648,7 +659,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
