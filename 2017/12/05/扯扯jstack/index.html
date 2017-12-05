@@ -82,7 +82,7 @@
 
 前戏说明:java自带了很多强大且有效的命令，线上出现问题的时候，有效地利用它们，便可以手起刀落。。。呸呸呸，线上出啥问题啊。乌鸦嘴！！！今天来瞅瞅jstack这个玩意。">
 <meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/thread-state.png">
-<meta property="og:updated_time" content="2017-12-05T12:20:12.000Z">
+<meta property="og:updated_time" content="2017-12-05T13:40:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="扯扯jstack">
 <meta name="twitter:description" content="我来日方长，你细水长流
@@ -429,7 +429,31 @@
 </blockquote>
 <p>首先来看一下线程的状态机:</p>
 <p><img src="http://oc8wh8qu5.bkt.clouddn.com/thread-state.png" alt=""></p>
-<h4 id="New"><a href="#New" class="headerlink" title="New"></a>New</h4>
+<h4 id="New"><a href="#New" class="headerlink" title="New"></a>New</h4><p>用new语句创建的线程处于新建状态，此时它和其他Java对象一样，仅仅在堆区中被分配了内存。</p>
+<p>这个没啥好扯的。</p>
+<h4 id="Runnable"><a href="#Runnable" class="headerlink" title="Runnable"></a>Runnable</h4><p>由上图可以清晰地看见，当处于New状态的线程，调用<code>start()</code>方法之后线程状态就会变成Runnable状态。</p>
+<p>Runnable状态又包括：Ready和Running(在于是否获得执行权)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">runnable_demo</span><span class="params">()</span> </span>&#123;</div><div class="line">    Thread t = <span class="keyword">new</span> Thread(() -&gt; &#123;</div><div class="line">        doSomething();</div><div class="line">    &#125;, <span class="string">"runnable_demo"</span>);</div><div class="line">  	t.start();</div><div class="line">  	Thread.yield();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>线程dump信息如下:</p>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">"runnable_demo" #11 prio=5 os_prio=31 tid=0x00007f9eeb22b000 nid=0x4f03 runnable [0x0000700008b12000]</div><div class="line">   java.lang.Thread.State: RUNNABLE</div><div class="line">	at com.anthow.demo.thread.JstackDemo.lambda$runnable_demo$2(JstackDemo.java:25)</div><div class="line">	at com.anthow.demo.thread.JstackDemo$$Lambda$2/1068824137.run(Unknown Source)</div><div class="line">	at java.lang.Thread.run(Thread.java:748)</div></pre></td></tr></table></figure>
+<p>加不加<code>Thread.yield();</code>其dump信息都一样(也说明了Runnable包含有两种状态)</p>
+<h4 id="Terminated"><a href="#Terminated" class="headerlink" title="Terminated"></a>Terminated</h4><p>作为英语渣渣的我竟然认识这个单词，就是终止的意思。那么很明显嘛，表示线程GG的意思咯。但是怎样终止一个线程了？下意识的准备找找有没有<code>stop</code>方法，有！！！但是不好意思，这是个废弃掉的方法。<a href="https://docs.oracle.com/javase/1.5.0/docs/guide/misc/threadPrimitiveDeprecation.html" target="_blank" rel="external">原因说得很仔细</a></p>
+<ul>
+<li><p>执行完<code>run()</code>方法，自动GG。</p>
+</li>
+<li><p>如果<code>run()</code>这家伙一直不”死”，咋整。</p>
+<ul>
+<li><p>用标志位：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">// volatile很关键</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">terminate_demo_1</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">new</span> Thread(() -&gt; &#123;</div><div class="line">        <span class="keyword">while</span>(flag) &#123;</div><div class="line">            System.out.println(<span class="string">"我是业务逻辑..."</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;, <span class="string">"terminate_demo_1"</span>).start();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 改变flag状态的方法</span></div><div class="line">changeFlag();</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用interrupt来终止：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">terminate_demo_2</span><span class="params">()</span> </span>&#123;</div><div class="line">    Thread t = <span class="keyword">new</span> Thread(() -&gt; &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Thread.sleep(<span class="number">1000</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            System.out.println(e);</div><div class="line">        &#125;</div><div class="line">    &#125;, <span class="string">"terminate_demo_2"</span>);</div><div class="line">    t.start();</div><div class="line">    System.out.println(<span class="string">"我要死了..."</span>);</div><div class="line">    t.interrupt();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>​</p>
+</li>
+</ul>
+
       
     </div>
     
@@ -624,7 +648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#New"><span class="nav-number">1.</span> <span class="nav-text">New</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#New"><span class="nav-number">1.</span> <span class="nav-text">New</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Runnable"><span class="nav-number">2.</span> <span class="nav-text">Runnable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Terminated"><span class="nav-number">3.</span> <span class="nav-text">Terminated</span></a></li></ol></div>
             
 
           </div>
