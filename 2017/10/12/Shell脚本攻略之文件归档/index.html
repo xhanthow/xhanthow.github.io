@@ -81,7 +81,7 @@
 ——《我所理解的生活》
 
 前戏说明:提取快照和备份数据都是日常必不可少的工作，那么让我们学习一下创建和维护文件或文件夹归档、压缩格式以及加密技术。">
-<meta property="og:updated_time" content="2017-10-12T09:16:19.000Z">
+<meta property="og:updated_time" content="2017-11-22T03:57:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell脚本攻略之文件归档">
 <meta name="twitter:description" content="缘分不是走在街上非要撞见，缘分就是睡前醒后彼此想念.
@@ -554,11 +554,16 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># -z</div><div class="line">rsync -avz source destination</div></pre></td></tr></table></figure>
 </li>
 <li><p>将一个目录中的内容同步到另一个目录</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 将源目录(/home/test/)中的内容(不包括目录本身)复制到现有的backups目录中</div><div class="line">rsync -av /home/test/ /home/backups</div><div class="line"></div><div class="line"></div><div class="line"># 将源目录(/home/test/)中的内容(包括目录本身)复制到现有的backups目录中</div><div class="line"># ⚠️源目录后是否有/</div><div class="line">rsync -av /home/test /home/backups</div><div class="line"></div><div class="line"># 如果dest_path末尾有/,将来自源端的内容复制到目的端目录中</div><div class="line"># 如果dest_path末尾没有/,会在目的端路径尾部创建一个同名目录，然后将源端内容复制到这个目录中</div><div class="line">rsync -av /home/test /home/backups/</div><div class="line">rsync -av /home/test /home/backups</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 将源目录(/home/test/)中的内容(不包括目录本身)复制到现有的backups目录中</div><div class="line">rsync -av /home/test/ /home/backups</div></pre></td></tr></table></figure>
 </li>
-<li><p>排除某些文件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># --exclude-from FILEPATH</div><div class="line">rsync -avz /home/code/some_code /mnt/disk/backup/code --exclude &quot;*.txt&quot;</div></pre></td></tr></table></figure>
-</li>
+</ul>
+<p>将源目录(/home/test/)中的内容(包括目录本身)复制到现有的backups目录中</p>
+<p>⚠️源目录后是否有/</p>
+<p>  rsync -av /home/test /home/backups</p>
+<p>如果dest_path末尾有/,将来自源端的内容复制到目的端目录中</p>
+<p>如果dest_path末尾没有/,会在目的端路径尾部创建一个同名目录，然后将源端内容复制到这个目录中</p>
+<p>  rsync -av /home/test /home/backups/<br>  rsync -av /home/test /home/backups<br>  <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"></div><div class="line">* 排除某些文件</div><div class="line"></div><div class="line">  ```shell</div><div class="line">  # --exclude-from FILEPATH</div><div class="line">  rsync -avz /home/code/some_code /mnt/disk/backup/code --exclude &quot;*.txt&quot;</div></pre></td></tr></table></figure></p>
+<ul>
 <li><p>删除不存在的文件</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># --delete</div><div class="line">rsync -avz SOURCE DESTINATION --delete</div></pre></td></tr></table></figure>
 </li>
@@ -693,7 +698,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -715,7 +720,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

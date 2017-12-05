@@ -53,7 +53,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="字节码," />
+  <meta name="keywords" content="jvm,扯扯jvm命令," />
 
 
 
@@ -69,31 +69,27 @@
 
 
 
-<meta name="description" content="心，一旦离开了，就再不会回来。
-——《解忧杂货铺》
-不用多说，i++ 和 ++i这两个玩意从你开始学习编程开始就被拿出来各种哔哔。偶然还是会忘记它们的，刚开始接触，卧槽，这什么玩意，反人类啊！懒得扯了，直接看正文吧~
+<meta name="description" content="我来日方长，你细水长流
+——— 《光荣日》
 
-我是正文：
-     public class Test &amp;#123;	public static void main(String[] args) &amp;#123;		int m">
+前戏说明:java自带了很多强大且有效的命令，线上出现问题的时候，有效地利用它们，便可以手起刀落。。。呸呸呸，线上出啥问题啊。乌鸦嘴！！！今天来瞅瞅jstack这个玩意。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从字节码中看清++i和i++的本质">
-<meta property="og:url" content="https://xhanthow.github.io/2016/09/04/++i i++/index.html">
+<meta property="og:title" content="扯扯jstack">
+<meta property="og:url" content="https://xhanthow.github.io/2017/12/05/扯扯jstack/index.html">
 <meta property="og:site_name" content="敲音乐听代码">
-<meta property="og:description" content="心，一旦离开了，就再不会回来。
-——《解忧杂货铺》
-不用多说，i++ 和 ++i这两个玩意从你开始学习编程开始就被拿出来各种哔哔。偶然还是会忘记它们的，刚开始接触，卧槽，这什么玩意，反人类啊！懒得扯了，直接看正文吧~
+<meta property="og:description" content="我来日方长，你细水长流
+——— 《光荣日》
 
-我是正文：
-     public class Test &amp;#123;	public static void main(String[] args) &amp;#123;		int m">
-<meta property="og:updated_time" content="2017-09-29T01:43:51.000Z">
+前戏说明:java自带了很多强大且有效的命令，线上出现问题的时候，有效地利用它们，便可以手起刀落。。。呸呸呸，线上出啥问题啊。乌鸦嘴！！！今天来瞅瞅jstack这个玩意。">
+<meta property="og:image" content="http://oc8wh8qu5.bkt.clouddn.com/thread-state.png">
+<meta property="og:updated_time" content="2017-12-05T12:20:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="从字节码中看清++i和i++的本质">
-<meta name="twitter:description" content="心，一旦离开了，就再不会回来。
-——《解忧杂货铺》
-不用多说，i++ 和 ++i这两个玩意从你开始学习编程开始就被拿出来各种哔哔。偶然还是会忘记它们的，刚开始接触，卧槽，这什么玩意，反人类啊！懒得扯了，直接看正文吧~
+<meta name="twitter:title" content="扯扯jstack">
+<meta name="twitter:description" content="我来日方长，你细水长流
+——— 《光荣日》
 
-我是正文：
-     public class Test &amp;#123;	public static void main(String[] args) &amp;#123;		int m">
+前戏说明:java自带了很多强大且有效的命令，线上出现问题的时候，有效地利用它们，便可以手起刀落。。。呸呸呸，线上出啥问题啊。乌鸦嘴！！！今天来瞅瞅jstack这个玩意。">
+<meta name="twitter:image" content="http://oc8wh8qu5.bkt.clouddn.com/thread-state.png">
 
 
 
@@ -123,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://xhanthow.github.io/2016/09/04/++i i++/"/>
+  <link rel="canonical" href="https://xhanthow.github.io/2017/12/05/扯扯jstack/"/>
 
 
 
 
 
-  <title>从字节码中看清++i和i++的本质 | 敲音乐听代码</title>
+  <title>扯扯jstack | 敲音乐听代码</title>
   
 
 
@@ -314,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xhanthow.github.io/2016/09/04/++i i++/">
+    <link itemprop="mainEntityOfPage" href="https://xhanthow.github.io/2017/12/05/扯扯jstack/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="anthow">
@@ -331,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">从字节码中看清++i和i++的本质</h1>
+          <h1 class="post-title" itemprop="name headline">扯扯jstack</h1>
         
 
         <div class="post-meta">
@@ -343,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-04T15:08:50+08:00">
-                2016-09-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-05T20:02:09+08:00">
+                2017-12-05
               </time>
             
 
@@ -366,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/字节码/" itemprop="url" rel="index">
-                    <span itemprop="name">字节码</span>
+                  <a href="/categories/java/" itemprop="url" rel="index">
+                    <span itemprop="name">java</span>
                   </a>
                 </span>
 
@@ -385,8 +381,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2016/09/04/++i i++/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2016/09/04/++i i++/" itemprop="commentsCount"></span>
+                <a href="/2017/12/05/扯扯jstack/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/05/扯扯jstack/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -420,21 +416,20 @@
 
       
         <blockquote>
-<p>心，一旦离开了，就再不会回来。</p>
-<p>——《解忧杂货铺》</p>
-<p>不用多说，<strong>i++</strong> 和 <strong>++i</strong>这两个玩意从你开始学习编程开始就被拿出来各种哔哔。偶然还是会忘记它们的，刚开始接触，卧槽，这什么玩意，反人类啊！懒得扯了，直接看正文吧~</p>
+<p>我来日方长，你细水长流</p>
+<p>——— 《光荣日》</p>
 </blockquote>
-<p>我是正文：</p>
- <figure class="highlight java"><table><tr><td class="code"><pre><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> m = <span class="number">0</span>;</div><div class="line">		<span class="keyword">int</span> n = <span class="number">0</span>;</div><div class="line">		System.out.println(m++);</div><div class="line">		System.out.println(++n);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>前戏说明:</strong><code>java</code>自带了很多强大且有效的命令，线上出现问题的时候，有效地利用它们，便可以手起刀落。。。呸呸呸，线上出啥问题啊。乌鸦嘴！！！今天来瞅瞅<code>jstack</code>这个玩意。</p>
 <a id="more"></a>
-<p>然后再控制台打印出来0，1(自己脑补分行)。对，结果就是这样的。所以再看看下文~<br><strong>javac</strong>这个命令都懂吧，然后咧，我一般都会加一个 <strong>-g</strong> 这个参数。这个东西的作用就是       <strong>生成所有调试信息(也会把变量信息打印出来)</strong><br>说干就干，<strong>javac -g Test.java</strong> 然后生成 <strong>Test.class</strong> 这个文件。然后 <strong>javap -verbose Test</strong><br>你会看见一下信息:</p>
- <figure class="highlight"><table><tr><td class="code"><pre><div class="line">Code:</div><div class="line">  stack=2, locals=3, args_size=1</div><div class="line">     0: iconst_0</div><div class="line">     1: istore_1</div><div class="line">     2: iconst_0</div><div class="line">     3: istore_2</div><div class="line">     4: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;</div><div class="line">     7: iload_1</div><div class="line">     8: iinc          1, 1</div><div class="line">    11: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V</div><div class="line">    14: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;</div><div class="line">    17: iinc          2, 1</div><div class="line">    20: iload_2</div><div class="line">    21: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V</div><div class="line">    24: return</div><div class="line">  LineNumberTable:</div><div class="line">    line 3: 0</div><div class="line">    line 4: 2</div><div class="line">    line 5: 4</div><div class="line">    line 6: 14</div><div class="line">    line 7: 24</div></pre></td></tr></table></figure>
-<p>这个是 <strong>m++</strong> 对应的字节码部分:<br> <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="number">7</span>: iload_1</div><div class="line"><span class="number">8</span>: iinc          <span class="number">1</span>, <span class="number">1</span></div></pre></td></tr></table></figure></p>
-<p>这个是 <strong>++n</strong> 对应的字节码部分:<br> <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="number">17</span>: iinc         <span class="number">2</span>, <span class="number">1</span></div><div class="line"><span class="number">20</span>: iload_2</div></pre></td></tr></table></figure></p>
-<p><strong>剖析一下:</strong> <strong>iinc 1,1</strong> 的意思就是将第一个 <strong>local variable</strong> 加1。第一个1表示的是第几个 <strong>local variable</strong> 第二个1就不用解释了。<br>那么这个 <strong>local variable</strong> 又是什么鬼了。上文提到过用 <strong>javac -g Test</strong> 这个命令,然后再用 <strong>javap -verbose Test</strong> 。这样的话，在字节码中你会看到<br> <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">LocalVariableTable:</div><div class="line">  Start  Length  Slot  Name   Signature</div><div class="line">      0      25     0  args   [Ljava/lang/String;</div><div class="line">      2      23     1     m   I</div><div class="line">      4      21     2     n   I</div></pre></td></tr></table></figure></p>
-<p>所以m就是第一个 <strong>local variable</strong> ，n是第二个 <strong>local variable</strong> 。<br>对哦，还没说 <strong>iload_1 iload_2</strong> 。这两兄弟的意思差不多，后面的数字1，2表示的也是 <strong>local variable</strong> 里的变量的位置。 <strong>iload_1</strong> 就是第1个int型变量进栈，也就是这个m。这个时候还没执行 <strong>iinc 1,1</strong> ，所以这个处于栈顶的m还是0，这个就是 <strong>m++</strong> 后还是0的原因。那么 <strong>++n</strong> 是1的原因，就很明显了。就是先加然后进栈。<br>哎呀，我也是半瓢水，其他指令解释起来好麻烦。直接甩个链接吧，里面有基本的字节码讲解，还不错哟。</p>
-<h3 id="字节码指令"><a href="#字节码指令" class="headerlink" title="字节码指令"></a><a href="http://gityuan.com/2015/10/24/jvm-bytecode-grammar/" target="_blank" rel="external">字节码指令</a></h3><p>PS：看看字节码，装装逼还是可以的~嘻嘻</p>
-
+<p><strong>jstack能得到运行java程序的java stack和native stack的信息。可以轻松得知当前线程的运行情况。</strong></p>
+<p>具体的用法不多讲，最主要的用法还是<code>jstack  pid</code>。</p>
+<p>e.g：<code>jstack 2312 &gt; thread.dump</code></p>
+<blockquote>
+<p><code>kill -3 &lt;pid&gt;</code>也可以获取thread dump信息，不过得谨慎使用。</p>
+</blockquote>
+<p>首先来看一下线程的状态机:</p>
+<p><img src="http://oc8wh8qu5.bkt.clouddn.com/thread-state.png" alt=""></p>
+<h4 id="New"><a href="#New" class="headerlink" title="New"></a>New</h4>
       
     </div>
     
@@ -451,7 +446,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/字节码/" rel="tag"># 字节码</a>
+            <a href="/tags/jvm/" rel="tag"># jvm</a>
+          
+            <a href="/tags/扯扯jvm命令/" rel="tag"># 扯扯jvm命令</a>
           
         </div>
       
@@ -464,8 +461,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/21/HTTP/" rel="next" title="图解HTTP——了解web及网络基础">
-                <i class="fa fa-chevron-left"></i> 图解HTTP——了解web及网络基础
+              <a href="/2017/11/16/图解设计模式之Decorator模式/" rel="next" title="图解设计模式之Decorator模式">
+                <i class="fa fa-chevron-left"></i> 图解设计模式之Decorator模式
               </a>
             
           </div>
@@ -473,10 +470,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/04/redis-master-slave/" rel="prev" title="配置redis主从复制以及哨兵模式">
-                配置redis主从复制以及哨兵模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -631,7 +624,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#字节码指令"><span class="nav-number">1.</span> <span class="nav-text">字节码指令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#New"><span class="nav-number">1.</span> <span class="nav-text">New</span></a></li></ol></div>
             
 
           </div>
