@@ -13,4 +13,3 @@ Disallow: /vendors/
 Disallow: /fancybox/
 
 Sitemap: https://xhanthow.github.io/sitemap.xml
-Sitemap: https://xhanthow.github.io/baidusitemap.xml
