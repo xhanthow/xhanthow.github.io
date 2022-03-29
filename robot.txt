@@ -1,4 +1,5 @@
 # hexo robots.txt
+# allow google
 User-agent: *
 Allow: /
 Allow: /archives/
